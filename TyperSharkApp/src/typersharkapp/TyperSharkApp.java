@@ -27,7 +27,7 @@ public class TyperSharkApp extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Welcome to Typer Shark!");
+                System.out.println("Welcome to Typer Shark :D!");
             }
         });
         
