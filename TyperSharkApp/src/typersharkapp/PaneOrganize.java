@@ -41,12 +41,12 @@ public class PaneOrganize {
         //VENTANA PRINCIPAL
         Inicio= new Pane();
         Inicio.setStyle("-fx-background-color: blue;");
-        TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 ravie",450,10,170,10, Color.DARKGRAY);
+        TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 elephant",450,10,170,30, Color.DARKGRAY);
         
-        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 12 ravie; -fx-base: #9BDCE1; -fx-background-radius: 30;", 150, 60, 30, 400, 10, Color.FUCHSIA);
-        Boton reglas= new Boton("Reglas","-fx-font: 15 ravie; -fx-base: #9BDCE1; -fx-background-radius: 30;", 100, 60,210, 400, 10, Color.BLUE);
-        Boton puntajes= new Boton("Top de puntajes","-fx-font: 12 ravie; -fx-base: #9BDCE1;-fx-background-radius: 30;", 180, 60, 340, 400, 10, Color.BLUEVIOLET);
-        Boton salir= new Boton("Salir","-fx-font: 15 ravie; -fx-base: #9BDCE1;-fx-background-radius: 30;", 100, 60, 550, 400, 10, Color.DEEPPINK);
+        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 30, 400, 10, Color.AQUA);
+        Boton reglas= new Boton("Reglas","-fx-font: 18 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60,220, 400, 10, Color.AQUA);
+        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 340, 400, 10, Color.AQUA);
+        Boton salir= new Boton("Salir","-fx-font: 18 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 550, 400, 10, Color.AQUA);
         
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
