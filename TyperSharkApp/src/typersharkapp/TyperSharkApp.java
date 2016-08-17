@@ -23,7 +23,7 @@ public class TyperSharkApp extends Application {
     public void start(Stage stage) {
         PaneOrganize po = new PaneOrganize();
         Scene scene = new Scene(po.getInicio(), 700, 500);
-        stage.setTitle("TyperShark!");
+        stage.setTitle("TyperShark!...");
         stage.setScene(scene);
         stage.show();
         
