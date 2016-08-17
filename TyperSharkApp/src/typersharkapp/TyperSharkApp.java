@@ -20,12 +20,12 @@ import javafx.stage.Stage;
 public class TyperSharkApp extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         PaneOrganize po = new PaneOrganize();
         Scene scene = new Scene(po.getInicio(), 700, 500);
-        primaryStage.setTitle("TyperShark!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("TyperShark!");
+        stage.setScene(scene);
+        stage.show();
         
     }
 
