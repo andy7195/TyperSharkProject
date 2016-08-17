@@ -19,26 +19,14 @@ import javafx.stage.Stage;
  */
 public class TyperSharkApp extends Application {
     
-    @Override
+        @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Welcome to Typer Shark'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Welcome to Typer Shark :D!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Typer Shark!");
+        PaneOrganize po = new PaneOrganize();
+        Scene scene = new Scene(po.getInicio(), 700, 500);
+        primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
 
     /**
