@@ -23,7 +23,7 @@ public class PaneOrganize {
     private Reglas window2;
     private Image imagen;
     private ImageView vi; 
-        
+    private InicioJuego juego;
   
     public PaneOrganize(){
         try{
@@ -37,6 +37,11 @@ public class PaneOrganize {
         vi.setImage (imagen);
         
         window2=new Reglas();
+        
+        juego = new InicioJuego();
+        
+        
+        
         
         //VENTANA PRINCIPAL
         Inicio= new Pane();
@@ -57,6 +62,7 @@ public class PaneOrganize {
         //ACCIONES DE LOS BOTONES
         reglas.getBtn().setOnAction(new ventana2());
         salir.getBtn().setOnAction(new Salida());
+        iniciar.getBtn().setOnAction(new Iniciar());
     }
 
     public Pane getInicio() {
@@ -66,13 +72,17 @@ public class PaneOrganize {
     public Reglas getWindow2() {
         return window2;
     }
+
+    public InicioJuego getJuego() {
+        return juego;
+    }
+    
     
     
     private class ventana2 implements EventHandler<ActionEvent>{
         public void handle(ActionEvent e){
             Stage v2 = new Stage();
-            PaneOrganize po2= new PaneOrganize();
-            Scene scene2 = new Scene(po2.getWindow2().getWindowReglas(),700,500);
+            Scene scene2 = new Scene(getWindow2().getWindowReglas(),700,500);
             v2.setScene(scene2);
             v2.show();
            
@@ -80,10 +90,21 @@ public class PaneOrganize {
         }
     }
 
-        private class Salida implements EventHandler<ActionEvent>{
+    private class Salida implements EventHandler<ActionEvent>{
         public void handle(ActionEvent e){
             System.out.println("Saliendo");
-            System.exit(0);
+            System.exit(0);   
+        }
+    }
+    
+    private class Iniciar implements EventHandler<ActionEvent>
+    {
+        public void handle(ActionEvent event)
+        {
+            Stage StageJuego = new Stage();
+            Scene scene = new Scene(getJuego().getJuego(), 700, 500);
+            StageJuego.setScene(scene);
+            StageJuego.show();
             
         }
     }
