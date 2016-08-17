@@ -41,16 +41,7 @@ public class PaneOrganize {
         //VENTANA PRINCIPAL
         Inicio= new Pane();
         Inicio.setStyle("-fx-background-color: blue;");
-        TitulosLabel T= new TitulosLabel("T","-fx-font: 40 ravie",10,10,190,10, Color.WHITE);
-        TitulosLabel Y= new TitulosLabel("Y","-fx-font: 40 ravie",10,10,225,20, Color.ANTIQUEWHITE);
-        TitulosLabel P= new TitulosLabel("P","-fx-font: 40 ravie",10,10,260,10, Color.AQUA);
-        TitulosLabel E= new TitulosLabel("E","-fx-font: 40 ravie",10,10,295,20, Color.AQUAMARINE);
-        TitulosLabel R= new TitulosLabel("R","-fx-font: 40 ravie",10,10,330,10, Color.AZURE);
-        TitulosLabel S= new TitulosLabel("S","-fx-font: 40 ravie",10,10,370,20, Color.ANTIQUEWHITE);
-        TitulosLabel H= new TitulosLabel("H","-fx-font: 40 ravie",10,10,405,10, Color.CYAN);
-        TitulosLabel A= new TitulosLabel("A","-fx-font: 40 ravie",10,10,435,20, Color.WHEAT);
-        TitulosLabel R1= new TitulosLabel("R","-fx-font: 40 ravie",10,10,465,10, Color.LAVENDER);
-        TitulosLabel K= new TitulosLabel("K","-fx-font: 40 ravie",10,10,505,20, Color.AQUAMARINE);
+        TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 ravie",450,10,180,10, Color.DARKGRAY);
         
         Boton iniciar= new Boton("Iniciar Partida","-fx-font: 12 ravie; -fx-base: #9BDCE1; -fx-background-radius: 30;", 150, 60, 30, 400, 10, Color.FUCHSIA);
         Boton reglas= new Boton("Reglas","-fx-font: 15 ravie; -fx-base: #9BDCE1; -fx-background-radius: 30;", 100, 60,210, 400, 10, Color.BLUE);
@@ -59,8 +50,8 @@ public class PaneOrganize {
         
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
-        Inicio.getChildren().addAll(T.getL(),Y.getL(),P.getL(),E.getL(),R.getL(),S.getL(),H.getL(),A.getL(),R1.getL(),K.getL());
-        Inicio.getChildren().addAll(iniciar.getBtn(),reglas.getBtn(),puntajes.getBtn(),salir.getBtn());
+       
+        Inicio.getChildren().addAll(Ttot.getL(),iniciar.getBtn(),reglas.getBtn(),puntajes.getBtn(),salir.getBtn());
        
         
         //ACCIONES DE LOS BOTONES
