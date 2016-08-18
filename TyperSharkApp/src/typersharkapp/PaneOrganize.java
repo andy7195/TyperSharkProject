@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -102,8 +103,10 @@ public class PaneOrganize {
         public void handle(ActionEvent event)
         {
             Stage StageJuego = new Stage();
-            Scene scene = new Scene(getJuego().getJuego(), 700, 500);
+            Scene scene = new Scene(getJuego().getPaneJuego(), 700, 500);
             StageJuego.setScene(scene);
+            StageJuego.setTitle("TyperShark");
+            StageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
             StageJuego.show();
             
         }

@@ -1,9 +1,11 @@
 package typersharkapp;
 
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.input.KeyEvent;
 
 public class InicioJuego 
 {
@@ -11,14 +13,16 @@ public class InicioJuego
     private Image fondo;
     private ImageView iv;
     private Boton regresar;
-    
+    private KeyHandler teclado;
     
     public InicioJuego()
     {
+        teclado = new KeyHandler();
         juego = new Pane();
         regresar = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 580, 438, 10, Color.AQUA);
         try{
             fondo = new Image("FondoJuego.jpg");
+            
         }
         catch(Exception e)
         {
@@ -34,7 +38,25 @@ public class InicioJuego
         
     }
 
-    public Pane getJuego() {
+    
+    private class KeyHandler implements EventHandler<KeyEvent>
+    {
+        public void handle(KeyEvent event)
+        {
+            
+        }
+    }
+
+    public KeyHandler getTeclado() {
+        return teclado;
+    }
+    
+    
+    
+    
+    
+    
+    public Pane getPaneJuego() {
         return juego;
     }
 
