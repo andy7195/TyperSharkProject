@@ -1,5 +1,6 @@
 package typersharkapp;
 
+import java.io.File;
 import java.util.Random;
 
 public abstract class AnimalesMarinos 
@@ -7,6 +8,7 @@ public abstract class AnimalesMarinos
     private double posicionX;
     private double posicionY;
     private double velocidad;
+    private File listadoPalabras;
     
     public AnimalesMarinos()
     {
@@ -14,11 +16,12 @@ public abstract class AnimalesMarinos
         this.posicionY = 0;
         this.velocidad = 0;
     }
-    public AnimalesMarinos(double X, double Y, double V)
-    {
-        this.posicionX = X;
-        this.posicionY = Y;
-        this.velocidad = V;
+
+    public AnimalesMarinos(double posicionX, double posicionY, double velocidad, File listadoPalabras) {
+        this.posicionX = posicionX;
+        this.posicionY = posicionY;
+        this.velocidad = velocidad;
+        this.listadoPalabras = listadoPalabras;
     }
     
     public abstract void moverse();

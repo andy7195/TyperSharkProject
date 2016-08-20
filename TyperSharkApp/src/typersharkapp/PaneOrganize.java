@@ -66,21 +66,53 @@ public class PaneOrganize {
         iniciar.getBtn().setOnAction(new Iniciar());
     }
 
+    public Image getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
+    }
+
+    public ImageView getVi() {
+        return vi;
+    }
+
+    public void setVi(ImageView vi) {
+        this.vi = vi;
+    }
+
     public Pane getInicio() {
         return Inicio;
     }
 
+    public void setInicio(Pane Inicio) {
+        this.Inicio = Inicio;
+    }
+    
+    
     public Reglas getWindow2() {
         return window2;
     }
 
+    public void setJuego(InicioJuego juego) {
+        this.juego = juego;
+    }
+    
+    
     public InicioJuego getJuego() {
         return juego;
+    }
+
+    public void setWindow2(Reglas window2) {
+        this.window2 = window2;
     }
     
     
     
+    
     private class ventana2 implements EventHandler<ActionEvent>{
+        @Override
         public void handle(ActionEvent e){
             Stage v2 = new Stage();
             Scene scene2 = new Scene(getWindow2().getWindowReglas(),700,500);
@@ -93,6 +125,7 @@ public class PaneOrganize {
     }
 
     private class Salida implements EventHandler<ActionEvent>{
+        @Override
         public void handle(ActionEvent e){
             System.out.println("Saliendo");
             System.exit(0);   
@@ -101,6 +134,7 @@ public class PaneOrganize {
     
     private class Iniciar implements EventHandler<ActionEvent>
     {
+        @Override
         public void handle(ActionEvent event)
         {
             Stage StageJuego = new Stage();

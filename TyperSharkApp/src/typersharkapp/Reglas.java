@@ -7,7 +7,6 @@ package typersharkapp;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -72,7 +71,25 @@ public class Reglas {
         
     }
 
+    public Image getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
+    }
+
+    public ImageView getVi() {
+        return vi;
+    }
+
+    public void setVi(ImageView vi) {
+        this.vi = vi;
+    }
+
+    
     private class regresar implements EventHandler<ActionEvent>{
+        @Override
         public void handle(ActionEvent e){
             Stage s= new Stage();
             TyperSharkApp ts= new TyperSharkApp();
@@ -83,7 +100,7 @@ public class Reglas {
     public Pane getWindowReglas() {
         return windowReglas;
     }
-
+    
     public void setWindowReglas(Pane windowReglas) {
         this.windowReglas = windowReglas;
     }

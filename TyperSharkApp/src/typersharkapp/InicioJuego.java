@@ -13,11 +13,13 @@ public class InicioJuego
     private Image fondo;
     private ImageView iv;
     private KeyHandler teclado;
+    private Buceador jugador;
     
     public InicioJuego()
     {
         teclado = new KeyHandler();
         juego = new Pane();
+        jugador= new Buceador();
         try{
             fondo = new Image("FondoJuego.jpg");
             
@@ -36,16 +38,30 @@ public class InicioJuego
        
     }
 
- 
-    
-  
-    
+   
     private class KeyHandler implements EventHandler<KeyEvent>
     {
         @Override
         public void handle(KeyEvent event)
         {
-            
+            switch(event.getCode())
+            {
+                case ENTER:
+                {
+                    if(jugador.getPuntaje()<=50){
+                        System.out.println("No puedo usar poder especial");
+                        break;
+                    }
+                    else{
+                        jugador.setPuntaje(jugador.getPuntaje()/2);
+                        break;
+                    }
+                  
+                }        
+                default:  {
+                    break;
+                }      
+            }
         }
     }
 
