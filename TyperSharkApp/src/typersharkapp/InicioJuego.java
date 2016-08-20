@@ -4,22 +4,20 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.input.KeyEvent;
+
 
 public class InicioJuego 
 {
     private Pane juego;
     private Image fondo;
     private ImageView iv;
-    private Boton regresar;
     private KeyHandler teclado;
     
     public InicioJuego()
     {
         teclado = new KeyHandler();
         juego = new Pane();
-        regresar = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 580, 438, 10, Color.AQUA);
         try{
             fondo = new Image("FondoJuego.jpg");
             
@@ -29,18 +27,22 @@ public class InicioJuego
             System.out.println("No lee imagen");
         }
         iv = new ImageView(fondo);
-        iv.setFitHeight(360);
-        iv.setFitWidth(640);
+        iv.setFitHeight(510);
+        iv.setFitWidth(710);
         iv.setImage (fondo);
         
-        juego.getChildren().addAll(iv, regresar.getBtn());
+        juego.getChildren().addAll(iv);
         
-        
+       
     }
 
+ 
+    
+  
     
     private class KeyHandler implements EventHandler<KeyEvent>
     {
+        @Override
         public void handle(KeyEvent event)
         {
             
@@ -67,12 +69,5 @@ public class InicioJuego
     public ImageView getIv() {
         return iv;
     }
-
-    public Boton getRegresar() {
-        return regresar;
-    }
-    
-    
-    
-    
+       
 }

@@ -14,13 +14,19 @@ import javafx.stage.Stage;
  * @author COMPAQ
  */
 public class TyperSharkApp extends Application {
+
+    private PaneOrganize po;
+    private Reglas reglas;
+ 
+    
     
     @Override
     public void start(Stage stage) {
-        PaneOrganize po = new PaneOrganize();
+        po = new PaneOrganize();
         Scene scene = new Scene(po.getInicio(), 700, 500);
         stage.setTitle("TyperShark!...");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         
     }

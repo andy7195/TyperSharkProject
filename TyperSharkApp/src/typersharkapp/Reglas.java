@@ -7,6 +7,7 @@ package typersharkapp;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,15 +24,17 @@ public class Reglas {
     private Pane windowReglas;
     private Image imagen;
     private ImageView vi; 
+     
     public Reglas() {
+        
          try{
             imagen= new Image("Shark.jpeg");
         
         }
         catch(Exception e){System.out.println("No lee imagen");}
         vi=new ImageView(imagen);
-        vi.setFitHeight(500);
-        vi.setFitWidth(700);
+        vi.setFitHeight(510);
+        vi.setFitWidth(710);
         vi.setImage (imagen);
         
         windowReglas= new Pane();
@@ -66,12 +69,14 @@ public class Reglas {
         windowReglas.getChildren().addAll(vi);
         windowReglas.getChildren().addAll(titulo1.getL(),titulo2.getL(),t,regreso.getBtn());
         regreso.getBtn().setOnAction(new regresar());
+        
     }
 
     private class regresar implements EventHandler<ActionEvent>{
         public void handle(ActionEvent e){
             Stage s= new Stage();
             TyperSharkApp ts= new TyperSharkApp();
+            s.setResizable(false);
             ts.start(s);
         }
     }

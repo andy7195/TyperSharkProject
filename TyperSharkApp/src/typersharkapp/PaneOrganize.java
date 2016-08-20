@@ -33,8 +33,8 @@ public class PaneOrganize {
         }
         catch(Exception e){System.out.println("No lee imagen");}
         vi=new ImageView(imagen);
-        vi.setFitHeight(500);
-        vi.setFitWidth(700);
+        vi.setFitHeight(510);
+        vi.setFitWidth(710);
         vi.setImage (imagen);
         
         window2=new Reglas();
@@ -49,10 +49,10 @@ public class PaneOrganize {
         Inicio.setStyle("-fx-background-color: blue;");
         TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 elephant",450,10,170,30, Color.DARKGRAY);
         
-        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 30, 400, 10, Color.AQUA);
-        Boton reglas= new Boton("Reglas","-fx-font: 18 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60,220, 400, 10, Color.AQUA);
-        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 340, 400, 10, Color.AQUA);
-        Boton salir= new Boton("Salir","-fx-font: 18 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 550, 400, 10, Color.AQUA);
+        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 40, 410, 10, Color.AQUA);
+        Boton reglas= new Boton("Reglas","-fx-font: 18 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60,230, 410, 10, Color.AQUA);
+        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 350, 410, 10, Color.AQUA);
+        Boton salir= new Boton("Salir","-fx-font: 18 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 560, 410, 10, Color.AQUA);
         
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
@@ -85,6 +85,7 @@ public class PaneOrganize {
             Stage v2 = new Stage();
             Scene scene2 = new Scene(getWindow2().getWindowReglas(),700,500);
             v2.setScene(scene2);
+            v2.setResizable(false);
             v2.show();
            
             
@@ -107,6 +108,7 @@ public class PaneOrganize {
             StageJuego.setScene(scene);
             StageJuego.setTitle("TyperShark");
             StageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
+            StageJuego.setResizable(false);
             StageJuego.show();
             
         }

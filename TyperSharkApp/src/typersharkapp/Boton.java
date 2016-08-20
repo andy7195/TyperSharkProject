@@ -5,7 +5,9 @@
  */
 package typersharkapp;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -24,6 +26,8 @@ public class Boton {
        btn.setStyle(estilo);
        btn.setOpacity(borde);
        btn.setTextFill(color);
+       btn.addEventHandler(MouseEvent.MOUSE_MOVED, new MouseHandlerMove());
+       btn.addEventHandler(MouseEvent.MOUSE_EXITED, new MouseHandlerExited());
     
     }
 
@@ -34,4 +38,22 @@ public class Boton {
     public void setBtn(Button btn) {
         this.btn = btn;
     }
+    
+    private class MouseHandlerMove implements EventHandler<MouseEvent>{
+
+        @Override
+        public void handle(MouseEvent event) {
+            btn.setTextFill(Color.DARKSALMON);
+         }
+    }
+    
+    private class MouseHandlerExited implements EventHandler<MouseEvent>{
+
+        @Override
+        public void handle(MouseEvent event) {
+            btn.setTextFill(Color.AQUA);
+        }
+    }
+    
+ 
 }
