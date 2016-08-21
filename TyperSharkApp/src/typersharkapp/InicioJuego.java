@@ -23,6 +23,7 @@ public class InicioJuego
     private FileReader archivo;
     private String palabra;
     private String palabras[];
+    private Buceador jugador;
     
     
     public InicioJuego()
@@ -73,7 +74,24 @@ public class InicioJuego
         @Override
         public void handle(KeyEvent event)
         {
-            
+             switch(event.getCode())
+            {
+                case ENTER:
+                {
+                    if(jugador.getPuntaje()<=50){
+                        System.out.println("No puedo usar poder especial");
+                        break;
+                    }
+                    else{
+                        jugador.setPuntaje(jugador.getPuntaje()/2);
+                        break;
+                    }
+                  
+                }        
+                default:  {
+                    break;
+                }      
+            }
         }
     }
 
