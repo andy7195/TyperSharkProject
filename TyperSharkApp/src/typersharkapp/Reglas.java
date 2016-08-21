@@ -7,6 +7,7 @@ package typersharkapp;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,8 @@ public class Reglas {
     private Pane windowReglas;
     private Image imagen;
     private ImageView vi; 
+    private Stage stage;
+    private Scene sc1;
      
     public Reglas() {
         
@@ -37,6 +40,7 @@ public class Reglas {
         vi.setImage (imagen);
         
         windowReglas= new Pane();
+        
         windowReglas.setStyle("-fx-background-color: aqua;");
         TitulosLabel titulo1= new TitulosLabel("REGLAS","-fx-font: 20 elephant",150,10,410,10, Color.DARKGRAY);
         TitulosLabel titulo2= new TitulosLabel("TYPERSHARK","-fx-font: 20 elephant;",210,10,370,40, Color.DARKGRAY);
@@ -90,11 +94,11 @@ public class Reglas {
     
     private class regresar implements EventHandler<ActionEvent>{
         @Override
-        public void handle(ActionEvent e){
-            Stage s= new Stage();
-            TyperSharkApp ts= new TyperSharkApp();
-            s.setResizable(false);
-            ts.start(s);
+        public void handle(ActionEvent e)
+        {
+            stage.setTitle("TyperShark!...");
+            stage.setScene(getSc1());
+            stage.show();
         }
     }
     public Pane getWindowReglas() {
@@ -104,5 +108,23 @@ public class Reglas {
     public void setWindowReglas(Pane windowReglas) {
         this.windowReglas = windowReglas;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public Scene getSc1() {
+        return sc1;
+    }
+
+    public void setSc1(Scene scene) {
+        this.sc1 = scene;
+    }
+    
+    
     
 }

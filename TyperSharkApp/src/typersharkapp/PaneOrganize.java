@@ -21,10 +21,13 @@ import javafx.stage.Stage;
  */
 public class PaneOrganize {
     private Pane Inicio;
-    private Reglas window2;
+    private Reglas reglas;
+    private Scene scene2;
     private Image imagen;
     private ImageView vi; 
     private InicioJuego juego;
+    private Stage stage; 
+    private Scene sc;
   
     public PaneOrganize(){
         try{
@@ -37,12 +40,6 @@ public class PaneOrganize {
         vi.setFitWidth(900);
         vi.setImage (imagen);
         
-        window2=new Reglas();
-        
-        juego = new InicioJuego();
-        
-        
-        
         
         //VENTANA PRINCIPAL
         Inicio= new Pane();
@@ -50,21 +47,98 @@ public class PaneOrganize {
         TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 elephant",450,10,270,30, Color.DARKGRAY);
         
         Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 130, 410, 10, Color.AQUA);
-        Boton reglas= new Boton("Reglas","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60, 330, 410, 10, Color.AQUA);
+        Boton regla= new Boton("Reglas","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60, 330, 410, 10, Color.AQUA);
         Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 450, 410, 10, Color.AQUA);
         Boton salir= new Boton("Salir","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 660, 410, 10, Color.AQUA);
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
-       
-        Inicio.getChildren().addAll(Ttot.getL(),iniciar.getBtn(),reglas.getBtn(),puntajes.getBtn(),salir.getBtn());
-       
+        Inicio.getChildren().addAll(Ttot.getL(),iniciar.getBtn(),regla.getBtn(),puntajes.getBtn(),salir.getBtn());
+        
+        
+        reglas = new Reglas();
+        
+        juego = new InicioJuego();
         
         //ACCIONES DE LOS BOTONES
-        reglas.getBtn().setOnAction(new ventana2());
+        regla.getBtn().setOnAction(new ventana2());
         salir.getBtn().setOnAction(new Salida());
         iniciar.getBtn().setOnAction(new Iniciar());
     }
 
+    
+    private class ventana2 implements EventHandler<ActionEvent>
+    {
+        Scene escena1 = new Scene(getReglas().getWindowReglas(),890,500);
+        @Override
+        public void handle(ActionEvent event)
+        {
+            reglas.setStage(stage);
+            reglas.setSc1(sc);
+            if(scene2 == null || scene2 != escena1)
+            {
+                scene2 = escena1;
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            else
+            {
+                
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            event.consume();
+        }
+    }
+
+    private class Salida implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent e){
+            System.out.println("Saliendo");
+            System.exit(0);   
+        }
+    }
+    
+    private class Iniciar implements EventHandler<ActionEvent>
+    {
+        Scene escena2 = new Scene(getJuego().getPaneJuego(),890,500);
+        @Override
+        public void handle(ActionEvent event)
+        {
+            
+            juego.setStage(stage);
+            juego.setSc2(sc);
+            if(scene2 == null || scene2 != escena2)
+            {
+                scene2 = escena2;
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
+                stage.show();
+            }
+            else
+            {  
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
+                stage.show();
+            }
+            //stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado()); 
+            event.consume();
+        }
+    }
+
+    
+    
+    public Scene getSc() {
+        return sc;
+    }
+
+    public void setSc(Scene sc) {
+        this.sc = sc;
+    }
+        
     public Image getImagen() {
         return imagen;
     }
@@ -90,8 +164,8 @@ public class PaneOrganize {
     }
     
     
-    public Reglas getWindow2() {
-        return window2;
+    public Reglas getReglas() {
+        return reglas;
     }
 
     public void setJuego(InicioJuego juego) {
@@ -103,47 +177,15 @@ public class PaneOrganize {
         return juego;
     }
 
-    public void setWindow2(Reglas window2) {
-        this.window2 = window2;
-    }
-    
-    
-    
-    
-    private class ventana2 implements EventHandler<ActionEvent>{
-        @Override
-        public void handle(ActionEvent e){
-            Stage v2 = new Stage();
-            Scene scene2 = new Scene(getWindow2().getWindowReglas(),890,500);
-            v2.setScene(scene2);
-            v2.setResizable(false);
-            v2.show();
-           
-            
-        }
+    public void setReglas(Reglas window2) {
+        this.reglas = window2;
     }
 
-    private class Salida implements EventHandler<ActionEvent>{
-        @Override
-        public void handle(ActionEvent e){
-            System.out.println("Saliendo");
-            System.exit(0);   
-        }
+    public Stage getStage() {
+        return stage;
     }
-    
-    private class Iniciar implements EventHandler<ActionEvent>
-    {
-        @Override
-        public void handle(ActionEvent event)
-        {
-            Stage StageJuego = new Stage();
-            Scene scene = new Scene(getJuego().getPaneJuego(), 890, 500);
-            StageJuego.setScene(scene);
-            StageJuego.setTitle("TyperShark");
-            StageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
-            StageJuego.setResizable(false);
-            StageJuego.show();
-            
-        }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

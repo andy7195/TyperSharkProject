@@ -15,15 +15,16 @@ import javafx.stage.Stage;
  */
 public class TyperSharkApp extends Application {
 
-    private PaneOrganize po;
+    //private PaneOrganize po;
     private Reglas reglas;
- 
-    
     
     @Override
-    public void start(Stage stage) {
-        po = new PaneOrganize();
+    public void start(Stage stage) 
+    {
+        PaneOrganize po = new PaneOrganize();
         Scene scene = new Scene(po.getInicio(), 890, 500);
+        po.setStage(stage);
+        po.setSc(scene);
         stage.setTitle("TyperShark!...");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -31,6 +32,23 @@ public class TyperSharkApp extends Application {
         
     }
 
+    /*public PaneOrganize getPo() {
+        return po;
+    }
+
+    public void setPo(PaneOrganize po) {
+        this.po = po;
+    }*/
+
+    public Reglas getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(Reglas reglas) {
+        this.reglas = reglas;
+    }
+
+    
     /**
      * @param args the command line arguments
      */

@@ -5,11 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 public class InicioJuego 
@@ -24,6 +26,8 @@ public class InicioJuego
     private String palabra;
     private String palabras[];
     private Buceador jugador;
+    private Stage stage;
+    private Scene sc2;
     
     
     public InicioJuego()
@@ -101,13 +105,31 @@ public class InicioJuego
     
     
     private class Salir implements EventHandler<ActionEvent>{
-        public void handle(ActionEvent e){
-            System.out.println("Saliendo");
-            System.exit(0);   
+        public void handle(ActionEvent e)
+        {
+            stage.setTitle("TyperShark!...");
+            stage.setScene(getSc2());
+            stage.show();  
         }
     }
+
     
     
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public Scene getSc2() {
+        return sc2;
+    }
+
+    public void setSc2(Scene sc2) {
+        this.sc2 = sc2;
+    }
     
     public Pane getPaneJuego() {
         return juego;
