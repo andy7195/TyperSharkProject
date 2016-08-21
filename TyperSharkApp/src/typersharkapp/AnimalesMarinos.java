@@ -7,7 +7,7 @@ public abstract class AnimalesMarinos
 {
     private double posicionX;
     private double posicionY;
-    private double velocidad;
+    private int velocidad;
     private File listadoPalabras;
     
     public AnimalesMarinos()
@@ -17,7 +17,7 @@ public abstract class AnimalesMarinos
         this.velocidad = 0;
     }
 
-    public AnimalesMarinos(double posicionX, double posicionY, double velocidad, File listadoPalabras) {
+    public AnimalesMarinos(double posicionX, double posicionY, int velocidad, File listadoPalabras) {
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.velocidad = velocidad;
@@ -32,7 +32,7 @@ public abstract class AnimalesMarinos
         Random rand = new Random();
         
         this.posicionY = rand.nextInt(500);
-        this.posicionX = 700;
+        this.posicionX = 900;
         
     }
 
@@ -52,11 +52,11 @@ public abstract class AnimalesMarinos
         this.posicionY = posicionY;
     }
 
-    public double getVelocidad() {
+    public int getVelocidad() {
         return velocidad;
     }
 
-    public void setVelocidad(double velocidad) {
+    public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
     

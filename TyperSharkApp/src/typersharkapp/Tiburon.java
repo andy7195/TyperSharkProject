@@ -3,6 +3,7 @@ package typersharkapp;
 import java.io.File;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 
 public class Tiburon extends AnimalesMarinos
@@ -11,11 +12,31 @@ public class Tiburon extends AnimalesMarinos
     private Image tiburon;
     private ImageView iv;
 
-    public Tiburon(String palabra, Image tiburon, ImageView iv, double posicionX, double posicionY, double velocidad, File listadoPalabras) {
-        super(posicionX, posicionY, velocidad, listadoPalabras);
+    public Tiburon(Pane pane, int velocidad, String palabra) 
+    {
+        super();
+        
+        try{
+            tiburon = new Image("Shark.png");
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("No lee imagen");
+        }
+        
+        iv = new ImageView(tiburon);
+        iv.setFitHeight(50);
+        iv.setFitWidth(130);
+        
         this.palabra = palabra;
-        this.tiburon = tiburon;
-        this.iv = iv;
+        this.generarPosicion();
+        this.setVelocidad(velocidad);
+        
+        iv.setLayoutX(this.getPosicionX());
+        iv.setLayoutY(this.getPosicionY());
+        
+        pane.getChildren().add(iv);
     }
 
     public String getPalabra() {
@@ -47,7 +68,8 @@ public class Tiburon extends AnimalesMarinos
     @Override
     public void moverse() 
     {
-        
+        this.setPosicionX(this.getPosicionX() - 1);
+        this.iv.setLayoutX(this.getPosicionX());
     }
 
     @Override

@@ -27,21 +27,21 @@ public class Reglas {
     public Reglas() {
         
          try{
-            imagen= new Image("Shark.jpeg");
+            imagen= new Image("Menu.png");
         
         }
         catch(Exception e){System.out.println("No lee imagen");}
         vi=new ImageView(imagen);
         vi.setFitHeight(510);
-        vi.setFitWidth(710);
+        vi.setFitWidth(900);
         vi.setImage (imagen);
         
         windowReglas= new Pane();
         windowReglas.setStyle("-fx-background-color: aqua;");
-        TitulosLabel titulo1= new TitulosLabel("REGLAS","-fx-font: 20 elephant",150,10,300,10, Color.DARKGRAY);
-        TitulosLabel titulo2= new TitulosLabel("TYPERSHARK","-fx-font: 20 elephant;",210,10,260,40, Color.DARKGRAY);
-        Boton regreso= new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 580, 438, 10, Color.AQUA);
-        Text t= new Text(10,100,"OBJETIVO: TyperShark es un juego cuyo objetivo es que el usuario aprenda a utilizar todos sus\n"
+        TitulosLabel titulo1= new TitulosLabel("REGLAS","-fx-font: 20 elephant",150,10,410,10, Color.DARKGRAY);
+        TitulosLabel titulo2= new TitulosLabel("TYPERSHARK","-fx-font: 20 elephant;",210,10,370,40, Color.DARKGRAY);
+        Boton regreso= new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
+        Text t= new Text(130,100,"OBJETIVO: TyperShark es un juego cuyo objetivo es que el usuario aprenda a utilizar todos sus\n"
                 + "dedos para tipiar.\n\n"
                 + "ACERCA DE: El juego consiste de un buceador el cual ira descendiendo en el mar.\n"
                 + "A medida que descendiende \n"

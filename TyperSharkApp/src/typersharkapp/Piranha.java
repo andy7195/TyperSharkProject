@@ -11,7 +11,7 @@ public class Piranha extends AnimalesMarinos
     private Image piranha;
     private ImageView iv;
 
-    public Piranha(char caracter, Image piranha, ImageView iv, double posicionX, double posicionY, double velocidad, File listadoPalabras) {
+    public Piranha(char caracter, Image piranha, ImageView iv, double posicionX, double posicionY, int velocidad, File listadoPalabras) {
         super(posicionX, posicionY, velocidad, listadoPalabras);
         this.caracter = caracter;
         this.piranha = piranha;

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 
 public class TiburonNegro extends AnimalesMarinos
@@ -18,12 +19,31 @@ public class TiburonNegro extends AnimalesMarinos
     }
 
     
-    public TiburonNegro(String[] palabras, int numroAlt, Image tiburon_negro, ImageView iv, double posicionX, double posicionY, double velocidad, File listadoPalabras) {
-        super(posicionX, posicionY, velocidad, listadoPalabras);
-        this.palabras = palabras;
-        this.numroAlt = numroAlt;
-        this.tiburon_negro = tiburon_negro;
-        this.iv = iv;
+    public TiburonNegro(Pane pane, int velocidad, String palabra[]) 
+    {
+        super();
+        
+        try{
+            tiburon_negro = new Image("BlackShark.png");
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("No lee imagen");
+        }
+        
+        iv = new ImageView(tiburon_negro);
+        iv.setFitHeight(75);
+        iv.setFitWidth(150);
+        
+        this.palabras = palabra;
+        this.generarPosicion();
+        this.setVelocidad(velocidad);
+        
+        iv.setLayoutX(this.getPosicionX());
+        iv.setLayoutY(this.getPosicionY());
+        
+        pane.getChildren().add(iv);
     }
 
     public String[] getPalabras() {
@@ -63,7 +83,8 @@ public class TiburonNegro extends AnimalesMarinos
     @Override
     public void moverse() 
     {
-        
+        this.setPosicionX(this.getPosicionX() - 1);
+        this.iv.setLayoutX(this.getPosicionX());
     }
 
     @Override

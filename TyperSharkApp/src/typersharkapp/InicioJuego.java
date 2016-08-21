@@ -1,10 +1,15 @@
 package typersharkapp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 
 public class InicioJuego 
@@ -13,13 +18,24 @@ public class InicioJuego
     private Image fondo;
     private ImageView iv;
     private KeyHandler teclado;
-    private Buceador jugador;
+    private Boton salir;
+    private Boton jugar;
+    private FileReader archivo;
+    private String palabra;
+    private String palabras[];
+    
     
     public InicioJuego()
     {
+        // HACER LA LECTURA DEL ARCHIVO DE PALABRAS
+        //archivo = new FileReader("Palabras_Tiburon.txt");
+        this.palabra = null;
+        this.palabras = null;
+        
+        
+        
         teclado = new KeyHandler();
         juego = new Pane();
-        jugador= new Buceador();
         try{
             fondo = new Image("FondoJuego.jpg");
             
@@ -30,38 +46,34 @@ public class InicioJuego
         }
         iv = new ImageView(fondo);
         iv.setFitHeight(510);
-        iv.setFitWidth(710);
+        iv.setFitWidth(900);
         iv.setImage (fondo);
         
-        juego.getChildren().addAll(iv);
+        salir = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
+        jugar = new Boton("Start","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 5, 438, 10, Color.AQUA);
+        
+        juego.getChildren().addAll(iv, salir.getBtn(), jugar.getBtn());
+        
+        
+        salir.getBtn().setOnAction(new Salir());
+        jugar.getBtn().setOnAction(event ->{
+            new Thread(new MoverAnimal(new Tiburon(this.juego, 2, new String()))).start();
+            new Thread(new MoverAnimal(new TiburonNegro(this.juego, 3, palabras))).start();
+        });
         
        
     }
 
-   
+ 
+    
+  
+    
     private class KeyHandler implements EventHandler<KeyEvent>
     {
         @Override
         public void handle(KeyEvent event)
         {
-            switch(event.getCode())
-            {
-                case ENTER:
-                {
-                    if(jugador.getPuntaje()<=50){
-                        System.out.println("No puedo usar poder especial");
-                        break;
-                    }
-                    else{
-                        jugador.setPuntaje(jugador.getPuntaje()/2);
-                        break;
-                    }
-                  
-                }        
-                default:  {
-                    break;
-                }      
-            }
+            
         }
     }
 
@@ -70,7 +82,12 @@ public class InicioJuego
     }
     
     
-    
+    private class Salir implements EventHandler<ActionEvent>{
+        public void handle(ActionEvent e){
+            System.out.println("Saliendo");
+            System.exit(0);   
+        }
+    }
     
     
     

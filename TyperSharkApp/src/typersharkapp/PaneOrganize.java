@@ -28,13 +28,13 @@ public class PaneOrganize {
   
     public PaneOrganize(){
         try{
-            imagen= new Image("Shark.jpeg");
+            imagen= new Image("Menu.png");
         
         }
         catch(Exception e){System.out.println("No lee imagen");}
         vi=new ImageView(imagen);
         vi.setFitHeight(510);
-        vi.setFitWidth(710);
+        vi.setFitWidth(900);
         vi.setImage (imagen);
         
         window2=new Reglas();
@@ -47,13 +47,12 @@ public class PaneOrganize {
         //VENTANA PRINCIPAL
         Inicio= new Pane();
         Inicio.setStyle("-fx-background-color: blue;");
-        TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 elephant",450,10,170,30, Color.DARKGRAY);
+        TitulosLabel Ttot= new TitulosLabel("TYPERSHARK","-fx-font: 40 elephant",450,10,270,30, Color.DARKGRAY);
         
-        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 40, 410, 10, Color.AQUA);
-        Boton reglas= new Boton("Reglas","-fx-font: 18 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60,230, 410, 10, Color.AQUA);
-        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 350, 410, 10, Color.AQUA);
-        Boton salir= new Boton("Salir","-fx-font: 18 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 560, 410, 10, Color.AQUA);
-        
+        Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 130, 410, 10, Color.AQUA);
+        Boton reglas= new Boton("Reglas","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60, 330, 410, 10, Color.AQUA);
+        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 450, 410, 10, Color.AQUA);
+        Boton salir= new Boton("Salir","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 660, 410, 10, Color.AQUA);
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
        
@@ -115,7 +114,7 @@ public class PaneOrganize {
         @Override
         public void handle(ActionEvent e){
             Stage v2 = new Stage();
-            Scene scene2 = new Scene(getWindow2().getWindowReglas(),700,500);
+            Scene scene2 = new Scene(getWindow2().getWindowReglas(),890,500);
             v2.setScene(scene2);
             v2.setResizable(false);
             v2.show();
@@ -138,7 +137,7 @@ public class PaneOrganize {
         public void handle(ActionEvent event)
         {
             Stage StageJuego = new Stage();
-            Scene scene = new Scene(getJuego().getPaneJuego(), 700, 500);
+            Scene scene = new Scene(getJuego().getPaneJuego(), 890, 500);
             StageJuego.setScene(scene);
             StageJuego.setTitle("TyperShark");
             StageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
