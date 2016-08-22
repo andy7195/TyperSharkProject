@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,6 +30,9 @@ public class PaneOrganize {
     private InicioJuego juego;
     private Stage stage; 
     private Scene sc;
+    private Puntajes puntaje;
+    private MediaPlayer mp;
+    private Media musicFile;
   
     public PaneOrganize(){
         try{
@@ -56,15 +61,41 @@ public class PaneOrganize {
         
         
         reglas = new Reglas();
-        
+        puntaje = new Puntajes();
         juego = new InicioJuego();
         
         //ACCIONES DE LOS BOTONES
         regla.getBtn().setOnAction(new ventana2());
         salir.getBtn().setOnAction(new Salida());
         iniciar.getBtn().setOnAction(new Iniciar());
+        puntajes.getBtn().setOnAction(new score());
     }
-
+    
+    private class score implements EventHandler<ActionEvent>{
+         Scene escena1 = new Scene(getPuntaje().getWindowPuntajes(),890,500);
+        @Override
+        public void handle(ActionEvent event)
+        {
+            puntaje.setS(stage);
+            puntaje.setSc(sc);
+            if(scene2 == null || scene2 != escena1)
+            {
+                scene2 = escena1;
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            else
+            {
+                
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            event.consume(); 
+        }
+    }
+    
     
     private class ventana2 implements EventHandler<ActionEvent>
     {
@@ -105,8 +136,19 @@ public class PaneOrganize {
         Scene escena2 = new Scene(getJuego().getPaneJuego(),890,500);
         @Override
         public void handle(ActionEvent event)
+                
         {
             
+                try{
+         musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
+                  
+         }
+        catch(Exception e1){System.out.println("No oye");}
+        mp = new MediaPlayer(musicFile);
+                mp.setVolume(0.5);
+                mp.play();
+   
+                           
             juego.setStage(stage);
             juego.setSc2(sc);
             if(scene2 == null || scene2 != escena2)
@@ -188,4 +230,14 @@ public class PaneOrganize {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public Puntajes getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Puntajes puntaje) {
+        this.puntaje = puntaje;
+    }
+    
+    
 }
