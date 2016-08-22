@@ -1,16 +1,24 @@
 package typersharkapp;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
-public class Tiburon extends AnimalesMarinos
+public class Tiburon extends AnimalesMarinos implements Runnable
 {
     private String palabra;
     private Image tiburon;
     private ImageView iv;
+    private Text texto;
+    private TextFlow t;
 
     public Tiburon(Pane pane, int velocidad, String palabra) 
     {
@@ -25,20 +33,72 @@ public class Tiburon extends AnimalesMarinos
             System.out.println("No lee imagen");
         }
         
-        iv = new ImageView(tiburon);
-        iv.setFitHeight(50);
-        iv.setFitWidth(130);
+        this.iv = new ImageView(tiburon);
+        this.iv.setFitHeight(50);
+        this.iv.setFitWidth(130);
+        
+        this.texto = new Text(130, 50, "Hola");
+        this.texto.setFill(Color.GREENYELLOW);
+        this.texto.setStyle("-fx-font: 18 century;");
+        
+        this.t = new TextFlow(this.texto);
+        this.t.setLayoutX(70);
+        this.t.setLayoutY(10);
         
         this.palabra = palabra;
         this.generarPosicion();
         this.setVelocidad(velocidad);
         
-        iv.setLayoutX(this.getPosicionX());
-        iv.setLayoutY(this.getPosicionY());
+        this.getFigura().getChildren().addAll(iv, t);
         
-        pane.getChildren().add(iv);
+        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFigura().setLayoutY(this.getPosicionY());
+        
+        pane.getChildren().add(this.getFigura());
     }
 
+    
+    @Override
+    public void run() 
+    {
+        while(this.getPosicionX() != 50)
+        {
+            this.moverse();
+            
+            Platform.runLater(new Runnable() 
+            {
+                @Override
+                public void run() 
+                { 
+                    Tiburon.this.setPosicionX(Tiburon.this.getPosicionX());
+                }
+            });
+            try 
+            {
+                Thread.sleep(this.getVelocidad()*10); 
+            } 
+            catch (InterruptedException ex) 
+            {
+                Logger.getLogger(Tiburon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+    }
+    
+    @Override
+    public void moverse() 
+    {
+        this.setPosicionX(this.getPosicionX() - 1);
+        this.getFigura().setLayoutX(this.getPosicionX());
+    }
+
+    @Override
+    public void atacar() 
+    {
+        
+    }
+    
+    
+    
     public String getPalabra() {
         return palabra;
     }
@@ -63,22 +123,19 @@ public class Tiburon extends AnimalesMarinos
         this.iv = iv;
     }
 
-      
-    
-    @Override
-    public void moverse() 
-    {
-        this.setPosicionX(this.getPosicionX() - 1);
-        this.iv.setLayoutX(this.getPosicionX());
+    public Text getTexto() {
+        return texto;
     }
 
-    @Override
-    public void atacar() 
-    {
-        
+    public void setTexto(Text texto) {
+        this.texto = texto;
     }
-    
-    
-    
-    
+
+    public TextFlow getT() {
+        return t;
+    }
+
+    public void setT(TextFlow t) {
+        this.t = t;
+    }
 }

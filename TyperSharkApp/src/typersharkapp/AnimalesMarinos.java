@@ -2,9 +2,11 @@ package typersharkapp;
 
 import java.io.File;
 import java.util.Random;
+import javafx.scene.layout.Pane;
 
 public abstract class AnimalesMarinos 
 {
+    private Pane figura;
     private double posicionX;
     private double posicionY;
     private int velocidad;
@@ -12,12 +14,15 @@ public abstract class AnimalesMarinos
     
     public AnimalesMarinos()
     {
+        this.figura = new Pane();
         this.posicionX = 0;
         this.posicionY = 0;
         this.velocidad = 0;
     }
 
-    public AnimalesMarinos(double posicionX, double posicionY, int velocidad, File listadoPalabras) {
+    public AnimalesMarinos(Pane pane, double posicionX, double posicionY, int velocidad, File listadoPalabras) 
+    {
+        this.figura = pane;
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.velocidad = velocidad;
@@ -31,11 +36,20 @@ public abstract class AnimalesMarinos
     {
         Random rand = new Random();
         
-        this.posicionY = rand.nextInt(500);
+        this.posicionY = rand.nextInt(450);
         this.posicionX = 900;
         
     }
 
+    
+    public Pane getFigura() {
+        return figura;
+    }
+
+    public void setFigura(Pane figura) {
+        this.figura = figura;
+    }
+    
     public double getPosicionX() {
         return posicionX;
     }

@@ -2,17 +2,25 @@ package typersharkapp;
 
 import java.io.File;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
-public class TiburonNegro extends AnimalesMarinos
+public class TiburonNegro extends AnimalesMarinos implements Runnable
 {
     private String palabras[];
     private int numroAlt;
     private Image tiburon_negro;
     private ImageView iv;
+    private Text texto;
+    private TextFlow t;
 
     public TiburonNegro() {
         
@@ -36,16 +44,88 @@ public class TiburonNegro extends AnimalesMarinos
         iv.setFitHeight(75);
         iv.setFitWidth(150);
         
+        this.texto = new Text(130, 50, "Mundo");
+        this.texto.setFill(Color.CYAN);
+        this.texto.setStyle("-fx-font: 18 century;");
+        
+        this.t = new TextFlow(this.texto);
+        this.t.setLayoutX(35);
+        this.t.setLayoutY(30);
+        
         this.palabras = palabra;
         this.generarPosicion();
         this.setVelocidad(velocidad);
         
-        iv.setLayoutX(this.getPosicionX());
-        iv.setLayoutY(this.getPosicionY());
+        this.getFigura().getChildren().addAll(iv, t);
         
-        pane.getChildren().add(iv);
+        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFigura().setLayoutY(this.getPosicionY());
+        
+        pane.getChildren().add(this.getFigura());
     }
 
+    
+    @Override
+    public void run() 
+    {
+        while(this.getPosicionX() != 50)
+        {
+            this.moverse();
+            
+            Platform.runLater(new Runnable() 
+            {
+                @Override
+                public void run() 
+                { 
+                    TiburonNegro.this.setPosicionX(TiburonNegro.this.getPosicionX());
+                }
+            });
+            try 
+            {
+                Thread.sleep(this.getVelocidad()*10); 
+            } 
+            catch (InterruptedException ex) 
+            {
+                Logger.getLogger(TiburonNegro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+    }
+    
+    @Override
+    public void moverse() 
+    {
+        this.setPosicionX(this.getPosicionX() - 1);
+        this.getFigura().setLayoutX(this.getPosicionX());
+    }
+
+    @Override
+    public void atacar() 
+    {
+        
+    }
+    
+    public void generarPalabras(){
+    
+    }
+    
+    
+    public TextFlow getT() {
+        return t;
+    }
+
+    public void setT(TextFlow t) {
+        this.t = t;
+    }
+    
+    public Text getTexto() {
+        return texto;
+    }
+
+    public void setTexto(Text texto) {
+        this.texto = texto;
+    }
+
+    
     public String[] getPalabras() {
         return palabras;
     }
@@ -76,25 +156,6 @@ public class TiburonNegro extends AnimalesMarinos
 
     public void setIv(ImageView iv) {
         this.iv = iv;
-    }
-    
-    
-        
-    @Override
-    public void moverse() 
-    {
-        this.setPosicionX(this.getPosicionX() - 1);
-        this.iv.setLayoutX(this.getPosicionX());
-    }
-
-    @Override
-    public void atacar() 
-    {
-        
-    }
-    
-    public void generarPalabras(){
-    
     }
     
 }

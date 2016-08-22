@@ -1,7 +1,5 @@
 package typersharkapp;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,20 +21,21 @@ public class InicioJuego
     private Boton salir;
     private Boton jugar;
     private FileReader archivo;
+    private char letra;
     private String palabra;
     private String palabras[];
     private Buceador jugador;
     private Stage stage;
     private Scene sc2;
     
-    
+   
     public InicioJuego()
     {
         // HACER LA LECTURA DEL ARCHIVO DE PALABRAS
         //archivo = new FileReader("Palabras_Tiburon.txt");
         this.palabra = null;
         this.palabras = null;
-        
+        this.letra = 'S';
         
         
         teclado = new KeyHandler();
@@ -62,8 +61,9 @@ public class InicioJuego
         
         salir.getBtn().setOnAction(new Salir());
         jugar.getBtn().setOnAction(event ->{
-            new Thread(new MoverAnimal(new Tiburon(this.juego, 2, new String()))).start();
-            new Thread(new MoverAnimal(new TiburonNegro(this.juego, 3, palabras))).start();
+            new Thread(new Tiburon(this.juego, 2, palabra)).start();
+            new Thread(new TiburonNegro(this.juego, 3, palabras)).start();
+            new Thread(new Piranha(this.juego, 1, letra)).start();
         });
         
        

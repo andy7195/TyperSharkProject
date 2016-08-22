@@ -139,15 +139,15 @@ public class PaneOrganize {
                 
         {
             
-                try{
-         musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
-                  
-         }
-        catch(Exception e1){System.out.println("No oye");}
-        mp = new MediaPlayer(musicFile);
-                mp.setVolume(0.5);
-                mp.play();
-   
+            /*try
+            {
+                musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
+            }
+            catch(Exception e1){System.out.println("No oye");}
+            mp = new MediaPlayer(musicFile);
+            mp.setVolume(0.5);
+            mp.play();*/
+
                            
             juego.setStage(stage);
             juego.setSc2(sc);
