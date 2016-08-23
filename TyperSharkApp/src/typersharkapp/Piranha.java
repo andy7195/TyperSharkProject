@@ -1,5 +1,6 @@
 package typersharkapp;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -11,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 
-public class Piranha extends AnimalesMarinos implements Runnable
+public class Piranha extends AnimalesMarinos //implements Runnable
 {
     private char caracter;
     private Image piranha;
@@ -19,7 +20,7 @@ public class Piranha extends AnimalesMarinos implements Runnable
     private Text texto;
     private TextFlow t;
 
-    public Piranha(Pane pane, int velocidad, char letra) 
+    public Piranha(char letra) 
     {
         super();
         try{
@@ -32,66 +33,60 @@ public class Piranha extends AnimalesMarinos implements Runnable
         }
         
         this.iv = new ImageView(piranha);
-        this.iv.setFitHeight(35);
-        this.iv.setFitWidth(70);
+        this.iv.setFitHeight(25);
+        this.iv.setFitWidth(50);
         
         this.texto = new Text(130, 50, "S");
         this.texto.setFill(Color.LIGHTCYAN);
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(25);
-        this.t.setLayoutY(8);
+        this.t.setLayoutX(15);
+        this.t.setLayoutY(0);
         
         this.caracter = letra;
-        this.generarPosicion();
-        this.setVelocidad(velocidad);
-        
-        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
-        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
-        
-        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
     @Override
     public void run() 
     {
-        while(this.getPosicionX() != 50)
+         try 
         {
-            this.moverse();
+            while(this.getPosicionX() != 50)
+            {
             
-            Platform.runLater(new Runnable() 
-            {
-                @Override
-                public void run() 
-                { 
-                    Piranha.this.setPosicionX(Piranha.this.getPosicionX());
-                }
-            });
-            try 
-            {
+                this.setPosicionX(this.getPosicionX() - 1);
+                
+                Platform.runLater(new Runnable() 
+                {
+                    @Override
+                    public void run() 
+                    { 
+                        Piranha.this.getFigura().setLayoutX(Piranha.this.getPosicionX());
+                    }
+                });
+
                 Thread.sleep(this.getVelocidad()*10); 
-            } 
-            catch (InterruptedException ex) 
-            {
-                Logger.getLogger(Piranha.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }   
-    }
-    
-    @Override
-    public void moverse() 
-    {
-        this.setPosicionX(this.getPosicionX() - 1);
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+            Piranha.this.getFigura().setVisible(false);
+        }
+        catch(Exception ex)
+        {
+                System.out.println("Error");
+                ex.printStackTrace();
+        }
     }
 
-    @Override
-    public void atacar() 
+    public void adjuntarPiranha(Pane panel, int velocidad)
     {
+        getFigura().getChildren().addAll(getIv(), getT());
         
+        getFigura().setLayoutX(this.getPosicionX());
+        getFigura().setLayoutY(this.getPosicionY());
+        panel.getChildren().add(this.getFigura());
+        
+        this.setVelocidad(velocidad);
     }
     
     

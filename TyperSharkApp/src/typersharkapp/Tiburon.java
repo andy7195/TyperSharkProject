@@ -6,21 +6,24 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.ALPHANUMERIC;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 
-public class Tiburon extends AnimalesMarinos implements Runnable
+public class Tiburon extends AnimalesMarinos //implements Runnable
 {
     private String palabra;
     private Image tiburon;
     private ImageView iv;
     private Text texto;
     private TextFlow t;
+    private KeyEvent event;
 
-    public Tiburon(Pane pane, int velocidad, String palabra) 
+    public Tiburon(String palabra, KeyEvent ke) 
     {
         super();
         
@@ -33,70 +36,72 @@ public class Tiburon extends AnimalesMarinos implements Runnable
             System.out.println("No lee imagen");
         }
         
+        this.palabra = palabra;
+        this.event = ke;
+        
         this.iv = new ImageView(tiburon);
         this.iv.setFitHeight(50);
         this.iv.setFitWidth(130);
         
-        this.texto = new Text(130, 50, "Hola");
+        this.texto = new Text(130, 50, palabra);
         this.texto.setFill(Color.GREENYELLOW);
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(60);
-        this.t.setLayoutY(8);
+        this.t.setLayoutX(70);
+        this.t.setLayoutY(10);
         
-        this.palabra = palabra;
-        this.generarPosicion();
-        this.setVelocidad(velocidad);
         
-        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
-        
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
-        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
-        
-        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
     @Override
     public void run() 
     {
-        while(this.getPosicionX() != 50)
+         try 
         {
-            this.moverse();
-            
-            Platform.runLater(new Runnable() 
+            int i = 0;
+            while(this.getPosicionX() > 50 && i < this.palabra.length())
             {
-                @Override
-                public void run() 
-                { 
-                    Tiburon.this.setPosicionX(Tiburon.this.getPosicionX());
+                
+                if(Tiburon.this.palabra.charAt(i)== Tiburon.this.event.getCode().toString().charAt(0))
+                {
+                    i++;
                 }
-            });
-            try 
-            {
-                Thread.sleep(100); 
-            } 
-            catch (InterruptedException ex) 
-            {
-                Logger.getLogger(Tiburon.class.getName()).log(Level.SEVERE, null, ex);
+                
+                this.setPosicionX(this.getPosicionX() - 1);
+                
+                Platform.runLater(new Runnable() 
+                {
+                    @Override
+                    public void run() 
+                    { 
+                        Tiburon.this.getFigura().setLayoutX(Tiburon.this.getPosicionX());
+                        
+                    }
+                });
+
+                Thread.sleep(this.getVelocidad()*10); 
             }
-        }   
-    }
-    
-    @Override
-    public void moverse() 
-    {
-        this.setPosicionX(this.getPosicionX() - 1);
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+            Tiburon.this.getFigura().setVisible(false);
+        }
+        catch(Exception ex)
+        {
+                System.out.println("Error");
+                ex.printStackTrace();
+        }  
     }
 
-    @Override
-    public void atacar() 
+    public void adjuntarTiburon(Pane panel, int velocidad)
     {
+        getFigura().getChildren().addAll(getIv(), getT());
         
+        getFigura().setLayoutX(this.getPosicionX());
+        getFigura().setLayoutY(this.getPosicionY());
+        panel.getChildren().add(this.getFigura());
+        
+        this.setVelocidad(velocidad);
     }
-    
     
     
     public String getPalabra() {

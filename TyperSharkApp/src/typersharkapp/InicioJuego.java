@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -60,11 +61,20 @@ public class InicioJuego
         
         
         salir.getBtn().setOnAction(new Salir());
-        jugar.getBtn().setOnAction(event ->{
-            new Thread(new Tiburon(this.juego, 2, palabra)).start();
-            new Thread(new TiburonNegro(this.juego, 3, palabras)).start();
-            new Thread(new Piranha(this.juego, 1, letra)).start();
-            new Thread(new Buceador(this.juego,"Juan")).start();
+        jugar.getBtn().setOnAction((ActionEvent event) -> {
+            
+            //Tiburon t = new Tiburon(palabra);
+            //t.adjuntarTiburon(juego, 2);
+            
+            TiburonNegro tn = new TiburonNegro(palabras);
+            tn.adjuntarTiburonNegro(juego, 3);
+            
+            Piranha p = new Piranha(letra);
+            p.adjuntarPiranha(juego, 1);
+            
+            //t.start();
+            tn.start();
+            p.start();
         });
         
        
@@ -75,7 +85,16 @@ public class InicioJuego
         @Override
         public void handle(KeyEvent event)
         {
-             switch(event.getCode())
+            Tiburon t = new Tiburon("hola", event);
+            t.adjuntarTiburon(juego, 2);
+            if(event.getCode().equals(ENTER))
+            {
+                t.start();
+            }
+         
+            
+            
+            /*switch(event.getCode())
             {
                 case ENTER:
                 {
@@ -99,7 +118,7 @@ public class InicioJuego
                         break;
                     }
                 }      
-            }
+            }*/
         }
     }
     public KeyHandler getTeclado() {

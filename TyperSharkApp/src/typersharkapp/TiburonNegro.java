@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 
-public class TiburonNegro extends AnimalesMarinos implements Runnable
+public class TiburonNegro extends AnimalesMarinos //implements Runnable
 {
     private String palabras[];
     private int numroAlt;
@@ -27,7 +27,7 @@ public class TiburonNegro extends AnimalesMarinos implements Runnable
     }
 
     
-    public TiburonNegro(Pane pane, int velocidad, String palabra[]) 
+    public TiburonNegro(String palabra[]) 
     {
         super();
         
@@ -50,58 +50,51 @@ public class TiburonNegro extends AnimalesMarinos implements Runnable
         
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(35);
-        this.t.setLayoutY(25);
+        this.t.setLayoutY(30);
         
         this.palabras = palabra;
-        this.generarPosicion();
-        this.setVelocidad(velocidad);
-        
-        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
-        
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
-        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
-        
-        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
     @Override
     public void run() 
     {
-        while(this.getPosicionX() != 50)
+         try 
         {
-            this.moverse();
+            while(this.getPosicionX() != 50)
+            {
             
-            Platform.runLater(new Runnable() 
-            {
-                @Override
-                public void run() 
-                { 
-                    TiburonNegro.this.setPosicionX(TiburonNegro.this.getPosicionX());
-                }
-            });
-            try 
-            {
+                this.setPosicionX(this.getPosicionX() - 1);
+                
+                Platform.runLater(new Runnable() 
+                {
+                    @Override
+                    public void run() 
+                    { 
+                        TiburonNegro.this.getFigura().setLayoutX(TiburonNegro.this.getPosicionX());
+                    }
+                });
+
                 Thread.sleep(this.getVelocidad()*10); 
-            } 
-            catch (InterruptedException ex) 
-            {
-                Logger.getLogger(TiburonNegro.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }   
-    }
-    
-    @Override
-    public void moverse() 
-    {
-        this.setPosicionX(this.getPosicionX() - 1);
-        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+            TiburonNegro.this.getFigura().setVisible(false);
+        }
+        catch(Exception ex)
+        {
+                System.out.println("Error");
+                ex.printStackTrace();
+        }
     }
 
-    @Override
-    public void atacar() 
+    public void adjuntarTiburonNegro(Pane panel, int velocidad)
     {
+        getFigura().getChildren().addAll(getIv(), getT());
         
+        getFigura().setLayoutX(this.getPosicionX());
+        getFigura().setLayoutY(this.getPosicionY());
+        panel.getChildren().add(this.getFigura());
+        
+        this.setVelocidad(velocidad);
     }
     
     public void generarPalabras(){
