@@ -64,16 +64,13 @@ public class InicioJuego
             new Thread(new Tiburon(this.juego, 2, palabra)).start();
             new Thread(new TiburonNegro(this.juego, 3, palabras)).start();
             new Thread(new Piranha(this.juego, 1, letra)).start();
+            new Thread(new Buceador(this.juego,"Juan")).start();
         });
         
        
     }
 
- 
-    
-  
-    
-    private class KeyHandler implements EventHandler<KeyEvent>
+     private class KeyHandler implements EventHandler<KeyEvent>
     {
         @Override
         public void handle(KeyEvent event)
@@ -93,12 +90,18 @@ public class InicioJuego
                   
                 }        
                 default:  {
-                    break;
+                    if(event.getCode().isLetterKey()){
+                        
+                        break;
+                    }
+                    else{
+                        System.out.println("La tecla presionada no es válida");
+                        break;
+                    }
                 }      
             }
         }
     }
-
     public KeyHandler getTeclado() {
         return teclado;
     }

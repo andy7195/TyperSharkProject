@@ -1,6 +1,5 @@
 package typersharkapp;
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -33,27 +32,26 @@ public class Piranha extends AnimalesMarinos implements Runnable
         }
         
         this.iv = new ImageView(piranha);
-        this.iv.setFitHeight(25);
-        this.iv.setFitWidth(50);
+        this.iv.setFitHeight(35);
+        this.iv.setFitWidth(70);
         
         this.texto = new Text(130, 50, "S");
         this.texto.setFill(Color.LIGHTCYAN);
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(15);
-        this.t.setLayoutY(0);
+        this.t.setLayoutX(25);
+        this.t.setLayoutY(8);
         
         this.caracter = letra;
         this.generarPosicion();
         this.setVelocidad(velocidad);
         
-        this.getFigura().getChildren().addAll(iv, t);
+        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
         
-        this.getFigura().setLayoutX(this.getPosicionX());
-        this.getFigura().setLayoutY(this.getPosicionY());
-        
-        pane.getChildren().add(this.getFigura());
+        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
@@ -87,7 +85,7 @@ public class Piranha extends AnimalesMarinos implements Runnable
     public void moverse() 
     {
         this.setPosicionX(this.getPosicionX() - 1);
-        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
     }
 
     @Override

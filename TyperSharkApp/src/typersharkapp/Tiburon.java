@@ -42,19 +42,19 @@ public class Tiburon extends AnimalesMarinos implements Runnable
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(70);
-        this.t.setLayoutY(10);
+        this.t.setLayoutX(60);
+        this.t.setLayoutY(8);
         
         this.palabra = palabra;
         this.generarPosicion();
         this.setVelocidad(velocidad);
         
-        this.getFigura().getChildren().addAll(iv, t);
+        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
         
-        this.getFigura().setLayoutX(this.getPosicionX());
-        this.getFigura().setLayoutY(this.getPosicionY());
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
         
-        pane.getChildren().add(this.getFigura());
+        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
@@ -75,7 +75,7 @@ public class Tiburon extends AnimalesMarinos implements Runnable
             });
             try 
             {
-                Thread.sleep(this.getVelocidad()*10); 
+                Thread.sleep(100); 
             } 
             catch (InterruptedException ex) 
             {
@@ -88,7 +88,7 @@ public class Tiburon extends AnimalesMarinos implements Runnable
     public void moverse() 
     {
         this.setPosicionX(this.getPosicionX() - 1);
-        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
     }
 
     @Override

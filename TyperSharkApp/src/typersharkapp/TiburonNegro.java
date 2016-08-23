@@ -50,18 +50,18 @@ public class TiburonNegro extends AnimalesMarinos implements Runnable
         
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(35);
-        this.t.setLayoutY(30);
+        this.t.setLayoutY(25);
         
         this.palabras = palabra;
         this.generarPosicion();
         this.setVelocidad(velocidad);
         
-        this.getFigura().getChildren().addAll(iv, t);
+        this.getFiguraAnimalesMarinos().getChildren().addAll(iv, t);
         
-        this.getFigura().setLayoutX(this.getPosicionX());
-        this.getFigura().setLayoutY(this.getPosicionY());
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutY(this.getPosicionY());
         
-        pane.getChildren().add(this.getFigura());
+        pane.getChildren().add(this.getFiguraAnimalesMarinos());
     }
 
     
@@ -95,7 +95,7 @@ public class TiburonNegro extends AnimalesMarinos implements Runnable
     public void moverse() 
     {
         this.setPosicionX(this.getPosicionX() - 1);
-        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFiguraAnimalesMarinos().setLayoutX(this.getPosicionX());
     }
 
     @Override

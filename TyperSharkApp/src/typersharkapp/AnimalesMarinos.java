@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 public abstract class AnimalesMarinos 
 {
-    private Pane figura;
+    private Pane figuraAnimalesMarinos;
     private double posicionX;
     private double posicionY;
     private int velocidad;
@@ -14,7 +14,7 @@ public abstract class AnimalesMarinos
     
     public AnimalesMarinos()
     {
-        this.figura = new Pane();
+        this.figuraAnimalesMarinos = new Pane();
         this.posicionX = 0;
         this.posicionY = 0;
         this.velocidad = 0;
@@ -22,7 +22,7 @@ public abstract class AnimalesMarinos
 
     public AnimalesMarinos(Pane pane, double posicionX, double posicionY, int velocidad, File listadoPalabras) 
     {
-        this.figura = pane;
+        this.figuraAnimalesMarinos = pane;
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.velocidad = velocidad;
@@ -37,17 +37,17 @@ public abstract class AnimalesMarinos
         Random rand = new Random();
         
         this.posicionY = rand.nextInt(450);
-        this.posicionX = 900;
+        this.posicionX = 800;
         
     }
 
     
-    public Pane getFigura() {
-        return figura;
+    public Pane getFiguraAnimalesMarinos() {
+        return figuraAnimalesMarinos;
     }
 
-    public void setFigura(Pane figura) {
-        this.figura = figura;
+    public void setFiguraAnimalesMarinos(Pane figuraAnimalesMarinos) {
+        this.figuraAnimalesMarinos = figuraAnimalesMarinos;
     }
     
     public double getPosicionX() {
