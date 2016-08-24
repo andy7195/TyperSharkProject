@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,8 +17,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Andy
+ * Una clase para representar la ventana principal del juego.
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class PaneOrganize {
     private Pane Inicio;
@@ -172,79 +174,145 @@ public class PaneOrganize {
         }
     }
     
-  
-
-    
-    
+    /**
+     * Método que devuelve la escena de la ventana principal.
+     * @return Scene
+     */
     public Scene getSc() {
         return sc;
     }
 
+    /**
+     * Método que modifica la escena de la ventana principal.
+     * @param sc
+     */
     public void setSc(Scene sc) {
         this.sc = sc;
     }
         
+    /**
+     * Método que devuelve la imagen de fondo de la ventana principal.
+     * @return Image
+     */
     public Image getImagen() {
         return imagen;
     }
 
+    /**
+     * Método que modifica la imagen de fondo de la ventana principal.
+     * @param imagen
+     */
     public void setImagen(Image imagen) {
         this.imagen = imagen;
     }
 
+    /**
+     * Método que devuelve la vista de la imagen de fondo de la ventana principal.
+     * @return ImageView
+     */
     public ImageView getVi() {
         return vi;
     }
 
+    /**
+     * Método que dmodifica la vista de la imagen de fondo de la ventana principal.
+     * @param vi de tipo ImageView que representa la vista de la imagen de fondo de la ventana principal.
+     */
     public void setVi(ImageView vi) {
         this.vi = vi;
     }
 
+    /**
+     * Método que devuelve el panel de la ventana principal.
+     * @return Pane
+     */
     public Pane getInicio() {
         return Inicio;
     }
 
+    /**
+     * Método que modifica el panel de la ventana principal.
+     * @param Inicio de tipo Pane que representa el panel de la ventana principal.
+     */
     public void setInicio(Pane Inicio) {
         this.Inicio = Inicio;
     }
     
-    
+    /**
+     * Método que devuelve la ventana Reglas.
+     * @return Reglas
+     */
     public Reglas getReglas() {
         return reglas;
     }
-
+    
+    /**
+     * Método que modifica la ventana Reglas.
+     * @param window2 de tipo Reglas que representa la ventana Reglas
+     */
+    public void setReglas(Reglas window2) {
+        this.reglas = window2;
+    }
+    
+    /**
+     * Método que devuelve la clase InicioJuego.
+     * @return InicioJuego
+     */
+    public InicioJuego getJuego() {
+        return juego;
+    }
+    /**
+     * Método que modifica la clase InicioJuego.
+     * @param juego de tipo InicioJuego que representa a la ventana de Inicio del Juego.
+     */
     public void setJuego(InicioJuego juego) {
         this.juego = juego;
     }
     
-    
-    public InicioJuego getJuego() {
-        return juego;
-    }
-
-    public void setReglas(Reglas window2) {
-        this.reglas = window2;
-    }
-
+    /**
+     * Método que devuelve el Stage del juego.
+     * @return Stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Método que modifica el Stage del juego.
+     * @param stage de tipo Stage que representa el Stage del juego.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Método que devuelve la ventana Puntajes.
+     * @return Puntajes
+     */
     public Puntajes getPuntaje() {
         return puntaje;
     }
 
+    /**
+     * Método que modifica la ventana Puntajes.
+     * @param puntaje de tipo Puntajes que representa la ventana Puntajes.
+     */
     public void setPuntaje(Puntajes puntaje) {
         this.puntaje = puntaje;
     }
-     public DatosUsuario getDu() {
+
+    /**
+     * Método que devuelve la ventana de ingreso de datos de usuario.
+     * @return DatosUsario
+     */
+    public DatosUsuario getDu() {
         return du;
     }
 
+    /**
+     * Método que modifica la ventana la ventana de ingreso de datos de usuario.
+     * @param du de tipo DatosUsuario que representa la ventana de ingreso de datos de usuario.
+     */
     public void setDu(DatosUsuario du) {
         this.du = du;
     }

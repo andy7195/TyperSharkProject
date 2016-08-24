@@ -1,18 +1,20 @@
 package typersharkapp;
 
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javafx.scene.input.KeyCode.ALPHANUMERIC;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
+/**
+ * Una clase para representar al tiburon del juego.
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
+ */
 
 public class Tiburon extends AnimalesMarinos //implements Runnable
 {
@@ -47,10 +49,11 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         this.texto.setFill(Color.GREENYELLOW);
         this.texto.setStyle("-fx-font: 18 century;");
         
+       
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(70);
         this.t.setLayoutY(10);
-        
+             
         
     }
 
@@ -92,6 +95,11 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         }  
     }
 
+  /**
+     * Método que añade la imagen al panel del tiburon.
+     * @param panel de tipo Pane que representa el panel del tiburon.
+     * @param velocidad de tipo int que representa la velocidad del tiburon.
+     */
     public void adjuntarTiburon(Pane panel, int velocidad)
     {
         getFigura().getChildren().addAll(getIv(), getT());
@@ -103,44 +111,85 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         this.setVelocidad(velocidad);
     }
     
-    
+    /**
+     * Método que devuelve la palabra del tiburon.
+     * @return String
+     */
     public String getPalabra() {
         return palabra;
     }
 
+    /**
+     * Método que modifica la palabra del tiburon.
+     * @param palabra de tipo String que representa la palabra del tiburon.
+     */
     public void setPalabra(String palabra) {
         this.palabra = palabra;
     }
 
+    /**
+     * Método que devuelve la imagen del tiburon.
+     * @return Image
+     */
     public Image getTiburon() {
         return tiburon;
     }
 
+    /**
+     * Método que modifica la imagen del tiburon.
+     * @param tiburon de tipo Image que representa la imagen del tiburon.
+     */
     public void setTiburon(Image tiburon) {
         this.tiburon = tiburon;
     }
 
+    /**
+     * Método que devuelve la vista de la imagen del tiburon.
+     * @return ImageView
+     */
     public ImageView getIv() {
         return iv;
     }
 
+    /**
+     * Método que modifica la vista de la imagen del tiburon.
+     * @param iv de tipo ImageView que representa la vista de la imagen del tiburon.
+     */
     public void setIv(ImageView iv) {
         this.iv = iv;
     }
 
+    /**
+     * Método que devuelve el texto del tiburon.
+     * @return Text
+     */
     public Text getTexto() {
         return texto;
     }
 
+    /**
+     * Método que modifica el texto del tiburon.
+     * @param texto de tipo Text que representa el texto del tiburon.
+     */
     public void setTexto(Text texto) {
         this.texto = texto;
     }
 
+    /**
+     * Método que devuelve el TextFlow del tiburon.
+     * @return TextFlow
+     */
     public TextFlow getT() {
         return t;
     }
 
+    /**
+     * Método que devuelve el TextFlow del tiburon.
+     * @param t de tipo TextFlow que representa el TextFlow del tiburon.
+     */
     public void setT(TextFlow t) {
         this.t = t;
     }
+
+
 }

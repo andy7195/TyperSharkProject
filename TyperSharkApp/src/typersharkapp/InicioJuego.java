@@ -6,12 +6,20 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javafx.scene.input.KeyCode.ENTER;
+import javafx.scene.input.KeyCode;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
+ */
 
 public class InicioJuego 
 {
@@ -61,6 +69,7 @@ public class InicioJuego
         
         
         salir.getBtn().setOnAction(new Salir());
+        new Thread(new Buceador(juego)).start();
         jugar.getBtn().setOnAction((ActionEvent event) -> {
             
             //Tiburon t = new Tiburon(palabra);
@@ -75,6 +84,7 @@ public class InicioJuego
             //t.start();
             tn.start();
             p.start();
+            
         });
         
        
@@ -87,7 +97,7 @@ public class InicioJuego
         {
             Tiburon t = new Tiburon("hola", event);
             t.adjuntarTiburon(juego, 2);
-            if(event.getCode().equals(ENTER))
+            if(event.getCode().equals(KeyCode.ENTER))
             {
                 t.start();
             }
@@ -121,12 +131,18 @@ public class InicioJuego
             }*/
         }
     }
+
+    /**
+     * Método que devuelve un Key Hanlder la ventana de inicio del juego.
+     * @return
+     */
     public KeyHandler getTeclado() {
         return teclado;
     }
     
      
     private class Salir implements EventHandler<ActionEvent>{
+        @Override
         public void handle(ActionEvent e)
         {
             stage.setTitle("TyperShark!...");
@@ -135,34 +151,84 @@ public class InicioJuego
         }
     }
 
-    
-    
+    /**
+     * Método que devuelve el stage del juego.
+     * @return Stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /** 
+     * Método que modifica el stage del juego.
+     * @param stage de tipo Stage que representa el stage del juego.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Método que devuelve la escena de la ventana de inicio del juego.
+     * @return Scene
+     */
     public Scene getSc2() {
         return sc2;
     }
 
+    /**
+     * Método que modifica la escena de la ventana de inicio del juego.
+     * @param sc2 de tipo Scene que representa la escena de la venta de inicio del juego.
+     */
     public void setSc2(Scene sc2) {
         this.sc2 = sc2;
     }
     
+    /**
+     * Método que devuelve el panel de la ventana de inicio del juego.
+     * @return
+     */
     public Pane getPaneJuego() {
         return juego;
     }
 
+    /**
+     * Método que modifica el panel de la ventana de inicio del juego.
+     * @param juego de tipo Pane que representa el panel de la venta de inicio del juego.
+     */
+    public void setJuego(Pane juego) {
+        this.juego = juego;
+    }
+
+    /**
+     * Método que devuelve la imagen de fondo de la ventana de inicio del juego.
+     * @return Image
+     */
     public Image getFondo() {
         return fondo;
     }
 
+    /**
+     * Método que modifica la imagen de fondo de la ventana de inicio del juego.
+     * @param fondo de tipo Image que representa la imagen de fondo de la venta de inicio del juego.
+     */
+    public void setFondo(Image fondo) {
+        this.fondo = fondo;
+    }
+
+    /**
+     * Método que devuelve la vista de la imagen de fondo de la ventana de inicio del juego.
+     * @return ImageView
+     */
     public ImageView getIv() {
         return iv;
+    }
+
+    /**
+     * Método que modifica la vista de la imagen de fondo de la ventana de inicio del juego.
+     * @param iv de tipo ImageView que representa la vista de la imagen de fondo de la venta de inicio del juego.
+     */
+    public void setIv(ImageView iv) {
+        this.iv = iv;
     }
        
 }

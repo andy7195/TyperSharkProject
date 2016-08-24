@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author COMPAQ
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class TyperSharkApp extends Application {
 
@@ -40,10 +43,20 @@ public class TyperSharkApp extends Application {
         this.po = po;
     }*/
 
+    /**
+     * Método que devuelve una clase Reglas.
+     * @return Reglas
+     */
+
+
     public Reglas getReglas() {
         return reglas;
     }
 
+    /**
+     * Método que modifica una clase Reglas.
+     * @param reglas
+     */
     public void setReglas(Reglas reglas) {
         this.reglas = reglas;
     }

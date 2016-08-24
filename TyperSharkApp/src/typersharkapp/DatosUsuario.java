@@ -8,9 +8,7 @@ package typersharkapp;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -28,8 +26,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Andy
+ * Una clase para representar la ventana de ingreso de datos de usuario.
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class DatosUsuario {
     private Pane windowDatos;
@@ -86,18 +87,34 @@ public class DatosUsuario {
         
            }
     
+    /**
+     * Método que devuelve el stage del juego.
+     * @return Stage
+     */
     public Stage getS() {
         return s;
     }
 
+    /**
+     * Método que modifica el Stage del juego.
+     * @param stage de tipo Stage que representa el Stage del juego.
+     */
     public void setS(Stage s) {
         this.s = s;
     }
 
+    /**
+     * Método que devuelve la escena de la ventana de ingreso de datos de usuario.
+     * @return Scene
+     */
     public Scene getSc() {
         return sc;
     }
 
+    /**
+     * Método que modifica la escena de la ventana de ingreso de datos de usuario.
+     * @param sc de tipo Scene que representa la escena de la ventana de ingreso de datos de usuario.
+     */
     public void setSc(Scene sc) {
         this.sc = sc;
     }
@@ -175,19 +192,79 @@ public class DatosUsuario {
         }
     }
      
-     
+    /**
+     * Método que devuelve el panel de la ventana de ingreso de datos de usuario.
+     * @return Pane
+     */
     public Pane getWindowDatos() {
         return windowDatos;
     }
     
-     public void setJuego(InicioJuego juego) {
-        this.juego = juego;
-    }
-    
-    
+    /**
+     * Método que devuelve la ventana de ingreso de inicio del juego.
+     * @return InicioJuego
+     */
     public InicioJuego getJuego() {
         return juego;
     }
+    
+    /**
+     * Método que modifica la ventana de ingreso de inicio del juego.
+     * @param juego de tipo InicioJuego que representa la ventana de ingreso de inicio del juego
+     */
+    public void setJuego(InicioJuego juego) {
+        this.juego = juego;
+    }
+
+    /**
+     * Método que devuelve la imagen de fondo de la ventana de ingreso de inicio del juego.
+     * @return Image
+     */
+    public Image getImagen() {
+        return imagen;
+    }
+
+    /**
+     * Método que modifica la imagen de fondo de la ventana de ingreso de inicio del juego.
+     * @param imagen de tipo Imagen que representa la imagen de fondo de la ventana de ingreso de inicio del juego.
+     */
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
+    }
+
+    /**
+     * Método que devuelve la vista de imagen de fondo de la ventana de ingreso de inicio del juego.
+     * @return ImageView
+     */
+    public ImageView getVi() {
+        return vi;
+    }
+
+    /** 
+     * Método que modifica la vista de imagen de fondo de la ventana de ingreso de inicio del juego.
+     * @param vi de tipo ImageView que representa la vista de imagen de fondo de la ventana de ingreso de inicio del juego.
+     */
+    public void setVi(ImageView vi) {
+        this.vi = vi;
+    }
+
+    /**
+     * Método que devuelve al buceador del juego.
+     * @return Buceador
+     */
+    public Buceador getB() {
+        return b;
+    }
+
+    /**
+     * Método que modifica al buceador del juego.
+     * @param b de tipo Buceador que representa al buceador del juego.
+     */
+    public void setB(Buceador b) {
+        this.b = b;
+    }
+    
+    
 
    
     

@@ -16,8 +16,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Andy
+ * Una clase para representar a la ventana de las reglas del juego.
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class Reglas {
     
@@ -75,18 +78,34 @@ public class Reglas {
         
     }
 
+    /**
+     * Método que devuelve la imagen de fondo.
+     * @return Image
+     */
     public Image getImagen() {
         return imagen;
     }
 
+    /**
+     * Método que modifica la imagen de fondo.
+     * @param imagen de tipo Image que representa la imagen de fondo
+     */
     public void setImagen(Image imagen) {
         this.imagen = imagen;
     }
 
+    /**
+     * Método que devuelve la vista de la imagen de fondo.
+     * @return ImagenView
+     */
     public ImageView getVi() {
         return vi;
     }
 
+    /**
+     * Método que modifica la vista de la imagen de fondo.
+     * @param vi
+     */
     public void setVi(ImageView vi) {
         this.vi = vi;
     }
@@ -101,26 +120,51 @@ public class Reglas {
             stage.show();
         }
     }
+
+    /**
+     * Método que devuelve el panel de las Reglas.
+     * @return Pane
+     */
     public Pane getWindowReglas() {
         return windowReglas;
     }
     
+    /**
+     * Método que modifica el panel de las Reglas.
+     * @param windowReglas de tipo Pane que representa el panel de las Reglas.
+     */
     public void setWindowReglas(Pane windowReglas) {
         this.windowReglas = windowReglas;
     }
 
+    /**
+     * Método que devuelve el stage del juego.
+     * @return Stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Método que modifica el stage del juego.
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Método que devuelve la escena de la ventana Reglas.
+     * @return Scene
+     */
     public Scene getSc1() {
         return sc1;
     }
 
+    /**
+     * Método que modifica la escena de la ventana Reglas.
+     * @param scene de tipo Scene que representa la escena de la ventana Reglas.
+     */
     public void setSc1(Scene scene) {
         this.sc1 = scene;
     }

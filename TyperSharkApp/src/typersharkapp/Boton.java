@@ -12,7 +12,10 @@ import javafx.scene.paint.Color;
 
 /**
  *
- * @author Andy
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class Boton {
     private Button btn;
@@ -31,10 +34,18 @@ public class Boton {
     
     }
 
+    /**
+     * Método que devuelve un boton.
+     * @return Button
+     */
     public Button getBtn() {
         return btn;
     }
 
+    /**
+     * Método que modifica un boton.
+     * @param btn de tipo Button que representa un boton.
+     */
     public void setBtn(Button btn) {
         this.btn = btn;
     }

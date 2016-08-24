@@ -19,8 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Andy
+ * Una clase para representar la ventana de los 10 mejores jugadores.
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class Puntajes {
     private Pane windowPuntajes;
@@ -87,18 +90,34 @@ public class Puntajes {
     
     }
 
+    /**
+     * Método que devuelve el stage del juego.
+     * @return Stage
+     */
     public Stage getS() {
         return s;
     }
 
+    /**
+     * Método que modifica el stage del juego.
+     * @param s de tipo Stage que representa el stage del juego.
+     */
     public void setS(Stage s) {
         this.s = s;
     }
 
+    /**
+     * Método que devuelve la escena de la ventana Puntajes.
+     * @return Scene
+     */
     public Scene getSc() {
         return sc;
     }
 
+    /**
+     * Método que modifica la escena de la ventana Puntajes.
+     * @param sc de tipo Scene que representa la escena de la ventana Reglas.
+     */
     public void setSc(Scene sc) {
         this.sc = sc;
     }
@@ -112,7 +131,87 @@ public class Puntajes {
             
         }
     }
+
+    /**
+     * Método que devuelve el panel de la ventana Puntajes.
+     * @return
+     */
     public Pane getWindowPuntajes() {
         return windowPuntajes;
     }
+
+    /**
+     * Método que modifica el panel de la ventana Puntajes.
+     * @param windowPuntajes
+     */
+    public void setWindowPuntajes(Pane windowPuntajes) {
+        this.windowPuntajes = windowPuntajes;
+    }
+
+    /**
+     * Método que devuelve la imagen de fondo de la ventana Puntajes.
+     * @return Image
+     */
+    public Image getImagen() {
+        return imagen;
+    }
+
+    /**
+     * Método que devuelve la imagen de fondo de la ventana Puntajes.
+     * @param imagen de tipo Image que representa la imagen de fondo de la ventana Puntajes.
+     */
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
+    }
+
+    /**
+     * Método que devuelve la vista de la imagen de fondo de la ventana Puntajes.
+     * @return ImageView
+     */
+    public ImageView getVi() {
+        return vi;
+    }
+
+    /**
+     * Método que devuelve la vista de la imagen de fondo de la ventana Puntajes.
+     * @param vi de tipo ImageView que representa la vista de la imagen de fondo de la ventana Puntajes.
+     */
+    public void setVi(ImageView vi) {
+        this.vi = vi;
+    }
+
+    /**
+     * Método que devuelve el area de texto de la ventana Puntajes.
+     * @return TextArea
+     */
+    public TextArea getTextArea() {
+        return textArea;
+    }
+
+    /**
+     * Método que modifica el area de texto de la ventana Puntajes.
+     * @param textArea
+     */
+    public void setTextArea(TextArea textArea) {
+        this.textArea = textArea;
+    }
+
+    /**
+     * Método que devuelve el titulo de la ventana Puntajes.
+     * @return String
+     */
+
+    public String getTexto() {
+        return texto;
+    }
+
+    /**
+     * Método que modifica el titulo de la ventana Puntajes.
+     * @param texto de tipo String que representa el titulo de la ventana Puntajes.
+     */
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+    
+    
 }
