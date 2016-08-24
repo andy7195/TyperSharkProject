@@ -49,7 +49,7 @@ public class Puntajes {
         textArea.setLayoutX(400);
         textArea.setLayoutY(150);
         textArea.setStyle("-fx-font: 18 century;-fx-background-color: transparent;-fx-background-radius: 30;");
-        textArea.setPrefSize(120, 270);
+        textArea.setPrefSize(180, 270);
         
         
         file= new File("C:/Users/Andy/Documents/NetBeansProjects/TyperSharkProject/TyperSharkApp/src/Top10.txt");

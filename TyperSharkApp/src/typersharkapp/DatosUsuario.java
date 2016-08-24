@@ -8,6 +8,12 @@ package typersharkapp;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -36,14 +42,18 @@ public class DatosUsuario {
     private Scene scene2;
     private Buceador b;
     private File file;
+    private SortedMap <String, Integer> datos;
     FileWriter fichero = null;
     PrintWriter pw = null;
     
     public DatosUsuario(){
-        
+         datos = new TreeMap(java.util.Collections.reverseOrder());
+
+         
          juego = new InicioJuego();
          Label titulo= new Label("INGRESE SU NOMBRE");
          nombre = new TextField();
+         
          Button btn1= new Button("JUGAR");
          try{
             imagen= new Image("Menu.png");
@@ -62,7 +72,6 @@ public class DatosUsuario {
         
         nombre.setLayoutX(450);
         nombre.setLayoutY(300);
-        
         
         btn1.setLayoutX(250);
         btn1.setLayoutY(400);
@@ -94,14 +103,7 @@ public class DatosUsuario {
     }
     
     
-    private class regresar implements EventHandler<ActionEvent>{
-        public void handle(ActionEvent e){
-            s.setTitle("TyperShark!...");
-            s.setScene(getSc());
-            s.show();
-            
-        }
-    }
+   
     
      private class Iniciar implements EventHandler<ActionEvent>
     {
@@ -120,17 +122,22 @@ public class DatosUsuario {
                 mp.setVolume(0.5);
                 mp.play();*/
            
-            
+           
           b = new Buceador();
           file= new File("C:/Users/Andy/Documents/NetBeansProjects/TyperSharkProject/TyperSharkApp/src/Top10.txt");
             try
             {
-                
+                    
+                    Set ref = datos.keySet();
+                    Iterator it = ref.iterator();
+                    while (it.hasNext()) {
+                    datos.put(nombre.getText(),(b.getPuntaje()));
+                    System.out.println((String)it.next());
                     fichero = new FileWriter(file, true);
                     pw = new PrintWriter(fichero); 
-                    pw.println(nombre.getText()+","+b.getPuntaje()+"\n");
-                
-              
+                    pw.println(datos);
+                    
+               }     
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

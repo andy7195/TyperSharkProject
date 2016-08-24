@@ -125,7 +125,7 @@ public class InicioJuego
         return teclado;
     }
     
-    
+     
     private class Salir implements EventHandler<ActionEvent>{
         public void handle(ActionEvent e)
         {
