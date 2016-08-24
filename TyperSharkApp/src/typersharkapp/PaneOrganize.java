@@ -33,6 +33,7 @@ public class PaneOrganize {
     private Puntajes puntaje;
     private MediaPlayer mp;
     private Media musicFile;
+    private DatosUsuario du;
   
     public PaneOrganize(){
         try{
@@ -62,12 +63,12 @@ public class PaneOrganize {
         
         reglas = new Reglas();
         puntaje = new Puntajes();
-        juego = new InicioJuego();
+        du = new DatosUsuario();
         
         //ACCIONES DE LOS BOTONES
         regla.getBtn().setOnAction(new ventana2());
         salir.getBtn().setOnAction(new Salida());
-        iniciar.getBtn().setOnAction(new Iniciar());
+        iniciar.getBtn().setOnAction(new VentanaDatos());
         puntajes.getBtn().setOnAction(new score());
     }
     
@@ -123,6 +124,46 @@ public class PaneOrganize {
         }
     }
 
+    private class VentanaDatos implements EventHandler<ActionEvent>
+    {
+        Scene escena2 = new Scene(getDu().getWindowDatos(),890,500);
+        @Override
+        public void handle(ActionEvent event){
+            du.setS(stage);
+            du.getS();
+            if(scene2 == null || scene2 != escena2)
+            {
+                scene2 = escena2;
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            else
+            {
+                
+                stage.setScene(scene2);
+                stage.setResizable(false);
+                stage.show();
+            }
+            event.consume();
+        
+            
+                /*try{
+         musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
+                  
+         }
+        catch(Exception e1){System.out.println("No oye");}
+        mp = new MediaPlayer(musicFile);
+                mp.setVolume(0.5);
+                mp.play();*/
+           
+            
+            
+            
+           
+               
+        }
+    }
     private class Salida implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent e){
@@ -131,45 +172,7 @@ public class PaneOrganize {
         }
     }
     
-    private class Iniciar implements EventHandler<ActionEvent>
-    {
-        Scene escena2 = new Scene(getJuego().getPaneJuego(),890,500);
-        @Override
-        public void handle(ActionEvent event)
-                
-        {
-            
-            /*try
-            {
-                musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
-            }
-            catch(Exception e1){System.out.println("No oye");}
-            mp = new MediaPlayer(musicFile);
-            mp.setVolume(0.5);
-            mp.play();*/
-
-                           
-            juego.setStage(stage);
-            juego.setSc2(sc);
-            if(scene2 == null || scene2 != escena2)
-            {
-                scene2 = escena2;
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
-                stage.show();
-            }
-            else
-            {  
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
-                stage.show();
-            }
-            //stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado()); 
-            event.consume();
-        }
-    }
+  
 
     
     
@@ -237,6 +240,13 @@ public class PaneOrganize {
 
     public void setPuntaje(Puntajes puntaje) {
         this.puntaje = puntaje;
+    }
+     public DatosUsuario getDu() {
+        return du;
+    }
+
+    public void setDu(DatosUsuario du) {
+        this.du = du;
     }
     
     

@@ -30,6 +30,11 @@ public class Buceador implements Runnable{
     private int posicionX;
     private int posicionY;
 
+    
+    public Buceador() {
+    }
+
+    
      public Buceador(Pane pane ,String nombre) {
         this.figuraBuceador= new Pane();
         this.nombre = nombre;
