@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.ALPHANUMERIC;
@@ -21,9 +22,10 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     private ImageView iv;
     private Text texto;
     private TextFlow t;
-    private KeyEvent event;
+    private int iterator;
+    private Buceador buzo;
 
-    public Tiburon(String palabra, KeyEvent ke) 
+    public Tiburon(String palabra, Buceador jugador) 
     {
         super();
         
@@ -37,7 +39,8 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         }
         
         this.palabra = palabra;
-        this.event = ke;
+        this.iterator = 0;
+        this.buzo = jugador;
         
         this.iv = new ImageView(tiburon);
         this.iv.setFitHeight(50);
@@ -50,8 +53,6 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(70);
         this.t.setLayoutY(10);
-        
-        
     }
 
     
@@ -60,15 +61,8 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            int i = 0;
-            while(this.getPosicionX() > 50 && i < this.palabra.length())
+            while(this.getPosicionX() > 50 && this.iterator < this.palabra.length())
             {
-                
-                if(Tiburon.this.palabra.charAt(i)== Tiburon.this.event.getCode().toString().charAt(0))
-                {
-                    i++;
-                }
-                
                 this.setPosicionX(this.getPosicionX() - 1);
                 
                 Platform.runLater(new Runnable() 
@@ -76,14 +70,23 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                     @Override
                     public void run() 
                     { 
-                        Tiburon.this.getFigura().setLayoutX(Tiburon.this.getPosicionX());
-                        
+                        Tiburon.this.getFigura().setLayoutX(Tiburon.this.getPosicionX());  
                     }
                 });
 
                 Thread.sleep(this.getVelocidad()*10); 
             }
             Tiburon.this.getFigura().setVisible(false);
+            this.iterator = 0;
+            
+            if(this.getPosicionX() <= 50)
+            {
+                this.buzo.setVidas(this.buzo.getVidas() - 1);
+            }
+            else if (this.iterator == this.palabra.length())
+            {
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 2);
+            }
         }
         catch(Exception ex)
         {
@@ -92,15 +95,33 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         }  
     }
 
+     private class KeyHandler implements EventHandler<KeyEvent>
+    {
+        
+        @Override
+        public void handle(KeyEvent event)
+        {
+            if(Tiburon.this.palabra.charAt(iterator)== event.getCode().toString().charAt(0))
+            {
+                iterator++;
+            }
+        }
+     }
+    
+    
+    
+    
     public void adjuntarTiburon(Pane panel, int velocidad)
     {
-        getFigura().getChildren().addAll(getIv(), getT());
+        this.getFigura().getChildren().addAll(getIv(), getT());
         
-        getFigura().setLayoutX(this.getPosicionX());
-        getFigura().setLayoutY(this.getPosicionY());
+        this.getFigura().setLayoutX(this.getPosicionX());
+        this.getFigura().setLayoutY(this.getPosicionY());
         panel.getChildren().add(this.getFigura());
         
         this.setVelocidad(velocidad);
+        
+        this.getFigura().addEventHandler(KeyEvent.KEY_TYPED, new KeyHandler());
     }
     
     
@@ -143,4 +164,14 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     public void setT(TextFlow t) {
         this.t = t;
     }
+
+    public int getIterator() {
+        return iterator;
+    }
+
+    public void setIterator(int iterator) {
+        this.iterator = iterator;
+    }
+    
+    
 }

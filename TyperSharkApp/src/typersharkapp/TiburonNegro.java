@@ -15,19 +15,21 @@ import javafx.scene.text.TextFlow;
 
 public class TiburonNegro extends AnimalesMarinos //implements Runnable
 {
-    private String palabras[];
+    private String palabras;//[];
     private int numroAlt;
     private Image tiburon_negro;
     private ImageView iv;
     private Text texto;
     private TextFlow t;
+    private int iterator;
+    private Buceador buzo;
 
     public TiburonNegro() {
         
     }
 
     
-    public TiburonNegro(String palabra[]) 
+    public TiburonNegro(String palabra, Buceador jugador)//[]) 
     {
         super();
         
@@ -44,15 +46,17 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
         iv.setFitHeight(75);
         iv.setFitWidth(150);
         
-        this.texto = new Text(130, 50, "Mundo");
+        this.palabras = palabra;
+        this.iterator = 0;
+        this.buzo = jugador;
+        
+        this.texto = new Text(130, 50, this.palabras);
         this.texto.setFill(Color.CYAN);
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(35);
         this.t.setLayoutY(30);
-        
-        this.palabras = palabra;
     }
 
     
@@ -78,6 +82,16 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10); 
             }
             TiburonNegro.this.getFigura().setVisible(false);
+            this.iterator = 0;
+            
+            if(this.getPosicionX() <= 50)
+            {
+                this.buzo.setVidas(this.buzo.getVidas() - 1);
+            }
+            else if (this.iterator == this.palabras.length())
+            {
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 3);
+            }
         }
         catch(Exception ex)
         {
@@ -119,11 +133,11 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     }
 
     
-    public String[] getPalabras() {
+    public String getPalabras() {
         return palabras;
     }
 
-    public void setPalabras(String[] palabras) {
+    public void setPalabras(String palabras) {
         this.palabras = palabras;
     }
 
@@ -150,5 +164,14 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     public void setIv(ImageView iv) {
         this.iv = iv;
     }
+
+    public int getIterator() {
+        return iterator;
+    }
+
+    public void setIterator(int iterator) {
+        this.iterator = iterator;
+    }
+    
     
 }

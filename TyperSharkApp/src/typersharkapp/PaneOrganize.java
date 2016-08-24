@@ -134,6 +134,7 @@ public class PaneOrganize {
     private class Iniciar implements EventHandler<ActionEvent>
     {
         Scene escena2 = new Scene(getJuego().getPaneJuego(),890,500);
+        
         @Override
         public void handle(ActionEvent event)
                 
@@ -158,6 +159,13 @@ public class PaneOrganize {
                 stage.setResizable(false);
                 stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
                 stage.show();
+                /*
+                Stage stageJuego = new Stage();
+                Scene sceneJuego = new Scene(juego.getPaneJuego(), 900, 510);
+                stageJuego.setScene(sceneJuego);
+                stageJuego.setResizable(false);
+                stageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
+                stageJuego.show();*/
             }
             else
             {  

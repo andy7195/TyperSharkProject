@@ -13,11 +13,8 @@ import javafx.stage.Stage;
  *
  * @author COMPAQ
  */
-public class TyperSharkApp extends Application {
-
-    //private PaneOrganize po;
-    private Reglas reglas;
-    
+public class TyperSharkApp extends Application 
+{
     @Override
     public void start(Stage stage) 
     {
@@ -31,23 +28,6 @@ public class TyperSharkApp extends Application {
         stage.show();
         
     }
-
-    /*public PaneOrganize getPo() {
-        return po;
-    }
-
-    public void setPo(PaneOrganize po) {
-        this.po = po;
-    }*/
-
-    public Reglas getReglas() {
-        return reglas;
-    }
-
-    public void setReglas(Reglas reglas) {
-        this.reglas = reglas;
-    }
-
     
     /**
      * @param args the command line arguments

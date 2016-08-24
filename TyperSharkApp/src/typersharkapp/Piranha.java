@@ -14,13 +14,15 @@ import javafx.scene.text.TextFlow;
 
 public class Piranha extends AnimalesMarinos //implements Runnable
 {
-    private char caracter;
+    private String caracter;
     private Image piranha;
     private ImageView iv;
     private Text texto;
     private TextFlow t;
+    private int iterator;
+    private Buceador buzo;
 
-    public Piranha(char letra) 
+    public Piranha(String letra, Buceador jugador) 
     {
         super();
         try{
@@ -36,15 +38,17 @@ public class Piranha extends AnimalesMarinos //implements Runnable
         this.iv.setFitHeight(25);
         this.iv.setFitWidth(50);
         
-        this.texto = new Text(130, 50, "S");
+        this.caracter = letra;
+        this.iterator = 0;
+        this.buzo = jugador;
+        
+        this.texto = new Text(130, 50, this.caracter);
         this.texto.setFill(Color.LIGHTCYAN);
         this.texto.setStyle("-fx-font: 18 century;");
         
         this.t = new TextFlow(this.texto);
         this.t.setLayoutX(15);
         this.t.setLayoutY(0);
-        
-        this.caracter = letra;
     }
 
     
@@ -70,6 +74,16 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10); 
             }
             Piranha.this.getFigura().setVisible(false);
+            this.iterator = 0;
+            
+            if(this.getPosicionX() <= 50)
+            {
+                this.buzo.setNumPiranhas(this.buzo.getNumPiranhas() + 1);
+            }
+            else if (this.iterator == 1)
+            {
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 1);
+            }
         }
         catch(Exception ex)
         {
@@ -90,11 +104,18 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     }
     
     
-    public char getCaracter() {
+    public int getIterator() {
+        return iterator;
+    }
+
+    public void setIterator(int iterator) {
+        this.iterator = iterator;
+    }
+    public String getCaracter() {
         return caracter;
     }
 
-    public void setCaracter(char caracter) {
+    public void setCaracter(String caracter) {
         this.caracter = caracter;
     }
 

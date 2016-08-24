@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 /*
@@ -17,7 +18,8 @@ import javafx.scene.layout.Pane;
  *
  * @author Edward Pino
  */
-public class Buceador implements Runnable{
+public class Buceador extends Thread
+{
     
     private Pane figuraBuceador;
     private String nombre;
@@ -29,6 +31,7 @@ public class Buceador implements Runnable{
     private ImageView ivBuceador;
     private int posicionX;
     private int posicionY;
+    private int nivel;
 
      public Buceador(Pane pane ,String nombre) {
         this.figuraBuceador= new Pane();
@@ -36,6 +39,7 @@ public class Buceador implements Runnable{
         this.puntaje = 0;
         this.vidas = 3;
         this.numPiranhas = 0;
+        this.nivel = 1;
         try{
             imBuceador = new Image("Buceador.png");
             
@@ -50,15 +54,20 @@ public class Buceador implements Runnable{
         this.setPosicionX(50);
         this.setPosicionY(50);
         
-        this.figuraBuceador.getChildren().addAll(ivBuceador);
-        this.getFiguraBuceador().setLayoutX(this.getPosicionX());
-        this.getFiguraBuceador().setLayoutY(this.getPosicionY());
         
-        pane.getChildren().add(this.getFiguraBuceador());
+        
+        
         
     }
-    
 
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -138,42 +147,51 @@ public class Buceador implements Runnable{
     public void setFiguraBuceador(Pane figuraBuceador) {
         this.figuraBuceador = figuraBuceador;
     }
-    
-        
-    private void descender(){
-        this.setPosicionY(this.getPosicionY() + 4);
-        this.getFiguraBuceador().setLayoutY(this.getPosicionY());
-    }
-    
-//       
+   
     private void puntosDescenso(){
         this.puntaje++;
     }
 
     @Override
-    public void run() {
-        while(this.getPosicionY() <= 200)
+    public void run() 
+    {
+        try
         {
-            this.descender();
-            this.puntosDescenso();
-            
-            Platform.runLater(new Runnable() 
+            while(this.getVidas() > 0)
             {
-                @Override
-                public void run() 
-                { 
-                    Buceador.this.setPosicionY(Buceador.this.getPosicionY());
+                this.setPosicionY(this.getPosicionY() + 1);
+                this.puntosDescenso();
+                if(this.getPosicionY() == 450)
+                {
+                    this.nivel++;
+                    this.setPosicionY(40);
                 }
-            });
-            try 
-            {
-                Thread.sleep(200); 
-            } 
-            catch (InterruptedException ex) 
-            {
-                Logger.getLogger(Buceador.class.getName()).log(Level.SEVERE, null, ex);
+
+                Platform.runLater(new Runnable() 
+                {
+                    @Override
+                    public void run() 
+                    { 
+                        Buceador.this.getFiguraBuceador().setLayoutY(Buceador.this.getPosicionY());
+                    }
+                });
+                
+                Thread.sleep(100);
             }
-        }   
+        }
+        catch (InterruptedException ex) 
+        {
+            Logger.getLogger(Buceador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void adjuntarBuceador(Pane panel)
+    {
+        this.figuraBuceador.getChildren().addAll(ivBuceador);
+        this.getFiguraBuceador().setLayoutX(this.getPosicionX());
+        this.getFiguraBuceador().setLayoutY(this.getPosicionY());
+        
+        panel.getChildren().add(this.getFiguraBuceador());
     }
             
     
