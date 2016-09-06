@@ -1,6 +1,12 @@
 
 package typersharkapp;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.logging.Level;
@@ -11,16 +17,42 @@ import javafx.scene.layout.Pane;
 
 public class JuegoAnimales extends Thread
 {
-    private Queue animales;
+    private Queue<AnimalesMarinos> animalesAlmacenados;
+    private ArrayList<AnimalesMarinos> animalesEnJuego;
     private Buceador buzo;
     private Pane pane;
     private AnimalesMarinos animal;
+    private ArrayList<String> listaPalabras;
+    private String[] abecedario;
     
-    public JuegoAnimales(Queue animales, Buceador jugador, Pane pane)
+    public JuegoAnimales(Queue<AnimalesMarinos> animales, Buceador jugador, Pane pane, String nombreArchivo)
     {
-        this.animales = animales;
+        this.animalesAlmacenados = animales;
+        this.animalesEnJuego = new ArrayList<>();
         this.buzo = jugador;
         this.pane = pane;
+        this.listaPalabras = new ArrayList<>();
+        this.abecedario = new String[]{"a", "b","c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        
+        String cadena;
+        try
+        {
+            FileReader fr = new FileReader(nombreArchivo);
+            BufferedReader br = new BufferedReader(fr);
+            while((cadena = br.readLine()) != null)
+            {
+                this.listaPalabras.add(cadena);
+            }
+            br.close();
+        }
+        catch(FileNotFoundException fnfe)
+        {
+            fnfe.printStackTrace();
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
     }
     
     public void run()
@@ -29,42 +61,45 @@ public class JuegoAnimales extends Thread
         {
             while (this.buzo.getVidas() > 0)
             {
-                if(this.animales.isEmpty() )//< this.buzo.getNivel()*3)
+                if(this.animalesAlmacenados.isEmpty())
                 {
-                    Random rand = new Random();
-                    int op = rand.nextInt(2);
-                    switch (op)
+                    for (int i = 0; i < 8*this.buzo.getNivel(); i++)
                     {
-                        case 0:
+                        Random rand = new Random();
+                        int op = rand.nextInt(3);
+                        switch (op)
                         {
-                            for(int i = 0; i <= this.buzo.getNivel(); i++)
+                            case 0:
                             {
-                                animal = new Tiburon("HOLA", this.buzo);
-                                animales.add(animal);
-                            }
-                            break;
-                        }
-                        case 1:
-                        {
-                            for(int i = 0; i <= this.buzo.getNivel(); i++)
-                            {
-                                animal = new TiburonNegro("MUNDO", this.buzo);
-                                animales.add(animal);
-                            }
-                            break;
-                        }
-                        case 2:
-                        {
-                            for(int i = 0; i <= this.buzo.getNivel(); i++)
-                            {
-                                animal = new Piranha("S", this.buzo);
-                                animales.add(animal);
-                            }
-                            break;
-                        }
-                    }
-                }
+                                animal = new Tiburon("Shark.png",this.listaPalabras.get(rand.nextInt(205)), this.buzo, animalesAlmacenados);
+                                animalesAlmacenados.add(animal);
 
+                                break;
+                            }
+                            case 1:
+                            {
+                                ArrayList<String> Palabras = new ArrayList<>();
+                                //rand.nextInt(max - min + 1) + min
+                                for (int j = 0; j < (rand.nextInt(2)+2); j++)
+                                {
+                                    Palabras.add(this.listaPalabras.get(rand.nextInt(205)));
+                                }
+                                animal = new TiburonNegro("BlackShark.png", Palabras, this.buzo, animalesAlmacenados);
+                                animalesAlmacenados.add(animal);
+                                break;
+                            }
+                            case 2:
+                            {
+                                animal = new Piranha("Piranha.png", this.abecedario[rand.nextInt(24)], this.buzo, this.animalesAlmacenados);
+                                animalesAlmacenados.add(animal);
+                                break;
+                            }
+                        }
+                        
+                    }
+                    this.buzo.setNivel(this.buzo.getNivel() + 1);
+                }
+                
                 Platform.runLater(new Runnable() 
                 {
                     @Override
@@ -72,13 +107,32 @@ public class JuegoAnimales extends Thread
                     { 
                         try
                         {
-                            if(!animal.isAlive())
+                            if(animalesEnJuego.isEmpty())
+                            {
+                                animalesEnJuego.add(animalesAlmacenados.poll());
+                                animalesEnJuego.add(animalesAlmacenados.poll());
+                                animalesEnJuego.add(animalesAlmacenados.poll());
+                                animalesEnJuego.add(animalesAlmacenados.poll());
+                                
+                                for(int i = 0; i < (animalesEnJuego.size()); i++)
+                                {
+                                    animalesEnJuego.get(i).adjuntarCriatura(pane);
+                                    animalesEnJuego.get(i).start();
+                                }
+                            }
+                            else if (!animalesEnJuego.get(0).isAlive() && !animalesEnJuego.get(1).isAlive() && !animalesEnJuego.get(2).isAlive() && !animalesEnJuego.get(3).isAlive())
+                            {
+                                animalesEnJuego.clear();
+                            }
+                            
+                            
+                           /* if(!animal.isAlive())
                             {
                                 if (animales.peek() instanceof Tiburon)
                                 {
                                     for(int i = 0; i <= buzo.getNivel(); i++)
                                     {
-                                        Tiburon t = (Tiburon)animales.poll();
+                                        Tiburon t = (Tiburon)animales.peek();
                                         t.adjuntarTiburon(pane, 2);
                                         t.start();
                                         Thread.sleep(5000);
@@ -88,7 +142,7 @@ public class JuegoAnimales extends Thread
                                 {
                                     for(int i = 0; i <= buzo.getNivel(); i++)
                                     {
-                                        TiburonNegro t = (TiburonNegro)animales.poll();
+                                        TiburonNegro t = (TiburonNegro)animales.peek();
                                         t.adjuntarTiburonNegro(pane, 3);
                                         t.start();
                                         Thread.sleep(5000);
@@ -99,16 +153,16 @@ public class JuegoAnimales extends Thread
                                 {
                                     for(int i = 0; i <= buzo.getNivel(); i++)
                                     {
-                                        Piranha t = (Piranha)animales.poll();
+                                        Piranha t = (Piranha)animales.peek();
                                         t.adjuntarPiranha(pane, 1);
                                         t.start();
                                         Thread.sleep(3000);
                                     }
 
                                 }
-                            }
+                            }*/
                         }
-                        catch(InterruptedException ex)
+                        catch(Exception ex)
                         {
                             Logger.getLogger(JuegoAnimales.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -117,7 +171,8 @@ public class JuegoAnimales extends Thread
                 
                 Thread.sleep(10000/this.buzo.getNivel());    
             }
-        }catch (InterruptedException ex) 
+        }
+        catch (InterruptedException ex) 
         {
             Logger.getLogger(JuegoAnimales.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,54 +1,24 @@
 package typersharkapp;
 
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Queue;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 
 public class Piranha extends AnimalesMarinos //implements Runnable
 {
     private String caracter;
-    private Image piranha;
-    private ImageView iv;
-    private Text texto;
-    private TextFlow t;
     private int iterator;
     private Buceador buzo;
+    Queue<AnimalesMarinos> animales;
 
-    public Piranha(String letra, Buceador jugador) 
+    public Piranha(String nombreImagen, String letra, Buceador jugador, Queue<AnimalesMarinos> animales) 
     {
-        super();
-        try{
-            piranha = new Image("Piranha.png");
-            
-        }
-        catch(Exception e)
-        {
-            System.out.println("No lee imagen");
-        }
-        
-        this.iv = new ImageView(piranha);
-        this.iv.setFitHeight(25);
-        this.iv.setFitWidth(50);
+        super(nombreImagen, letra, 1);
         
         this.caracter = letra;
         this.iterator = 0;
         this.buzo = jugador;
-        
-        this.texto = new Text(130, 50, this.caracter);
-        this.texto.setFill(Color.LIGHTCYAN);
-        this.texto.setStyle("-fx-font: 18 century;");
-        
-        this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(15);
-        this.t.setLayoutY(0);
+        this.animales = animales;
     }
 
     
@@ -57,7 +27,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() != 50)
+            while(this.getPosicionX() > 50 && this.iterator < this.caracter.length())
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -79,10 +49,16 @@ public class Piranha extends AnimalesMarinos //implements Runnable
             if(this.getPosicionX() <= 50)
             {
                 this.buzo.setNumPiranhas(this.buzo.getNumPiranhas() + 1);
+                if(this.buzo.getNumPiranhas() == 3)
+                {
+                    this.buzo.setNumPiranhas(0);
+                    this.buzo.setVidas(this.buzo.getVidas() - 1);
+                }
             }
             else if (this.iterator == 1)
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 1);
+                //this.animales.remove();
             }
         }
         catch(Exception ex)
@@ -90,17 +66,6 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 System.out.println("Error");
                 ex.printStackTrace();
         }
-    }
-
-    public void adjuntarPiranha(Pane panel, int velocidad)
-    {
-        getFigura().getChildren().addAll(getIv(), getT());
-        
-        getFigura().setLayoutX(this.getPosicionX());
-        getFigura().setLayoutY(this.getPosicionY());
-        panel.getChildren().add(this.getFigura());
-        
-        this.setVelocidad(velocidad);
     }
     
     
@@ -118,36 +83,4 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     public void setCaracter(String caracter) {
         this.caracter = caracter;
     }
-
-    public Image getPiranha() {
-        return piranha;
-    }
-
-    public void setPiranha(Image piranha) {
-        this.piranha = piranha;
-    }
-
-    public ImageView getIv() {
-        return iv;
-    }
-
-    public void setIv(ImageView iv) {
-        this.iv = iv;
-    }
-
-    public Text getTexto() {
-        return texto;
-    }
-
-    public void setTexto(Text texto) {
-        this.texto = texto;
-    }
-
-    public TextFlow getT() {
-        return t;
-    }
-
-    public void setT(TextFlow t) {
-        this.t = t;
-    }   
 }

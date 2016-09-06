@@ -32,9 +32,6 @@ public class InicioJuego
     
     public InicioJuego()
     {
-        // HACER LA LECTURA DEL ARCHIVO DE PALABRAS
-        //archivo = new FileReader("Palabras_Tiburon.txt");
-        
         try{
             fondo = new Image("FondoJuego.jpg");
             
@@ -82,7 +79,7 @@ public class InicioJuego
         
         this.jugador = new Buceador(this.juego, "Xavier");
         jugador.adjuntarBuceador(juego);
-        new JuegoAnimales(animales, jugador, juego).start();
+        new JuegoAnimales(animales, jugador, juego, "E:\\Documents\\Xavier-ESPOL\\Programacion Orientada a Objetos\\Proyectos Java\\TyperSharkProject\\TyperSharkApp\\src\\Palabras.txt").start();
         jugador.start();
         
         
@@ -108,7 +105,7 @@ public class InicioJuego
         {
             //System.out.println(animal instanceof TiburonNegro);
             
-            if (animal.peek() instanceof Tiburon)
+            /*if (animal.peek() instanceof Tiburon)
             {
                 Tiburon t = (Tiburon)animal;
                 System.out.println(event.getCode().toString());
@@ -126,7 +123,7 @@ public class InicioJuego
                     t.setIterator(t.getIterator()+1);
                 }
             }
-            if (animal.peek() instanceof Piranha)
+            else if (animal.peek() instanceof Piranha)
             {
                 Piranha t = (Piranha)animal;
                 System.out.println(event.getCode().toString());
@@ -134,43 +131,6 @@ public class InicioJuego
                 {
                     t.setIterator(t.getIterator()+1);
                 }
-            }
-            
-            
-            
-            /*Tiburon t = new Tiburon("hola", event);
-            t.adjuntarTiburon(juego, 2);
-            if(event.getCode().equals(ENTER))
-            {
-                t.start();
-            }
-         
-            
-            
-            switch(event.getCode())
-            {
-                case ENTER:
-                {
-                    if(jugador.getPuntaje()<=50){
-                        System.out.println("No puedo usar poder especial");
-                        break;
-                    }
-                    else{
-                        jugador.setPuntaje(jugador.getPuntaje()/2);
-                        break;
-                    }
-                  
-                }        
-                default:  {
-                    if(event.getCode().isLetterKey()){
-                        
-                        break;
-                    }
-                    else{
-                        System.out.println("La tecla presionada no es válida");
-                        break;
-                    }
-                }      
             }*/
         }
     }

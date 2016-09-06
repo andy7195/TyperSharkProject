@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 /*
@@ -33,7 +32,36 @@ public class Buceador extends Thread
     private int posicionY;
     private int nivel;
 
-     public Buceador(Pane pane ,String nombre) {
+    
+    public Buceador(Pane pane, String nombre, int puntaje, int vidas, int numPiranhas, int tiempo, int nivel)
+    {
+        this.figuraBuceador= new Pane();
+        this.nombre = nombre;
+        this.puntaje = puntaje;
+        this.vidas = vidas;
+        this.numPiranhas = numPiranhas;
+        this.tiempo = tiempo;
+        this.nivel = nivel;
+        
+        try
+        {
+            imBuceador = new Image("Buceador.png");
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("No lee imagen");
+        }
+        
+        this.ivBuceador = new ImageView(imBuceador);
+        this.ivBuceador.setFitHeight(75);
+        this.ivBuceador.setFitWidth(130);
+        this.setPosicionX(50);
+        this.setPosicionY(50);
+    }
+    
+    public Buceador(Pane pane ,String nombre) 
+    {
         this.figuraBuceador= new Pane();
         this.nombre = nombre;
         this.puntaje = 0;
@@ -52,12 +80,7 @@ public class Buceador extends Thread
         this.ivBuceador.setFitHeight(75);
         this.ivBuceador.setFitWidth(130);
         this.setPosicionX(50);
-        this.setPosicionY(50);
-        
-        
-        
-        
-        
+        this.setPosicionY(50);    
     }
 
     public int getNivel() {

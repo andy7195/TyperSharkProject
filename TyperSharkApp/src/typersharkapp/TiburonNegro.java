@@ -1,62 +1,28 @@
 package typersharkapp;
 
-import java.io.File;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import java.util.ArrayList;
+import java.util.Queue;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 
 public class TiburonNegro extends AnimalesMarinos //implements Runnable
 {
-    private String palabras;//[];
+    private ArrayList<String> palabras;
     private int numroAlt;
-    private Image tiburon_negro;
-    private ImageView iv;
-    private Text texto;
-    private TextFlow t;
     private int iterator;
     private Buceador buzo;
-
-    public TiburonNegro() {
-        
-    }
-
+    Queue<AnimalesMarinos> animales;
     
-    public TiburonNegro(String palabra, Buceador jugador)//[]) 
+    
+    public TiburonNegro(String nombreImagen, ArrayList<String> Palabras, Buceador jugador, Queue<AnimalesMarinos> animales)//[]) 
     {
-        super();
+        super(nombreImagen, Palabras.get(0), 3);
         
-        try{
-            tiburon_negro = new Image("BlackShark.png");
-            
-        }
-        catch(Exception e)
-        {
-            System.out.println("No lee imagen");
-        }
-        
-        iv = new ImageView(tiburon_negro);
-        iv.setFitHeight(75);
-        iv.setFitWidth(150);
-        
-        this.palabras = palabra;
+        this.palabras = Palabras;
         this.iterator = 0;
         this.buzo = jugador;
-        
-        this.texto = new Text(130, 50, this.palabras);
-        this.texto.setFill(Color.CYAN);
-        this.texto.setStyle("-fx-font: 18 century;");
-        
-        this.t = new TextFlow(this.texto);
-        this.t.setLayoutX(35);
-        this.t.setLayoutY(30);
+        this.animales = animales;
     }
 
     
@@ -65,7 +31,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() != 50)
+            while(this.getPosicionX() > 50 && !this.palabras.isEmpty())
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -88,9 +54,10 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
             {
                 this.buzo.setVidas(this.buzo.getVidas() - 1);
             }
-            else if (this.iterator == this.palabras.length())
+            else if (this.iterator == this.palabras.get(this.palabras.size()-1).length())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 3);
+                //this.animales.remove();
             }
         }
         catch(Exception ex)
@@ -99,48 +66,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                 ex.printStackTrace();
         }
     }
-
-    public void adjuntarTiburonNegro(Pane panel, int velocidad)
-    {
-        getFigura().getChildren().addAll(getIv(), getT());
-        
-        getFigura().setLayoutX(this.getPosicionX());
-        getFigura().setLayoutY(this.getPosicionY());
-        panel.getChildren().add(this.getFigura());
-        
-        this.setVelocidad(velocidad);
-    }
     
-    public void generarPalabras(){
-    
-    }
-    
-    
-    public TextFlow getT() {
-        return t;
-    }
-
-    public void setT(TextFlow t) {
-        this.t = t;
-    }
-    
-    public Text getTexto() {
-        return texto;
-    }
-
-    public void setTexto(Text texto) {
-        this.texto = texto;
-    }
-
-    
-    public String getPalabras() {
-        return palabras;
-    }
-
-    public void setPalabras(String palabras) {
-        this.palabras = palabras;
-    }
-
     public int getNumroAlt() {
         return numroAlt;
     }
@@ -148,23 +74,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     public void setNumroAlt(int numroAlt) {
         this.numroAlt = numroAlt;
     }
-
-    public Image getTiburon_negro() {
-        return tiburon_negro;
-    }
-
-    public void setTiburon_negro(Image tiburon_negro) {
-        this.tiburon_negro = tiburon_negro;
-    }
-
-    public ImageView getIv() {
-        return iv;
-    }
-
-    public void setIv(ImageView iv) {
-        this.iv = iv;
-    }
-
+    
     public int getIterator() {
         return iterator;
     }
