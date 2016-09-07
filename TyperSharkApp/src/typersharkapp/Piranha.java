@@ -27,7 +27,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.iterator < this.caracter.length())
+            while(this.getPosicionX() > 50 && this.iterator < this.caracter.length() && this.buzo.getVidas() > 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);

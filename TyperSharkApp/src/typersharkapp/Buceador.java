@@ -201,6 +201,7 @@ public class Buceador extends Thread
                 
                 Thread.sleep(100);
             }
+            this.figuraBuceador.setVisible(false);
         }
         catch (InterruptedException ex) 
         {

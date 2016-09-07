@@ -50,7 +50,7 @@ public class DatosUsuario {
          datos = new TreeMap(java.util.Collections.reverseOrder());
 
          
-         juego = new InicioJuego();
+         //juego = new InicioJuego();
          Label titulo= new Label("INGRESE SU NOMBRE");
          nombre = new TextField();
          
@@ -152,21 +152,21 @@ public class DatosUsuario {
             }
             
             
-            juego.setStage(s);
+           // juego.setStage(s);
             juego.setSc2(sc);
             if(scene2 == null || scene2 != escena2)
             {
                 scene2 = escena2;
                 s.setScene(scene2);
                 s.setResizable(false);
-                s.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
+                s.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getEventoTeclado());   
                 s.show();
             }
             else
             {  
                 s.setScene(scene2);
                 s.setResizable(false);
-                s.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
+                s.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getEventoTeclado());   
                 s.show();
             }
             //stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado()); 

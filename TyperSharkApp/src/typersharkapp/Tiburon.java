@@ -29,7 +29,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.iterator < this.palabra.length())
+            while(this.getPosicionX() > 50 && this.iterator < this.palabra.length() && this.buzo.getVidas() > 0)
             {
                 this.setPosicionX(this.getPosicionX() - 1);
                 

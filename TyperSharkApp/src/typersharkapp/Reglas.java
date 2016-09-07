@@ -22,24 +22,33 @@ import javafx.stage.Stage;
 public class Reglas {
     
     private Pane windowReglas;
+    private Stage stageReglas;
     private Image imagen;
     private ImageView vi; 
-    private Stage stage;
-    private Scene sc1;
+    private Stage stagePrincipal;
      
-    public Reglas() {
+    public Reglas(Stage stageP) 
+    {
         
-         try{
+        try
+        {
             imagen= new Image("Menu.png");
         
         }
         catch(Exception e){System.out.println("No lee imagen");}
-        vi=new ImageView(imagen);
+        
+        windowReglas = new Pane();
+        this.stagePrincipal = stageP;
+        this.stageReglas = new Stage();
+        Scene sceneReglas = new Scene(this.windowReglas, 890, 500);
+        this.stageReglas.setTitle("Reglas");
+        this.stageReglas.setScene(sceneReglas);
+        this.stageReglas.setResizable(false);
+        
+        vi = new ImageView(imagen);
         vi.setFitHeight(510);
         vi.setFitWidth(900);
         vi.setImage (imagen);
-        
-        windowReglas= new Pane();
         
         windowReglas.setStyle("-fx-background-color: aqua;");
         TitulosLabel titulo1= new TitulosLabel("REGLAS","-fx-font: 20 elephant",150,10,410,10, Color.DARKGRAY);
@@ -74,6 +83,33 @@ public class Reglas {
         regreso.getBtn().setOnAction(new regresar());
         
     }
+    
+    
+    private class regresar implements EventHandler<ActionEvent>
+    {
+        @Override
+        public void handle(ActionEvent e)
+        {
+            stageReglas.hide();
+            stagePrincipal.show();
+        }
+    }
+
+    public Pane getWindowReglas() {
+        return windowReglas;
+    }
+
+    public void setWindowReglas(Pane windowReglas) {
+        this.windowReglas = windowReglas;
+    }
+
+    public Stage getStageReglas() {
+        return stageReglas;
+    }
+
+    public void setStageReglas(Stage stageReglas) {
+        this.stageReglas = stageReglas;
+    }
 
     public Image getImagen() {
         return imagen;
@@ -91,40 +127,13 @@ public class Reglas {
         this.vi = vi;
     }
 
-    
-    private class regresar implements EventHandler<ActionEvent>{
-        @Override
-        public void handle(ActionEvent e)
-        {
-            stage.setTitle("TyperShark!...");
-            stage.setScene(getSc1());
-            stage.show();
-        }
-    }
-    public Pane getWindowReglas() {
-        return windowReglas;
-    }
-    
-    public void setWindowReglas(Pane windowReglas) {
-        this.windowReglas = windowReglas;
+    public Stage getStagePrincipal() {
+        return stagePrincipal;
     }
 
-    public Stage getStage() {
-        return stage;
+    public void setStagePrincipal(Stage stagePrincipal) {
+        this.stagePrincipal = stagePrincipal;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Scene getSc1() {
-        return sc1;
-    }
-
-    public void setSc1(Scene scene) {
-        this.sc1 = scene;
-    }
-    
-    
     
 }

@@ -21,25 +21,26 @@ import javafx.stage.Stage;
  *
  * @author Andy
  */
-public class PaneOrganize {
+public class PaneOrganize 
+{
     private Pane Inicio;
-    private Reglas reglas;
-    private Scene scene2;
     private Image imagen;
-    private ImageView vi; 
-    private InicioJuego juego;
-    private Stage stage; 
-    private Scene sc;
-    private Puntajes puntaje;
-    private MediaPlayer mp;
-    private Media musicFile;
-  
-    public PaneOrganize(){
+    private ImageView vi;
+    private Stage stagePrincipal;
+    private Reglas reglas;
+    private InicioJuego inicioJuego;
+    private Puntajes puntajes;
+    
+    public PaneOrganize(Stage stageP)
+    {
         try{
             imagen= new Image("Menu.png");
         
         }
         catch(Exception e){System.out.println("No lee imagen");}
+        
+        this.stagePrincipal = stageP;
+        
         vi=new ImageView(imagen);
         vi.setFitHeight(510);
         vi.setFitWidth(900);
@@ -53,142 +54,97 @@ public class PaneOrganize {
         
         Boton iniciar= new Boton("Iniciar Partida","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 200, 60, 130, 410, 10, Color.AQUA);
         Boton regla= new Boton("Reglas","-fx-font: 20 century; -fx-background-color: transparent; -fx-background-radius: 30;", 100, 60, 330, 410, 10, Color.AQUA);
-        Boton puntajes= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 450, 410, 10, Color.AQUA);
+        Boton puntaje= new Boton("Top de puntajes","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 180, 60, 450, 410, 10, Color.AQUA);
         Boton salir= new Boton("Salir","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 100, 60, 660, 410, 10, Color.AQUA);
+        
         //AGREGANDO NODOS A LAS VENTANAS
         Inicio.getChildren().add(vi);
-        Inicio.getChildren().addAll(Ttot.getL(),iniciar.getBtn(),regla.getBtn(),puntajes.getBtn(),salir.getBtn());
+        Inicio.getChildren().addAll(Ttot.getL(),iniciar.getBtn(),regla.getBtn(),puntaje.getBtn(),salir.getBtn());
         
         
-        reglas = new Reglas();
-        puntaje = new Puntajes();
-        juego = new InicioJuego();
+        reglas = null;
+        puntajes = null;
+        inicioJuego = null;
         
         //ACCIONES DE LOS BOTONES
-        regla.getBtn().setOnAction(new ventana2());
+        regla.getBtn().setOnAction(new ventanaReglas());
         salir.getBtn().setOnAction(new Salida());
         iniciar.getBtn().setOnAction(new Iniciar());
-        puntajes.getBtn().setOnAction(new score());
+        puntaje.getBtn().setOnAction(new ventanaPuntajes());
     }
     
-    private class score implements EventHandler<ActionEvent>{
-         Scene escena1 = new Scene(getPuntaje().getWindowPuntajes(),890,500);
+    private class ventanaPuntajes implements EventHandler<ActionEvent>
+    {
         @Override
         public void handle(ActionEvent event)
         {
-            puntaje.setS(stage);
-            puntaje.setSc(sc);
-            if(scene2 == null || scene2 != escena1)
-            {
-                scene2 = escena1;
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.show();
-            }
-            else
-            {
-                
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.show();
-            }
+            setPuntajes(new Puntajes(getStagePrincipal()));
+            getPuntajes().getStagePuntajes().show();
+            stagePrincipal.hide();
             event.consume(); 
         }
     }
     
-    
-    private class ventana2 implements EventHandler<ActionEvent>
+    private class ventanaReglas implements EventHandler<ActionEvent>
     {
-        Scene escena1 = new Scene(getReglas().getWindowReglas(),890,500);
         @Override
         public void handle(ActionEvent event)
         {
-            reglas.setStage(stage);
-            reglas.setSc1(sc);
-            if(scene2 == null || scene2 != escena1)
+            if(reglas == null)
             {
-                scene2 = escena1;
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.show();
+                setReglas(new Reglas(getStagePrincipal()));
+                getReglas().getStageReglas().show();
+                stagePrincipal.hide();
             }
             else
             {
-                
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.show();
+                getReglas().getStageReglas().show();
+                stagePrincipal.hide();
             }
+            
             event.consume();
-        }
-    }
-
-    private class Salida implements EventHandler<ActionEvent>{
-        @Override
-        public void handle(ActionEvent e){
-            System.out.println("Saliendo");
-            System.exit(0);   
         }
     }
     
     private class Iniciar implements EventHandler<ActionEvent>
     {
-        Scene escena2 = new Scene(getJuego().getPaneJuego(),890,500);
         
         @Override
-        public void handle(ActionEvent event)
-                
+        public void handle(ActionEvent event)     
         {
-            
-            /*try
+            if(inicioJuego == null)
             {
-                musicFile = new Media("file:///C:/Users/Andy/Videos/music.mp3");
-            }
-            catch(Exception e1){System.out.println("No oye");}
-            mp = new MediaPlayer(musicFile);
-            mp.setVolume(0.5);
-            mp.play();*/
-
-                           
-            juego.setStage(stage);
-            juego.setSc2(sc);
-            if(scene2 == null || scene2 != escena2)
-            {
-                scene2 = escena2;
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
-                stage.show();
-                /*
-                Stage stageJuego = new Stage();
-                Scene sceneJuego = new Scene(juego.getPaneJuego(), 900, 510);
-                stageJuego.setScene(sceneJuego);
-                stageJuego.setResizable(false);
-                stageJuego.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());
-                stageJuego.show();*/
+                setInicioJuego(new InicioJuego(getStagePrincipal()));
+                getInicioJuego().getStageIngresoDatos().show();
+                stagePrincipal.hide();
             }
             else
-            {  
-                stage.setScene(scene2);
-                stage.setResizable(false);
-                stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado());   
-                stage.show();
+            {
+                getInicioJuego().getStageInicioJuego().show();
+                stagePrincipal.hide();
             }
-            //stage.addEventHandler(KeyEvent.KEY_PRESSED, getJuego().getTeclado()); 
+            
             event.consume();
         }
     }
 
-    
-    
-    public Scene getSc() {
-        return sc;
+    private class Salida implements EventHandler<ActionEvent>
+    {
+        @Override
+        public void handle(ActionEvent e){
+            System.out.println("Saliendo...");
+            System.exit(0);   
+        }
     }
 
-    public void setSc(Scene sc) {
-        this.sc = sc;
+    public Pane getInicio() {
+        return Inicio;
     }
-        
+
+    public void setInicio(Pane Inicio) {
+        this.Inicio = Inicio;
+    }
+
     public Image getImagen() {
         return imagen;
     }
@@ -205,47 +161,35 @@ public class PaneOrganize {
         this.vi = vi;
     }
 
-    public Pane getInicio() {
-        return Inicio;
+    public Stage getStagePrincipal() {
+        return stagePrincipal;
     }
 
-    public void setInicio(Pane Inicio) {
-        this.Inicio = Inicio;
+    public void setStagePrincipal(Stage stagePrincipal) {
+        this.stagePrincipal = stagePrincipal;
     }
-    
-    
+
     public Reglas getReglas() {
         return reglas;
     }
 
-    public void setJuego(InicioJuego juego) {
-        this.juego = juego;
-    }
-    
-    
-    public InicioJuego getJuego() {
-        return juego;
+    public void setReglas(Reglas reglas) {
+        this.reglas = reglas;
     }
 
-    public void setReglas(Reglas window2) {
-        this.reglas = window2;
+    public InicioJuego getInicioJuego() {
+        return inicioJuego;
     }
 
-    public Stage getStage() {
-        return stage;
+    public void setInicioJuego(InicioJuego inicioJuego) {
+        this.inicioJuego = inicioJuego;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public Puntajes getPuntajes() {
+        return puntajes;
     }
 
-    public Puntajes getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(Puntajes puntaje) {
-        this.puntaje = puntaje;
-    }
-    
-    
+    public void setPuntajes(Puntajes puntajes) {
+        this.puntajes = puntajes;
+    }  
 }

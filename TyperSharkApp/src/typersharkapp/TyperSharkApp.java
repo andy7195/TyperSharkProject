@@ -18,11 +18,9 @@ public class TyperSharkApp extends Application
     @Override
     public void start(Stage stage) 
     {
-        PaneOrganize po = new PaneOrganize();
+        PaneOrganize po = new PaneOrganize(stage);
         Scene scene = new Scene(po.getInicio(), 890, 500);
-        po.setStage(stage);
-        po.setSc(scene);
-        stage.setTitle("TyperShark!...");
+        stage.setTitle("TyperShark");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

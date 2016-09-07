@@ -31,7 +31,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && !this.palabras.isEmpty())
+            while(this.getPosicionX() > 50 && !this.palabras.isEmpty() && this.buzo.getVidas() > 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
