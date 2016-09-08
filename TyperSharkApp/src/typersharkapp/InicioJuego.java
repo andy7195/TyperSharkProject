@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -38,6 +39,13 @@ public class InicioJuego
     private Pane ingresoDatos;
     private TextField campoNombre;
     
+    private BorderPane panelJuego;
+    
+    private GridPane menu;
+    private Label lbNombre, lbNivel, lbPuntaje, lbVidas;
+    
+    
+    
     public InicioJuego(Stage stageP)
     {
         try{
@@ -51,11 +59,19 @@ public class InicioJuego
         
         this.stagePrincipal = stageP;
         
+        this.panelJuego = new BorderPane();
+        
+        
+        
         iv = new ImageView(fondo);
         iv.setFitHeight(510);
         iv.setFitWidth(900);
         iv.setImage(fondo);
         
+        
+        this.menu = new GridPane();
+        
+        //Stage del Ingreso del nombre del jugador.
         this.stageIngresoDatos = new Stage();
         TitulosLabel label = new TitulosLabel("Ingrese su nombre:", "-fx-font: 25 elephant",450,10,200,250, Color.DARKGRAY);
         this.campoNombre = new TextField();
@@ -72,15 +88,20 @@ public class InicioJuego
         
         this.eventoTeclado = new KeyHandler(animales, jugador);
         
+        //Stage del panel en donde sale el buceador y las criaturas marinas.
         salir = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
         stageInicioJuego = new Stage();
         juego = new Pane();
-        Scene sceneInicioJuego = new Scene(this.juego, 890, 500);
+        Scene sceneInicioJuego = new Scene(this.panelJuego, 890, 525);
         stageInicioJuego.setTitle("TyperShark");
         stageInicioJuego.setScene(sceneInicioJuego);
         stageInicioJuego.setResizable(false);
         stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
         juego.getChildren().addAll(iv, salir.getBtn());
+        
+        this.panelJuego.setCenter(juego);
+        this.panelJuego.setTop(menu);
+        
         salir.getBtn().setOnAction(new Salir());
         
     }
@@ -137,6 +158,7 @@ public class InicioJuego
     
     private class Jugar implements EventHandler<ActionEvent>
     {
+        @Override
         public void handle(ActionEvent event)
         {
             stageIngresoDatos.hide();
@@ -145,12 +167,36 @@ public class InicioJuego
             jugador = new Buceador(juego, campoNombre.getText());
             jugador.adjuntarBuceador(juego);
             
+            
+            menu.setStyle("-fx-background-color: #778899;");
+            lbNombre = new Label("Nombre Jugador:");
+            lbNombre.setStyle("-fx-font: 14 elephant");
+            lbNombre.setTextFill(Color.AQUA);
+            lbNivel = new Label("Nivel:");
+            lbNivel.setStyle("-fx-font: 14 elephant");
+            lbNivel.setTextFill(Color.AQUA);
+            lbPuntaje = new Label("Puntaje:");
+            lbPuntaje.setStyle("-fx-font: 14 elephant");
+            lbPuntaje.setTextFill(Color.AQUA);
+            lbVidas = new Label("Vidas:");
+            lbVidas.setStyle("-fx-font: 14 elephant");
+            lbVidas.setTextFill(Color.AQUA);
+            menu.add(lbNombre, 0, 0);
+            menu.add(jugador.getLb_nombre(), 1, 0);
+            menu.add(lbVidas, 0, 1);
+            menu.add(jugador.getLb_vidas(), 1, 1);
+            menu.add(lbPuntaje, 2, 0);
+            menu.add(jugador.getLb_puntaje(), 3, 0);
+            menu.add(lbNivel, 2, 1);
+            menu.add(jugador.getLb_nivel(), 3, 1);
+            
             new JuegoAnimales(animales, jugador, juego, "E:\\Documents\\Xavier-ESPOL\\Programacion Orientada a Objetos\\Proyectos Java\\TyperSharkProject\\TyperSharkApp\\src\\Palabras.txt").start();
             jugador.start();
         }
     }
     
     private class Salir implements EventHandler<ActionEvent>{
+        @Override
         public void handle(ActionEvent e)
         {
             stageInicioJuego.close();

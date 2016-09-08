@@ -11,7 +11,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     private String palabra;
     private int iterator;
     private Buceador buzo;
-    Queue<AnimalesMarinos> animales;
+    private Queue<AnimalesMarinos> animales;
 
     public Tiburon(String nombreImagen, String palabra, Buceador jugador, Queue<AnimalesMarinos> animales) 
     {
@@ -49,11 +49,12 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
             
             if(this.getPosicionX() <= 50)
             {
-                this.buzo.setVidas(this.buzo.getVidas() - 1);
+                this.buzo.setVidas(this.buzo.getVidas() - 0);
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
             }
             else if (this.iterator == this.palabra.length())
             {
-                this.buzo.setPuntaje(this.buzo.getPuntaje() + 2);
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
                 //this.animales.remove();
                 //this.animales.poll();
             }

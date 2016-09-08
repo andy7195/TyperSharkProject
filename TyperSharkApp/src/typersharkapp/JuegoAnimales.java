@@ -63,7 +63,7 @@ public class JuegoAnimales extends Thread
             {
                 if(this.animalesAlmacenados.isEmpty())
                 {
-                    for (int i = 0; i < 8*this.buzo.getNivel(); i++)
+                    for (int i = 0; i < 4*(this.buzo.getNivel()+1); i++)
                     {
                         Random rand = new Random();
                         int op = rand.nextInt(3);

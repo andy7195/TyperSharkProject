@@ -9,7 +9,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     private String caracter;
     private int iterator;
     private Buceador buzo;
-    Queue<AnimalesMarinos> animales;
+     private Queue<AnimalesMarinos> animales;
 
     public Piranha(String nombreImagen, String letra, Buceador jugador, Queue<AnimalesMarinos> animales) 
     {
@@ -52,12 +52,13 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 if(this.buzo.getNumPiranhas() == 3)
                 {
                     this.buzo.setNumPiranhas(0);
-                    this.buzo.setVidas(this.buzo.getVidas() - 1);
+                    this.buzo.setVidas(this.buzo.getVidas() - 0);
+                    this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                 }
             }
             else if (this.iterator == 1)
             {
-                this.buzo.setPuntaje(this.buzo.getPuntaje() + 1);
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                 //this.animales.remove();
             }
         }

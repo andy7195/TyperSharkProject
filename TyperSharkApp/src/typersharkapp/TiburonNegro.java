@@ -12,10 +12,10 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     private int numroAlt;
     private int iterator;
     private Buceador buzo;
-    Queue<AnimalesMarinos> animales;
+    private Queue<AnimalesMarinos> animales;
     
     
-    public TiburonNegro(String nombreImagen, ArrayList<String> Palabras, Buceador jugador, Queue<AnimalesMarinos> animales)//[]) 
+    public TiburonNegro(String nombreImagen, ArrayList<String> Palabras, Buceador jugador, Queue<AnimalesMarinos> animalesz)//[]) 
     {
         super(nombreImagen, Palabras.get(0), 3);
         
@@ -45,18 +45,19 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                     }
                 });
 
-                Thread.sleep(this.getVelocidad()*10); 
+                Thread.sleep(this.getVelocidad()*10/buzo.getNivel()); 
             }
             TiburonNegro.this.getFigura().setVisible(false);
             this.iterator = 0;
             
             if(this.getPosicionX() <= 50)
             {
-                this.buzo.setVidas(this.buzo.getVidas() - 1);
+                this.buzo.setVidas(this.buzo.getVidas() - 0);
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
             }
             else if (this.iterator == this.palabras.get(this.palabras.size()-1).length())
             {
-                this.buzo.setPuntaje(this.buzo.getPuntaje() + 3);
+                this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 //this.animales.remove();
             }
         }
