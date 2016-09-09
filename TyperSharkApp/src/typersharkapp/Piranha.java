@@ -51,7 +51,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 if(this.buzo.getNumPiranhas() == 3)
                 {
                     this.buzo.setNumPiranhas(0);
-                    this.buzo.setVidas(this.buzo.getVidas() - 0);
+                    this.buzo.setVidas(this.buzo.getVidas() - 1);
                     this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                     this.buzo.setPoder(this.buzo.getPoder() + 10);
                 }
@@ -60,7 +60,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                 this.buzo.setPoder(this.buzo.getPoder() + 10);
-                //this.animales.remove();
+                this.buzo.setCriaturasAsesinadas(this.buzo.getCriaturasAsesinadas() + 1);
             }
         }
         catch(Exception ex)

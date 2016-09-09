@@ -41,23 +41,22 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                     }
                 });
 
-                Thread.sleep(this.getVelocidad()*10); 
+                Thread.sleep(this.getVelocidad()*10/this.buzo.getNivel()); 
             }
             Tiburon.this.getFigura().setVisible(false);
             //this.setIterator(0);
             
             if(this.getPosicionX() <= 50)
             {
-                this.buzo.setVidas(this.buzo.getVidas() - 0);
+                this.buzo.setVidas(this.buzo.getVidas() - 1);
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
                 this.buzo.setPoder(this.buzo.getPoder() + 50);
+                this.buzo.setCriaturasAsesinadas(this.buzo.getCriaturasAsesinadas() + 1);
             }
             else if (this.getIterator() == this.palabra.length())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
                 this.buzo.setPoder(this.buzo.getPoder() + 50);
-                //this.animales.remove();
-                //this.animales.poll();
             }
         }
         catch(Exception ex)

@@ -96,7 +96,7 @@ public class JuegoAnimales extends Thread
                         }
                         
                     }
-                    this.buzo.setNivel(this.buzo.getNivel() + 1);
+                    //this.buzo.setNivel(this.buzo.getNivel() + 1);
                 }
                 
                 Platform.runLater(new Runnable() 
@@ -131,7 +131,7 @@ public class JuegoAnimales extends Thread
                     }
                 });
                 
-                Thread.sleep(10000/this.buzo.getNivel());    
+                Thread.sleep(1000);//this.buzo.getNivel());    
             }
         }
         catch (InterruptedException ex) 

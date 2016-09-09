@@ -34,6 +34,7 @@ public class Buceador extends Thread
     private int posicionY;
     private int nivel;
     private int poder;
+    private int criaturasAsesinadas;
     
     private Label lb_nombre;
     private Label lb_vidas;
@@ -51,6 +52,7 @@ public class Buceador extends Thread
         this.tiempo = tiempo;
         this.nivel = nivel;
         this.poder = 0;
+        this.criaturasAsesinadas = 0;
         
         this.lb_nombre = new Label(nombre);
         this.lb_nombre.setStyle("-fx-font: 14 elephant");
@@ -89,8 +91,9 @@ public class Buceador extends Thread
         this.puntaje = 0;
         this.vidas = 3;
         this.numPiranhas = 0;
-        this.nivel = 0;
+        this.nivel = 1;
         this.poder = 0;
+        this.criaturasAsesinadas = 1;
         
         this.lb_nombre = new Label(this.nombre);
         this.lb_nombre.setStyle("-fx-font: 14 elephant");
@@ -136,6 +139,10 @@ public class Buceador extends Thread
                 {
                     //this.nivel++;
                     this.setPosicionY(40);
+                }
+                if(this.criaturasAsesinadas%15 == 0)
+                {
+                    this.nivel++;
                 }
 
                 Platform.runLater(new Runnable() 
@@ -307,6 +314,14 @@ public class Buceador extends Thread
 
     public void setPoder(int poder) {
         this.poder = poder;
+    }
+
+    public int getCriaturasAsesinadas() {
+        return criaturasAsesinadas;
+    }
+
+    public void setCriaturasAsesinadas(int criaturasAsesinadas) {
+        this.criaturasAsesinadas = criaturasAsesinadas;
     }
     
 }

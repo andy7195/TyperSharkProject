@@ -123,24 +123,7 @@ public class InicioJuego
         {
             try
             {
-                if(keyEvent.getCode() == KeyCode.ENTER)
-                {
-                    System.out.println("ENTER");
-                    if(this.buzo.getPoder() == 500)
-                    {
-                        System.out.println("Se uso el poder.");
-                        //this.animal.clear();
-                        this.buzo.setPuntaje(this.buzo.getPuntaje() - 500);
-                        this.buzo.setPoder(0);
-
-                        this.animal.get(0).setBandera(1);
-                        this.animal.get(1).setBandera(1);
-                        this.animal.get(2).setBandera(1);
-                        this.animal.get(3).setBandera(1);
-
-                    }
-                }
-                else if (keyEvent.getCode().isLetterKey())
+                if (keyEvent.getCode().isLetterKey())
                 {
                     if(this.animal.get(0).getPalabra().charAt(this.animal.get(0).getIterator()) == keyEvent.getText().charAt(0))
                     {
@@ -163,42 +146,29 @@ public class InicioJuego
                         this.animal.get(3).setIterator(this.animal.get(3).getIterator() + 1);
                     }
                 }
+                else if(keyEvent.getCode() == KeyCode.ENTER)
+                {
+                    System.out.println("ENTER");
+                    if(this.buzo.getPoder() == 500)
+                    {
+                        System.out.println("Se uso el poder.");
+                        //this.animal.clear();
+                        this.buzo.setPuntaje(this.buzo.getPuntaje() - 500);
+                        this.buzo.setPoder(0);
+
+                        this.animal.get(0).setBandera(1);
+                        this.animal.get(1).setBandera(1);
+                        this.animal.get(2).setBandera(1);
+                        this.animal.get(3).setBandera(1);
+
+                    }
+                }
+                
             }
             catch(Exception ex)
             {
                 ex.getStackTrace();
             }
-            
-            
-            //System.out.println(animal instanceof TiburonNegro);
-            
-            /*if (animal.peek() instanceof Tiburon)
-            {
-                Tiburon t = (Tiburon)animal;
-                System.out.println(event.getCode().toString());
-                if(t.getPalabra().charAt(t.getIterator())== event.getCode().toString().charAt(0))
-                {
-                    t.setIterator(t.getIterator()+1);
-                }
-            }
-            else if (animal.peek() instanceof TiburonNegro)
-            {
-                TiburonNegro t = (TiburonNegro)animal;
-                System.out.println(event.getCode().toString());
-                if(t.getPalabras().charAt(t.getIterator())== event.getCode().toString().charAt(0))
-                {
-                    t.setIterator(t.getIterator()+1);
-                }
-            }
-            else if (animal.peek() instanceof Piranha)
-            {
-                Piranha t = (Piranha)animal;
-                System.out.println(event.getCode().toString());
-                if(t.getCaracter().charAt(0)== event.getCode().toString().charAt(0))
-                {
-                    t.setIterator(t.getIterator()+1);
-                }
-            }*/
         }
     }
      
@@ -211,42 +181,48 @@ public class InicioJuego
         @Override
         public void handle(ActionEvent event)
         {
-            stageIngresoDatos.hide();
+            try
+            {
+                stageIngresoDatos.hide();
             
-            stageInicioJuego.show();
-            jugador = new Buceador(juego, campoNombre.getText());
-            jugador.adjuntarBuceador(juego);
-            
-            
-            menu.setStyle("-fx-background-color: #778899;");
-            lbNombre = new Label("Nombre Jugador:");
-            lbNombre.setStyle("-fx-font: 14 elephant");
-            lbNombre.setTextFill(Color.AQUA);
-            lbNivel = new Label("Nivel:");
-            lbNivel.setStyle("-fx-font: 14 elephant");
-            lbNivel.setTextFill(Color.AQUA);
-            lbPuntaje = new Label("Puntaje:");
-            lbPuntaje.setStyle("-fx-font: 14 elephant");
-            lbPuntaje.setTextFill(Color.AQUA);
-            lbVidas = new Label("Vidas:");
-            lbVidas.setStyle("-fx-font: 14 elephant");
-            lbVidas.setTextFill(Color.AQUA);
-            menu.add(lbNombre, 0, 0);
-            menu.add(jugador.getLb_nombre(), 1, 0);
-            menu.add(lbVidas, 0, 1);
-            menu.add(jugador.getLb_vidas(), 1, 1);
-            menu.add(lbPuntaje, 2, 0);
-            menu.add(jugador.getLb_puntaje(), 3, 0);
-            menu.add(lbNivel, 2, 1);
-            menu.add(jugador.getLb_nivel(), 3, 1);
-            
-            conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt");
-            
-            eventoTeclado = new KeyHandler(conjuntoHilosAnimales.getAnimalesEnJuego(), jugador);
-            stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
-            
-            conjuntoHilosAnimales.start();
-            jugador.start();
+                stageInicioJuego.show();
+                jugador = new Buceador(juego, campoNombre.getText());
+                jugador.adjuntarBuceador(juego);
+
+                menu.setStyle("-fx-background-color: #778899;");
+                lbNombre = new Label("Nombre Jugador:");
+                lbNombre.setStyle("-fx-font: 14 elephant");
+                lbNombre.setTextFill(Color.AQUA);
+                lbNivel = new Label("Nivel:");
+                lbNivel.setStyle("-fx-font: 14 elephant");
+                lbNivel.setTextFill(Color.AQUA);
+                lbPuntaje = new Label("Puntaje:");
+                lbPuntaje.setStyle("-fx-font: 14 elephant");
+                lbPuntaje.setTextFill(Color.AQUA);
+                lbVidas = new Label("Vidas:");
+                lbVidas.setStyle("-fx-font: 14 elephant");
+                lbVidas.setTextFill(Color.AQUA);
+                menu.add(lbNombre, 0, 0);
+                menu.add(jugador.getLb_nombre(), 1, 0);
+                menu.add(lbVidas, 0, 1);
+                menu.add(jugador.getLb_vidas(), 1, 1);
+                menu.add(lbPuntaje, 2, 0);
+                menu.add(jugador.getLb_puntaje(), 3, 0);
+                menu.add(lbNivel, 2, 1);
+                menu.add(jugador.getLb_nivel(), 3, 1);
+
+                conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt");
+
+                eventoTeclado = new KeyHandler(conjuntoHilosAnimales.getAnimalesEnJuego(), jugador);
+                stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
+
+                conjuntoHilosAnimales.start();
+                jugador.start();
+            }
+            catch(Exception ex)
+            {
+                System.err.println("Error");
+            }
         }
     }
     

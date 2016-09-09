@@ -75,5 +75,14 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     public void setNumroAlt(int numroAlt) {
         this.numroAlt = numroAlt;
     }
+
+    public ArrayList<String> getPalabras() {
+        return palabras;
+    }
+
+    public void setPalabras(ArrayList<String> palabras) {
+        this.palabras = palabras;
+    }
+    
     
 }
