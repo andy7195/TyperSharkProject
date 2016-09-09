@@ -190,7 +190,7 @@ public class InicioJuego
             menu.add(lbNivel, 2, 1);
             menu.add(jugador.getLb_nivel(), 3, 1);
             
-            new JuegoAnimales(animales, jugador, juego, "E:\\Documents\\Xavier-ESPOL\\Programacion Orientada a Objetos\\Proyectos Java\\TyperSharkProject\\TyperSharkApp\\src\\Palabras.txt").start();
+            new JuegoAnimales(animales, jugador, juego, "Palabras.txt").start();
             jugador.start();
         }
     }

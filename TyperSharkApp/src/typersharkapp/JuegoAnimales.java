@@ -1,4 +1,3 @@
-
 package typersharkapp;
 
 import java.io.BufferedReader;

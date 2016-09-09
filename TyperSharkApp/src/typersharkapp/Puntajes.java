@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package typersharkapp;
 
 import java.io.BufferedReader;
@@ -64,7 +59,7 @@ public class Puntajes {
         textArea.setPrefSize(180, 270);
         
         
-        file= new File("E:\\Documents\\Xavier-ESPOL\\Programacion Orientada a Objetos\\Proyectos Java\\TyperSharkProject\\TyperSharkApp\\src\\Top10.txt");
+        file= new File("Top10.txt");
         
         try 
         {

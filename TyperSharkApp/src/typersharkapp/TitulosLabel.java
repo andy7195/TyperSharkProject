@@ -6,16 +6,15 @@
 package typersharkapp;
 
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 
 /**
  *
- * @author Andy
+ * @version 1.0
+ * @author Dennise Guizado
+ * @author Edward Pino
+ * @author Xavier Pesantes
  */
 public class TitulosLabel {
     private Label l;
@@ -30,8 +29,21 @@ public class TitulosLabel {
        
     }
 
+    /**
+     * Método que devuelve el label.
+     * @return
+     */
     public Label getL() {
         return l;
     }
 
+    /**
+     * Método que modifica el label.
+     * @param 1 de tipo Label
+     */
+    public void setL(Label l) {
+        this.l = l;
+    }
+    
+    
 }
