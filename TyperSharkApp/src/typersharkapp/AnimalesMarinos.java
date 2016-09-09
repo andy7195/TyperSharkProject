@@ -19,11 +19,18 @@ public abstract class AnimalesMarinos extends Thread
     private int velocidad;
     private ImageView imagenCriaturaMarina;
     private TextFlow texto;
+    private String palabra;
+    private int iterator;
+    
+    private int bandera;
     
     public AnimalesMarinos(String nombreImagen, String palabra, int velocidad)
     {
         this.generarPosicion();
         this.velocidad = velocidad;
+        this.bandera = 0;
+        this.palabra = palabra;
+        this.iterator = 0;
         
         Text p = new Text(130, 50, palabra);
         p.setFill(Color.GREENYELLOW);
@@ -92,7 +99,29 @@ public abstract class AnimalesMarinos extends Thread
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
-    
-    
+
+    public int getBandera() {
+        return bandera;
+    }
+
+    public void setBandera(int bandera) {
+        this.bandera = bandera;
+    }
+
+    public String getPalabra() {
+        return palabra;
+    }
+
+    public void setPalabra(String palabra) {
+        this.palabra = palabra;
+    }
+
+    public int getIterator() {
+        return iterator;
+    }
+
+    public void setIterator(int iterator) {
+        this.iterator = iterator;
+    }
     
 }

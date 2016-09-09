@@ -16,7 +16,6 @@ public class Piranha extends AnimalesMarinos //implements Runnable
         super(nombreImagen, letra, 1);
         
         this.caracter = letra;
-        this.iterator = 0;
         this.buzo = jugador;
         this.animales = animales;
     }
@@ -27,7 +26,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.iterator < this.caracter.length() && this.buzo.getVidas() > 0)
+            while(this.getPosicionX() > 50 && this.getIterator() < this.caracter.length() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -44,7 +43,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10); 
             }
             Piranha.this.getFigura().setVisible(false);
-            this.iterator = 0;
+            //this.setIterator(0);
             
             if(this.getPosicionX() <= 50)
             {
@@ -54,11 +53,13 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                     this.buzo.setNumPiranhas(0);
                     this.buzo.setVidas(this.buzo.getVidas() - 0);
                     this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
+                    this.buzo.setPoder(this.buzo.getPoder() + 10);
                 }
             }
-            else if (this.iterator == 1)
+            else if (this.getIterator() == 1)
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
+                this.buzo.setPoder(this.buzo.getPoder() + 10);
                 //this.animales.remove();
             }
         }
@@ -69,14 +70,6 @@ public class Piranha extends AnimalesMarinos //implements Runnable
         }
     }
     
-    
-    public int getIterator() {
-        return iterator;
-    }
-
-    public void setIterator(int iterator) {
-        this.iterator = iterator;
-    }
     public String getCaracter() {
         return caracter;
     }

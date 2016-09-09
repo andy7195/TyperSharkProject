@@ -170,7 +170,7 @@ public class DatosUsuario {
             
             
            // juego.setStage(s);
-            juego.setSc2(sc);
+            //juego.setSc2(sc);
             if(scene2 == null || scene2 != escena2)
             {
                 scene2 = escena2;

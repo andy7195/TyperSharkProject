@@ -1,6 +1,7 @@
 package typersharkapp;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
@@ -33,7 +35,6 @@ public class InicioJuego
     private Stage stagePrincipal;
     private Stage stageInicioJuego;
     private Stage stageIngresoDatos;
-    private Scene sc2;
     private Queue<AnimalesMarinos> animales = new LinkedList<>();
     
     private Pane ingresoDatos;
@@ -44,7 +45,7 @@ public class InicioJuego
     private GridPane menu;
     private Label lbNombre, lbNivel, lbPuntaje, lbVidas;
     
-    
+    private JuegoAnimales conjuntoHilosAnimales;
     
     public InicioJuego(Stage stageP)
     {
@@ -86,7 +87,7 @@ public class InicioJuego
         this.ingresoDatos.getChildren().addAll(iv, campoNombre, label.getL(), jugar.getBtn());
         this.jugar.getBtn().setOnAction(new Jugar());
         
-        this.eventoTeclado = new KeyHandler(animales, jugador);
+        
         
         //Stage del panel en donde sale el buceador y las criaturas marinas.
         salir = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
@@ -96,7 +97,7 @@ public class InicioJuego
         stageInicioJuego.setTitle("TyperShark");
         stageInicioJuego.setScene(sceneInicioJuego);
         stageInicioJuego.setResizable(false);
-        stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
+        
         juego.getChildren().addAll(iv, salir.getBtn());
         
         this.panelJuego.setCenter(juego);
@@ -108,18 +109,67 @@ public class InicioJuego
 
      private class KeyHandler implements EventHandler<KeyEvent>
     {
-         private Queue<AnimalesMarinos> animal;
+         private ArrayList<AnimalesMarinos> animal;
          private Buceador buzo;
          
-         public KeyHandler(Queue<AnimalesMarinos> a, Buceador jugador)
+         public KeyHandler(ArrayList<AnimalesMarinos> a, Buceador jugador)
          {
              this.animal = a;
              this.buzo = jugador;
          }
         
         @Override
-        public void handle(KeyEvent event)
+        public void handle(KeyEvent keyEvent)
         {
+            try
+            {
+                if(keyEvent.getCode() == KeyCode.ENTER)
+                {
+                    System.out.println("ENTER");
+                    if(this.buzo.getPoder() == 500)
+                    {
+                        System.out.println("Se uso el poder.");
+                        //this.animal.clear();
+                        this.buzo.setPuntaje(this.buzo.getPuntaje() - 500);
+                        this.buzo.setPoder(0);
+
+                        this.animal.get(0).setBandera(1);
+                        this.animal.get(1).setBandera(1);
+                        this.animal.get(2).setBandera(1);
+                        this.animal.get(3).setBandera(1);
+
+                    }
+                }
+                else if (keyEvent.getCode().isLetterKey())
+                {
+                    if(this.animal.get(0).getPalabra().charAt(this.animal.get(0).getIterator()) == keyEvent.getText().charAt(0))
+                    {
+                        System.out.println("ENTRA0");
+                        this.animal.get(0).setIterator(this.animal.get(0).getIterator() + 1);
+                    }
+                    if(this.animal.get(1).getPalabra().charAt(this.animal.get(1).getIterator()) == keyEvent.getText().charAt(0))
+                    {
+                        System.out.println("ENTRA1");
+                        this.animal.get(1).setIterator(this.animal.get(1).getIterator() + 1);
+                    }
+                    if(this.animal.get(2).getPalabra().charAt(this.animal.get(2).getIterator()) == keyEvent.getText().charAt(0))
+                    {
+                        System.out.println("ENTRA2");
+                        this.animal.get(2).setIterator(this.animal.get(2).getIterator() + 1);
+                    }
+                    if(this.animal.get(3).getPalabra().charAt(this.animal.get(3).getIterator()) == keyEvent.getText().charAt(0))
+                    {
+                        System.out.println("ENTRA3");
+                        this.animal.get(3).setIterator(this.animal.get(3).getIterator() + 1);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.getStackTrace();
+            }
+            
+            
             //System.out.println(animal instanceof TiburonNegro);
             
             /*if (animal.peek() instanceof Tiburon)
@@ -190,7 +240,12 @@ public class InicioJuego
             menu.add(lbNivel, 2, 1);
             menu.add(jugador.getLb_nivel(), 3, 1);
             
-            new JuegoAnimales(animales, jugador, juego, "Palabras.txt").start();
+            conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt");
+            
+            eventoTeclado = new KeyHandler(conjuntoHilosAnimales.getAnimalesEnJuego(), jugador);
+            stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
+            
+            conjuntoHilosAnimales.start();
             jugador.start();
         }
     }
@@ -222,14 +277,6 @@ public class InicioJuego
 
     public void setStagePrincipal(Stage stage) {
         this.stagePrincipal = stage;
-    }
-
-    public Scene getSc2() {
-        return sc2;
-    }
-
-    public void setSc2(Scene sc2) {
-        this.sc2 = sc2;
     }
     
     public Pane getPaneJuego() {

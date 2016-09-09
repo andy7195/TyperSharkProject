@@ -10,7 +10,6 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
 {
     private ArrayList<String> palabras;
     private int numroAlt;
-    private int iterator;
     private Buceador buzo;
     private Queue<AnimalesMarinos> animales;
     
@@ -20,7 +19,6 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
         super(nombreImagen, Palabras.get(0), 3);
         
         this.palabras = Palabras;
-        this.iterator = 0;
         this.buzo = jugador;
         this.animales = animales;
     }
@@ -31,7 +29,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && !this.palabras.isEmpty() && this.buzo.getVidas() > 0)
+            while(this.getPosicionX() > 50 && !this.palabras.isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -48,16 +46,18 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10/buzo.getNivel()); 
             }
             TiburonNegro.this.getFigura().setVisible(false);
-            this.iterator = 0;
+            //this.setIterator(0);
             
             if(this.getPosicionX() <= 50)
             {
                 this.buzo.setVidas(this.buzo.getVidas() - 0);
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
+                this.buzo.setPoder(this.buzo.getPoder() + 100);
             }
-            else if (this.iterator == this.palabras.get(this.palabras.size()-1).length())
+            else if (this.getIterator() == this.palabras.get(this.palabras.size()-1).length())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
+                this.buzo.setPoder(this.buzo.getPoder() + 100);
                 //this.animales.remove();
             }
         }
@@ -75,14 +75,5 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     public void setNumroAlt(int numroAlt) {
         this.numroAlt = numroAlt;
     }
-    
-    public int getIterator() {
-        return iterator;
-    }
-
-    public void setIterator(int iterator) {
-        this.iterator = iterator;
-    }
-    
     
 }

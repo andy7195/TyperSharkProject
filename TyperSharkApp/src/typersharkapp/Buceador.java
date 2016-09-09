@@ -33,6 +33,7 @@ public class Buceador extends Thread
     private int posicionX;
     private int posicionY;
     private int nivel;
+    private int poder;
     
     private Label lb_nombre;
     private Label lb_vidas;
@@ -49,6 +50,7 @@ public class Buceador extends Thread
         this.numPiranhas = numPiranhas;
         this.tiempo = tiempo;
         this.nivel = nivel;
+        this.poder = 0;
         
         this.lb_nombre = new Label(nombre);
         this.lb_nombre.setStyle("-fx-font: 14 elephant");
@@ -88,6 +90,7 @@ public class Buceador extends Thread
         this.vidas = 3;
         this.numPiranhas = 0;
         this.nivel = 0;
+        this.poder = 0;
         
         this.lb_nombre = new Label(this.nombre);
         this.lb_nombre.setStyle("-fx-font: 14 elephant");
@@ -127,6 +130,8 @@ public class Buceador extends Thread
             {
                 this.setPosicionY(this.getPosicionY() + 1);
                 this.puntosDescenso();
+                this.verificarPuntosPoder();
+                
                 if(this.getPosicionY() == 450)
                 {
                     //this.nivel++;
@@ -166,9 +171,15 @@ public class Buceador extends Thread
     
     private void puntosDescenso(){
         this.puntaje++;
-    } 
-
+    }
     
+    private void verificarPuntosPoder()
+    {
+        if(this.poder > 500)
+        {
+            this.poder = 500;
+        }
+    }
     
     public Label getLb_nombre() {
         return lb_nombre;
@@ -288,6 +299,14 @@ public class Buceador extends Thread
 
     public void setLb_nivel(Label lb_nivel) {
         this.lb_nivel = lb_nivel;
+    }
+
+    public int getPoder() {
+        return poder;
+    }
+
+    public void setPoder(int poder) {
+        this.poder = poder;
     }
     
 }

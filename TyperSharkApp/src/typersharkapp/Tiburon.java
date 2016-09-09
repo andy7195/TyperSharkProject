@@ -9,16 +9,15 @@ import javafx.scene.input.KeyEvent;
 public class Tiburon extends AnimalesMarinos //implements Runnable
 {
     private String palabra;
-    private int iterator;
     private Buceador buzo;
     private Queue<AnimalesMarinos> animales;
+    private int bandera;
 
     public Tiburon(String nombreImagen, String palabra, Buceador jugador, Queue<AnimalesMarinos> animales) 
     {
         super(nombreImagen, palabra, 2);
         
         this.palabra = palabra;
-        this.iterator = 0;
         this.buzo = jugador;
         this.animales = animales;
     }
@@ -29,7 +28,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.iterator < this.palabra.length() && this.buzo.getVidas() > 0)
+            while(this.getPosicionX() > 50 && this.getIterator() < this.palabra.length() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
                 this.setPosicionX(this.getPosicionX() - 1);
                 
@@ -45,16 +44,18 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10); 
             }
             Tiburon.this.getFigura().setVisible(false);
-            this.iterator = 0;
+            //this.setIterator(0);
             
             if(this.getPosicionX() <= 50)
             {
                 this.buzo.setVidas(this.buzo.getVidas() - 0);
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
+                this.buzo.setPoder(this.buzo.getPoder() + 50);
             }
-            else if (this.iterator == this.palabra.length())
+            else if (this.getIterator() == this.palabra.length())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
+                this.buzo.setPoder(this.buzo.getPoder() + 50);
                 //this.animales.remove();
                 //this.animales.poll();
             }
@@ -66,7 +67,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
         }  
     }
     
-    private class KeyHandler implements EventHandler<KeyEvent>
+    /*private class KeyHandler implements EventHandler<KeyEvent>
     {
         
         @Override
@@ -77,7 +78,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                 iterator++;
             }
         }
-     }
+     }*/
     
     public String getPalabra() {
         return palabra;

@@ -123,45 +123,8 @@ public class JuegoAnimales extends Thread
                             {
                                 animalesEnJuego.clear();
                             }
-                            
-                            
-                           /* if(!animal.isAlive())
-                            {
-                                if (animales.peek() instanceof Tiburon)
-                                {
-                                    for(int i = 0; i <= buzo.getNivel(); i++)
-                                    {
-                                        Tiburon t = (Tiburon)animales.peek();
-                                        t.adjuntarTiburon(pane, 2);
-                                        t.start();
-                                        Thread.sleep(5000);
-                                    }
-                                }
-                                else if (animales.peek() instanceof TiburonNegro)
-                                {
-                                    for(int i = 0; i <= buzo.getNivel(); i++)
-                                    {
-                                        TiburonNegro t = (TiburonNegro)animales.peek();
-                                        t.adjuntarTiburonNegro(pane, 3);
-                                        t.start();
-                                        Thread.sleep(5000);
-                                    }
-
-                                }
-                                if (animales.peek() instanceof Piranha)
-                                {
-                                    for(int i = 0; i <= buzo.getNivel(); i++)
-                                    {
-                                        Piranha t = (Piranha)animales.peek();
-                                        t.adjuntarPiranha(pane, 1);
-                                        t.start();
-                                        Thread.sleep(3000);
-                                    }
-
-                                }
-                            }*/
                         }
-                        catch(Exception ex)
+                        catch(ArrayIndexOutOfBoundsException ex)
                         {
                             Logger.getLogger(JuegoAnimales.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -175,5 +138,61 @@ public class JuegoAnimales extends Thread
         {
             Logger.getLogger(JuegoAnimales.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Queue<AnimalesMarinos> getAnimalesAlmacenados() {
+        return animalesAlmacenados;
+    }
+
+    public void setAnimalesAlmacenados(Queue<AnimalesMarinos> animalesAlmacenados) {
+        this.animalesAlmacenados = animalesAlmacenados;
+    }
+
+    public ArrayList<AnimalesMarinos> getAnimalesEnJuego() {
+        return animalesEnJuego;
+    }
+
+    public void setAnimalesEnJuego(ArrayList<AnimalesMarinos> animalesEnJuego) {
+        this.animalesEnJuego = animalesEnJuego;
+    }
+
+    public Buceador getBuzo() {
+        return buzo;
+    }
+
+    public void setBuzo(Buceador buzo) {
+        this.buzo = buzo;
+    }
+
+    public Pane getPane() {
+        return pane;
+    }
+
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
+
+    public AnimalesMarinos getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(AnimalesMarinos animal) {
+        this.animal = animal;
+    }
+
+    public ArrayList<String> getListaPalabras() {
+        return listaPalabras;
+    }
+
+    public void setListaPalabras(ArrayList<String> listaPalabras) {
+        this.listaPalabras = listaPalabras;
+    }
+
+    public String[] getAbecedario() {
+        return abecedario;
+    }
+
+    public void setAbecedario(String[] abecedario) {
+        this.abecedario = abecedario;
     }
 }
