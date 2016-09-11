@@ -123,36 +123,50 @@ public class InicioJuego
         {
             try
             {
+                System.out.println("TECLA PRESIONADA "+ keyEvent.getText().charAt(0));
                 if (keyEvent.getCode().isLetterKey())
                 {
-                    if(this.animal.get(0).getPalabra().charAt(this.animal.get(0).getIterator()) == keyEvent.getText().charAt(0))
-                    {
-                        System.out.println("ENTRA0");
-                        this.animal.get(0).setIterator(this.animal.get(0).getIterator() + 1);
-                    }
-                    if(this.animal.get(1).getPalabra().charAt(this.animal.get(1).getIterator()) == keyEvent.getText().charAt(0))
-                    {
-                        System.out.println("ENTRA1");
-                        this.animal.get(1).setIterator(this.animal.get(1).getIterator() + 1);
-                    }
-                    if(this.animal.get(2).getPalabra().charAt(this.animal.get(2).getIterator()) == keyEvent.getText().charAt(0))
-                    {
-                        System.out.println("ENTRA2");
-                        this.animal.get(2).setIterator(this.animal.get(2).getIterator() + 1);
-                    }
-                    if(this.animal.get(3).getPalabra().charAt(this.animal.get(3).getIterator()) == keyEvent.getText().charAt(0))
-                    {
-                        System.out.println("ENTRA3");
-                        this.animal.get(3).setIterator(this.animal.get(3).getIterator() + 1);
-                    }
+                    String A=this.animal.get(0).getPalabra();
+                    String B=this.animal.get(1).getPalabra();
+                    String C=this.animal.get(2).getPalabra();
+                    String D=this.animal.get(3).getPalabra();
+                    System.out.println(A+""+B+""+C+""+D);
+                    if(!A.isEmpty())
+                        if((A.charAt(0) ==keyEvent.getText().charAt(0)))
+                        {
+                            System.out.println("ENTRA0");
+                            this.animal.get(0).setPalabra(A.substring(1));
+                        }
+                    if(!B.isEmpty())
+                        if((B.charAt(0) ==keyEvent.getText().charAt(0)))
+                        {
+                            System.out.println("ENTRA1");
+                            this.animal.get(1).setPalabra(B.substring(1));
+
+                        }
+                    if(!C.isEmpty())
+                        if((C.charAt(0) ==keyEvent.getText().charAt(0)))
+                        {
+                            System.out.println("ENTRA2");
+                            this.animal.get(2).setPalabra(C.substring(1));
+
+                        }
+                    if(!D.isEmpty())
+                        if((D.charAt(0) ==keyEvent.getText().charAt(0)))
+                        {
+                            System.out.println("ENTRA3");
+                            this.animal.get(3).setPalabra(D.substring(1));
+
+                        }
                 }
                 else if(keyEvent.getCode() == KeyCode.ENTER)
                 {
                     System.out.println("ENTER");
-                    if(this.buzo.getPoder() == 500)
+                    if(this.buzo.getPoder() >= 500)
                     {
                         System.out.println("Se uso el poder.");
                         //this.animal.clear();
+                        
                         this.buzo.setPuntaje(this.buzo.getPuntaje() - 500);
                         this.buzo.setPoder(0);
 
@@ -162,6 +176,10 @@ public class InicioJuego
                         this.animal.get(3).setBandera(1);
 
                     }
+                }
+                else if(keyEvent.getCode() == KeyCode.CONTROL){
+                    this.buzo.setVidas(this.buzo.getVidas()+1);
+                
                 }
                 
             }
@@ -237,7 +255,7 @@ public class InicioJuego
 
     
     
-    
+
     
     public Stage getStageIngresoDatos() {
         return stageIngresoDatos;

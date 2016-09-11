@@ -29,7 +29,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && !this.palabras.isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
+            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -54,7 +54,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 this.buzo.setPoder(this.buzo.getPoder() + 100);
             }
-            else if (this.getIterator() == this.palabras.get(this.palabras.size()-1).length())
+            else if (!this.getPalabra().isEmpty())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 this.buzo.setPoder(this.buzo.getPoder() + 100);

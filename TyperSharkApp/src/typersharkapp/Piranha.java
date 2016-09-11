@@ -26,7 +26,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.getIterator() < this.caracter.length() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
+            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -56,7 +56,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                     this.buzo.setPoder(this.buzo.getPoder() + 10);
                 }
             }
-            else if (this.getIterator() == 1)
+            else if (!this.getPalabra().isEmpty())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                 this.buzo.setPoder(this.buzo.getPoder() + 10);

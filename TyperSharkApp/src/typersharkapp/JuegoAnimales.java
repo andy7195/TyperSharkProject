@@ -118,6 +118,7 @@ public class JuegoAnimales extends Thread
                                     animalesEnJuego.get(i).adjuntarCriatura(pane);
                                     animalesEnJuego.get(i).start();
                                 }
+                                System.out.println(animalesEnJuego.get(0));
                             }
                             else if (!animalesEnJuego.get(0).isAlive() && !animalesEnJuego.get(1).isAlive() && !animalesEnJuego.get(2).isAlive() && !animalesEnJuego.get(3).isAlive())
                             {

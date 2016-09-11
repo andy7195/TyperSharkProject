@@ -127,12 +127,18 @@ public class Buceador extends Thread
     @Override
     public void run() 
     {
-        try
+        //try
         {
+        int k=1;
+        int j=1;
             while(this.getVidas() > 0)
             {
-                this.setPosicionY(this.getPosicionY() + 1);
-                this.puntosDescenso();
+                if(k%100==0)
+                    this.setPosicionY(this.getPosicionY() + 1);
+                k++;
+                j++;
+                System.out.println(j+" "+k);
+                this.puntosDescenso(j);
                 this.verificarPuntosPoder();
                 
                 if(this.getPosicionY() == 450)
@@ -145,26 +151,34 @@ public class Buceador extends Thread
                     this.nivel++;
                 }
 
-                Platform.runLater(new Runnable() 
-                {
+                Thread a=new Thread(new Runnable(){
+
                     @Override
-                    public void run() 
-                    { 
-                        Buceador.this.getFiguraBuceador().setLayoutY(Buceador.this.getPosicionY());
-                        lb_vidas.setText(Integer.toString(vidas));
-                        lb_puntaje.setText(Integer.toString(puntaje));
-                        lb_nivel.setText(Integer.toString(nivel));
+                    public void run() {
+                        Platform.runLater(new Runnable() 
+                        {
+                            @Override
+                            public void run() 
+                            { 
+                                Buceador.this.getFiguraBuceador().setLayoutY(Buceador.this.getPosicionY());
+                                lb_vidas.setText(Integer.toString(vidas));
+                                lb_puntaje.setText(Integer.toString(puntaje));
+                                lb_nivel.setText(Integer.toString(nivel));
+                            }
+                        });
                     }
+                    
                 });
-                
-                Thread.sleep(100);
+                a.start();
+
+
             }
             this.figuraBuceador.setVisible(false);
         }
-        catch (InterruptedException ex) 
-        {
-            Logger.getLogger(Buceador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //catch (InterruptedException ex) 
+        //{
+        //    Logger.getLogger(Buceador.class.getName()).log(Level.SEVERE, null, ex);
+        //}
     }
     
     public void adjuntarBuceador(Pane panel)
@@ -176,8 +190,10 @@ public class Buceador extends Thread
         panel.getChildren().add(this.getFiguraBuceador());
     }
     
-    private void puntosDescenso(){
-        this.puntaje++;
+    private void puntosDescenso(int a){
+        if(a%1000==0)
+            this.puntaje++;
+
     }
     
     private void verificarPuntosPoder()

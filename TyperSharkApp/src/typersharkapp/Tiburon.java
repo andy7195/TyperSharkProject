@@ -28,7 +28,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && this.getIterator() < this.palabra.length() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
+            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
                 this.setPosicionX(this.getPosicionX() - 1);
                 
@@ -53,8 +53,9 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                 this.buzo.setPoder(this.buzo.getPoder() + 50);
                 this.buzo.setCriaturasAsesinadas(this.buzo.getCriaturasAsesinadas() + 1);
             }
-            else if (this.getIterator() == this.palabra.length())
+            else if (!this.getPalabra().isEmpty())
             {
+                
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);
                 this.buzo.setPoder(this.buzo.getPoder() + 50);
             }
