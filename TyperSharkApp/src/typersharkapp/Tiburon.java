@@ -53,7 +53,7 @@ public class Tiburon extends AnimalesMarinos //implements Runnable
                 this.buzo.setPoder(this.buzo.getPoder() + 50);
                 this.buzo.setCriaturasAsesinadas(this.buzo.getCriaturasAsesinadas() + 1);
             }
-            else if (!this.getPalabra().isEmpty())
+            else if (this.getPalabra().isEmpty())
             {
                 
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 50);

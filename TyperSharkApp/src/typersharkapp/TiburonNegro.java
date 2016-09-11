@@ -4,21 +4,25 @@ package typersharkapp;
 import java.util.ArrayList;
 import java.util.Queue;
 import javafx.application.Platform;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
 public class TiburonNegro extends AnimalesMarinos //implements Runnable
 {
-    private ArrayList<String> palabras;
+    private String palabra1,palabra2 ;
     private int numroAlt;
     private Buceador buzo;
     private Queue<AnimalesMarinos> animales;
     
     
-    public TiburonNegro(String nombreImagen, ArrayList<String> Palabras, Buceador jugador, Queue<AnimalesMarinos> animalesz)//[]) 
+    public TiburonNegro(String nombreImagen,String palabra1,String palabra2, Buceador jugador, Queue<AnimalesMarinos> animalesz)//[]) 
     {
-        super(nombreImagen, Palabras.get(0), 3);
+        super(nombreImagen, palabra1,palabra2, 3);
+        System.out.println(palabra2);
         
-        this.palabras = Palabras;
+        this.palabra1 = palabra1;
+        this.palabra2 = palabra2;
         this.buzo = jugador;
         this.animales = animales;
     }
@@ -29,19 +33,31 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
+            while(this.getPosicionX() > 50 && !(this.getPalabra().isEmpty() && this.getPalabra2().isEmpty() ) && this.buzo.getVidas() > 0 && this.getBandera() == 0)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
-                
+                //System.out.println(getPalabra() + palabra2 );
                 Platform.runLater(new Runnable() 
                 {
                     @Override
                     public void run() 
                     { 
                         TiburonNegro.this.getFigura().setLayoutX(TiburonNegro.this.getPosicionX());
-                    }
+                        if(getPalabra().isEmpty()){
+                            System.out.println("sadf");
+
+
+                                texto.setVisible(false);
+                                texto2.setVisible(true);
+                                setPalabra(palabra2);
+                                setPalabra2("");
+                            }
+                  
+                        }
                 });
+                
+
 
                 Thread.sleep(this.getVelocidad()*10/buzo.getNivel()); 
             }
@@ -54,7 +70,8 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 this.buzo.setPoder(this.buzo.getPoder() + 100);
             }
-            else if (!this.getPalabra().isEmpty())
+            
+            else if (this.getPalabra().isEmpty())
             {
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 this.buzo.setPoder(this.buzo.getPoder() + 100);
@@ -76,13 +93,23 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
         this.numroAlt = numroAlt;
     }
 
-    public ArrayList<String> getPalabras() {
-        return palabras;
+    public String getPalabra1() {
+        return palabra1;
     }
 
-    public void setPalabras(ArrayList<String> palabras) {
-        this.palabras = palabras;
+    public void setPalabra1(String palabra1) {
+        this.palabra1 = palabra1;
     }
+
+    public String getPalabra2() {
+        return palabra2;
+    }
+
+    public void setPalabra2(String palabra2) {
+        this.palabra2 = palabra2;
+    }
+
+
     
     
 }

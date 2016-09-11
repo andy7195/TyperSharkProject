@@ -18,10 +18,12 @@ public abstract class AnimalesMarinos extends Thread
     private double posicionY;
     private int velocidad;
     private ImageView imagenCriaturaMarina;
-    private TextFlow texto;
+    protected TextFlow texto;
+    protected TextFlow texto2;
     private String palabra;
     private int iterator;
-    
+    protected Text p;
+    protected Text p2;
     private int bandera;
     
     public AnimalesMarinos(String nombreImagen, String palabra, int velocidad)
@@ -32,11 +34,12 @@ public abstract class AnimalesMarinos extends Thread
         this.palabra = palabra;
         this.iterator = 0;
         
-        Text p = new Text(130, 50, palabra);
+        p = new Text(130, 50, palabra);
         p.setFill(Color.GREENYELLOW);
         p.setStyle("-fx-font: 18 century;");
-        
+       
         this.texto = new TextFlow(p);
+       
         this.texto.setLayoutX(70);
         this.texto.setLayoutY(10);
         
@@ -46,6 +49,37 @@ public abstract class AnimalesMarinos extends Thread
         
         this.figura = new Pane();
         this.figura.getChildren().addAll(this.imagenCriaturaMarina, this.texto);
+        
+        
+    }
+    
+        public AnimalesMarinos(String nombreImagen, String palabra, String palabra2, int velocidad)
+    {
+        this.generarPosicion();
+        this.velocidad = velocidad;
+        this.bandera = 0;
+        this.palabra = palabra;
+        this.iterator = 0;
+        
+        p = new Text(130, 50, palabra);
+        p2 = new Text(130, 50, palabra2);
+        p.setFill(Color.GREENYELLOW);
+        p.setStyle("-fx-font: 18 century;");
+        p2.setFill(Color.GREENYELLOW);
+        p2.setStyle("-fx-font: 18 century;");
+        this.texto = new TextFlow(p);
+        this.texto2=new TextFlow(p2);
+        this.texto2.setVisible(false);
+        this.texto.setLayoutX(70);
+        this.texto.setLayoutY(10);
+        this.texto2.setLayoutX(70);
+        this.texto2.setLayoutY(10);
+        this.imagenCriaturaMarina = new ImageView(new Image(nombreImagen));
+        this.imagenCriaturaMarina.setFitHeight(50);
+        this.imagenCriaturaMarina.setFitWidth(130);
+        
+        this.figura = new Pane();
+        this.figura.getChildren().addAll(this.imagenCriaturaMarina, this.texto,this.texto2);
         
         
     }

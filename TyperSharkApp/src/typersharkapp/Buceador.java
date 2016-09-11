@@ -137,7 +137,7 @@ public class Buceador extends Thread
                     this.setPosicionY(this.getPosicionY() + 1);
                 k++;
                 j++;
-                System.out.println(j+" "+k);
+                //System.out.println(this.puntaje+" "+this.vidas);
                 this.puntosDescenso(j);
                 this.verificarPuntosPoder();
                 

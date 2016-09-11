@@ -25,8 +25,8 @@ import javafx.stage.Stage;
 public class InicioJuego
 {
     private Pane juego;
-    private Image fondo;
-    private ImageView iv;
+    private Image fondo,fondoU;
+    private ImageView iv,ivU;
     private KeyHandler eventoTeclado;
     private Boton salir;
     private Boton jugar;
@@ -74,6 +74,18 @@ public class InicioJuego
         
         //Stage del Ingreso del nombre del jugador.
         this.stageIngresoDatos = new Stage();
+        
+        try{
+            fondoU= new Image("Menu.png");
+        
+        }
+        catch(Exception e){System.out.println("No lee imagen");}
+        
+        ivU = new ImageView(fondo);
+        ivU.setFitHeight(510);
+        ivU.setFitWidth(900);
+        ivU.setImage(fondo);
+        
         TitulosLabel label = new TitulosLabel("Ingrese su nombre:", "-fx-font: 25 elephant",450,10,200,250, Color.DARKGRAY);
         this.campoNombre = new TextField();
         this.campoNombre.setLayoutX(450);
@@ -84,6 +96,7 @@ public class InicioJuego
         this.stageIngresoDatos.setTitle("Ingreso de Datos");
         this.stageIngresoDatos.setScene(sceneIngresoDatos);
         this.stageIngresoDatos.setResizable(false);
+        this.ingresoDatos.getChildren().add(ivU);
         this.ingresoDatos.getChildren().addAll(iv, campoNombre, label.getL(), jugar.getBtn());
         this.jugar.getBtn().setOnAction(new Jugar());
         
@@ -130,12 +143,13 @@ public class InicioJuego
                     String B=this.animal.get(1).getPalabra();
                     String C=this.animal.get(2).getPalabra();
                     String D=this.animal.get(3).getPalabra();
-                    System.out.println(A+""+B+""+C+""+D);
+                   //System.out.println(A+""+B+""+C+""+D);
                     if(!A.isEmpty())
                         if((A.charAt(0) ==keyEvent.getText().charAt(0)))
                         {
                             System.out.println("ENTRA0");
                             this.animal.get(0).setPalabra(A.substring(1));
+                            
                         }
                     if(!B.isEmpty())
                         if((B.charAt(0) ==keyEvent.getText().charAt(0)))

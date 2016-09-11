@@ -77,13 +77,13 @@ public class JuegoAnimales extends Thread
                             }
                             case 1:
                             {
-                                ArrayList<String> Palabras = new ArrayList<>();
+                                /*ArrayList<String> Palabras = new ArrayList<>();
                                 //rand.nextInt(max - min + 1) + min
                                 for (int j = 0; j < (rand.nextInt(2)+2); j++)
                                 {
                                     Palabras.add(this.listaPalabras.get(rand.nextInt(205)));
-                                }
-                                animal = new TiburonNegro("BlackShark.png", Palabras, this.buzo, animalesAlmacenados);
+                                }*/
+                                animal = new TiburonNegro("BlackShark.png", this.listaPalabras.get(rand.nextInt(205)),this.listaPalabras.get(rand.nextInt(205)), this.buzo, animalesAlmacenados);
                                 animalesAlmacenados.add(animal);
                                 break;
                             }
@@ -118,7 +118,7 @@ public class JuegoAnimales extends Thread
                                     animalesEnJuego.get(i).adjuntarCriatura(pane);
                                     animalesEnJuego.get(i).start();
                                 }
-                                System.out.println(animalesEnJuego.get(0));
+                                //System.out.println(animalesEnJuego.get(0));
                             }
                             else if (!animalesEnJuego.get(0).isAlive() && !animalesEnJuego.get(1).isAlive() && !animalesEnJuego.get(2).isAlive() && !animalesEnJuego.get(3).isAlive())
                             {

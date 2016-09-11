@@ -74,8 +74,8 @@ public class PaneOrganize
         public void handle(ActionEvent event)
         {
             setPuntajes(new Puntajes(getStagePrincipal()));
-            getPuntajes().getStagePuntajes().show();
-            stagePrincipal.hide();
+            //getPuntajes().getStagePuntajes().show();
+            //stagePrincipal.hide();
             event.consume(); 
         }
     }
