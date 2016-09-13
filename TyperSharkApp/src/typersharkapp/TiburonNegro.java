@@ -66,7 +66,7 @@ public class TiburonNegro extends AnimalesMarinos //implements Runnable
             
             if(this.getPosicionX() <= 50)
             {
-                this.buzo.setVidas(this.buzo.getVidas() - 0);
+                this.buzo.setVidas(this.buzo.getVidas() - 1);
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 100);
                 this.buzo.setPoder(this.buzo.getPoder() + 100);
             }

@@ -1,6 +1,9 @@
 package typersharkapp;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -29,7 +32,9 @@ public class InicioJuego
     private ImageView iv,ivU;
     private KeyHandler eventoTeclado;
     private Boton salir;
+    private Boton guardar;
     private Boton jugar;
+    private File partidasGuardadas;
     private FileReader archivo;
     private Buceador jugador;
     private Stage stagePrincipal;
@@ -86,6 +91,9 @@ public class InicioJuego
         ivU.setFitWidth(900);
         ivU.setImage(fondo);
         
+        partidasGuardadas=new File("Partidas Guardadas.txt");
+        
+        
         TitulosLabel label = new TitulosLabel("Ingrese su nombre:", "-fx-font: 25 elephant",450,10,200,250, Color.DARKGRAY);
         this.campoNombre = new TextField();
         this.campoNombre.setLayoutX(450);
@@ -104,6 +112,8 @@ public class InicioJuego
         
         //Stage del panel en donde sale el buceador y las criaturas marinas.
         salir = new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
+        guardar = new Boton("Guardar Partida","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 200, 60, 500, 438, 10, Color.AQUA);
+       
         stageInicioJuego = new Stage();
         juego = new Pane();
         Scene sceneInicioJuego = new Scene(this.panelJuego, 890, 525);
@@ -111,12 +121,13 @@ public class InicioJuego
         stageInicioJuego.setScene(sceneInicioJuego);
         stageInicioJuego.setResizable(false);
         
-        juego.getChildren().addAll(iv, salir.getBtn());
+        juego.getChildren().addAll(iv, salir.getBtn(),guardar.getBtn());
         
         this.panelJuego.setCenter(juego);
         this.panelJuego.setTop(menu);
         
         salir.getBtn().setOnAction(new Salir());
+        guardar.getBtn().setOnAction(new GuardarPartida());
         
     }
 
@@ -267,7 +278,39 @@ public class InicioJuego
         }
     }
 
-    
+    private class GuardarPartida implements EventHandler<ActionEvent>{
+        @Override 
+        public void handle(ActionEvent e){
+            if(conjuntoHilosAnimales.getBuzo().getVidas()>0){
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            try
+            {
+                
+                    fichero = new FileWriter(partidasGuardadas, true);
+                    pw = new PrintWriter(fichero); 
+                    pw.println(jugador.getNombre()+","+jugador.getNivel()+","+jugador.getPuntaje()+","+jugador.getVidas()+"\n");
+                
+           
+                        
+                animales.poll().stop();
+                jugador.stop();
+            
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            } finally {
+               try {
+               // Nuevamente aprovechamos el finally para 
+               // asegurarnos que se cierra el fichero.
+               if (null != fichero)
+                  fichero.close();
+               } catch (Exception e2) {
+                  e2.printStackTrace();
+               }
+            }
+            }
+        }
+    }
     
 
     
