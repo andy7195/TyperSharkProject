@@ -1,0 +1,14 @@
+AAA,700
+bbb,100
+ccc,500
+gdc,400
+ags,250
+dsa,188
+and,698
+pay,742
+bpt,145
+ptb,843
+hfg,225
+dsw,384
+
+
