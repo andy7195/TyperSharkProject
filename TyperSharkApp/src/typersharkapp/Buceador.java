@@ -40,7 +40,7 @@ public class Buceador extends Thread
     private Label lb_vidas;
     private Label lb_puntaje;
     private Label lb_nivel;
-
+    private boolean conEndB;
     
     public Buceador(Pane pane, String nombre, int puntaje, int vidas, int numPiranhas, int tiempo, int nivel)
     {
@@ -84,7 +84,7 @@ public class Buceador extends Thread
         this.setPosicionY(50);
     }
     
-    public Buceador(Pane pane ,String nombre) 
+    public Buceador(Pane pane ,String nombre,boolean conEnd) 
     {
         this.figuraBuceador= new Pane();
         this.nombre = nombre;
@@ -94,6 +94,7 @@ public class Buceador extends Thread
         this.nivel = 1;
         this.poder = 0;
         this.criaturasAsesinadas = 1;
+        this.conEndB= conEnd;
         
         this.lb_nombre = new Label(this.nombre);
         this.lb_nombre.setStyle("-fx-font: 14 elephant");
@@ -131,7 +132,7 @@ public class Buceador extends Thread
         {
         int k=1;
         int j=1;
-            while(this.getVidas() > 0)
+            while((this.getVidas() > 0) && (this.conEndB==false) )
             {
                 if(k%100==0)
                     this.setPosicionY(this.getPosicionY() + 1);
@@ -148,8 +149,10 @@ public class Buceador extends Thread
                 }
                 if(this.criaturasAsesinadas%15 == 0)
                 {
-                    this.nivel++;
+                    this.setCriaturasAsesinadas(1);
+                    this.setNivel(this.getNivel()+1);
                 }
+
 
                 Thread a=new Thread(new Runnable(){
 
@@ -175,6 +178,7 @@ public class Buceador extends Thread
             }
             this.figuraBuceador.setVisible(false);
         }
+ 
         //catch (InterruptedException ex) 
         //{
         //    Logger.getLogger(Buceador.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,6 +205,18 @@ public class Buceador extends Thread
         if(this.poder > 500)
         {
             this.poder = 500;
+        }
+    }
+    
+    public void verificarPuntajes(){
+        if(this.puntaje<0){
+            this.puntaje=0;
+        }
+    }
+    
+    public void verificarVidas(){
+        if(this.puntaje<0){
+            this.puntaje=0;
         }
     }
     
@@ -234,6 +250,7 @@ public class Buceador extends Thread
 
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
+        this.verificarPuntajes();
     }
 
     public int getVidas() {
@@ -242,6 +259,7 @@ public class Buceador extends Thread
 
     public void setVidas(int vidas) {
         this.vidas = vidas;
+        this.verificarVidas();
     }
 
     public int getNumPiranhas() {

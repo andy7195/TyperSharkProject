@@ -1,11 +1,8 @@
 package typersharkapp;
 
-import java.io.File;
 import java.util.Random;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -88,7 +85,7 @@ public abstract class AnimalesMarinos extends Thread
     {
         Random rand = new Random();
         
-        this.posicionY = rand.nextInt(450);
+        this.posicionY = rand.nextInt(400);
         this.posicionX = 900;    
     }
 
@@ -97,8 +94,6 @@ public abstract class AnimalesMarinos extends Thread
         this.figura.setLayoutX(this.getPosicionX());
         this.figura.setLayoutY(this.getPosicionY());
         panel.getChildren().add(this.figura);
-        
-        //this.figura.addEventHandler(KeyEvent.KEY_TYPED, new KeyHandler());
     }
     
     

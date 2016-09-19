@@ -10,14 +10,16 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     private int iterator;
     private Buceador buzo;
      private Queue<AnimalesMarinos> animales;
+    private boolean conEndPi;
 
-    public Piranha(String nombreImagen, String letra, Buceador jugador, Queue<AnimalesMarinos> animales) 
+    public Piranha(String nombreImagen, String letra, Buceador jugador, Queue<AnimalesMarinos> animales, boolean conEnd) 
     {
         super(nombreImagen, letra, 1);
         
         this.caracter = letra;
         this.buzo = jugador;
         this.animales = animales;
+        this.conEndPi= conEnd;
     }
 
     
@@ -26,7 +28,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
     {
          try 
         {
-            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0)
+            while(this.getPosicionX() > 50 && !this.getPalabra().isEmpty() && this.buzo.getVidas() > 0 && this.getBandera() == 0 && conEndPi == false)
             {
             
                 this.setPosicionX(this.getPosicionX() - 1);
@@ -43,8 +45,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 Thread.sleep(this.getVelocidad()*10); 
             }
             Piranha.this.getFigura().setVisible(false);
-            //this.setIterator(0);
-            
+
             if(this.getPosicionX() <= 50)
             {
                 this.buzo.setNumPiranhas(this.buzo.getNumPiranhas() + 1);
@@ -52,8 +53,6 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 {
                     this.buzo.setNumPiranhas(0);
                     this.buzo.setVidas(this.buzo.getVidas() - 1);
-                    this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
-                    this.buzo.setPoder(this.buzo.getPoder() + 10);
                 }
             }
             else if (this.getPalabra().isEmpty())
@@ -61,6 +60,8 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 this.buzo.setPuntaje(this.buzo.getPuntaje() + 10);
                 this.buzo.setPoder(this.buzo.getPoder() + 10);
                 this.buzo.setCriaturasAsesinadas(this.buzo.getCriaturasAsesinadas() + 1);
+                System.out.println("Criaturas Asesinadas: "+this.buzo.getCriaturasAsesinadas());
+                
             }
         }
         catch(Exception ex)
@@ -68,6 +69,7 @@ public class Piranha extends AnimalesMarinos //implements Runnable
                 System.out.println("Error");
                 ex.printStackTrace();
         }
+        
     }
     
     public String getCaracter() {

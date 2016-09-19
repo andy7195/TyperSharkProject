@@ -50,26 +50,27 @@ public class Reglas {
         TitulosLabel titulo2= new TitulosLabel("TYPERSHARK","-fx-font: 20 elephant;",210,10,370,40, Color.DARKGRAY);
         Boton regreso= new Boton("Regresar","-fx-font: 20 century; -fx-background-color: transparent;-fx-background-radius: 30;", 150, 60, 730, 438, 10, Color.AQUA);
         Text t= new Text(130,100,"OBJETIVO: TyperShark es un juego cuyo objetivo es que el usuario aprenda a utilizar todos sus\n"
-                + "dedos para tipiar.\n\n"
+                + "dedos para tipear.\n\n"
                 + "ACERCA DE: El juego consiste de un buceador el cual ira descendiendo en el mar.\n"
                 + "A medida que descendiende \n"
-                + "apareceran diferentes tipos de animales marinos como tiburones, piranas y tiburones negros.\n"
+                + "apareceran diferentes tipos de animales marinos como tiburones,pulpos, piranas y tiburones negros.\n"
                 + "Los tiburones tendran una palabra, las piranas un caracter y los tiburones negros pueden contener\n"
                 + "2 o 3 palabaras seleccionadas aleatoriamente\n\n"
                 + "COMO JUGAR: A medida que los animales marinos salgan el jugador debera tipiar la o\n"
                 + "las palabras o caracteres que salgan en cada uno.\n"
                 + "A medida que avanze descendiendo el buceador, el nivel de velocidad de los animales aumentara\n\n"
                 + "PUNTAJE:El jugador gana puntos:\n"
-                + "\t\t\tPor cada tiburon que mate el jugador obtendra 3 puntos\n"
-                + "\t\t\tPor cada pirana que mate 2 puntos\n"
-                + "\t\t\tPor cada tiburon negro 5 puntos\n"
+                + "\t\t\tPor cada tiburon que mate el jugador obtendra 3 puntos.\n"
+                + "\t\t\tPor cada pirana que mate 2 puntos.\n"
+                + "\t\t\tPor cada tiburon negro 5 puntos.\n"
+                + "\t\t\tPor un pulpo que mate obtendra un combo marino.Solo se puede obtener uno.\n"
                 + "\t\t\tA medida que descienda en el mar\n\n"
                 + "VIDAS: Al comenzar el juego el jugador tendra 3 vidas las cuales las puede perder si:\n"
-                + "\t\t\tSi un tiburon o tiburon negro toca al buceador o al cabo que lo sostiene pierde 1 vida\n"
+                + "\t\t\tSi un tiburon ,pulpo o tiburon negro toca al buceador o al cabo que lo sostiene pierde 1 vida\n"
                 + "\t\t\tSi las piranas ya han tocado 3 veces al buceador o a su cabo pierde 1 vida\n\n"
-                + "BONO: Si el jugador ya ha acumulado 50 puntos o mas podra matar a un combo marino dando ENTER.\n"
+                + "BONO: Si el jugador ya ha acumulado 500 puntos o mas podra matara con un combo marino dando ENTER.\n"
                 + "Este combo marino incluye todos los animales marinos que se encuentren en ese momento a su alrededor.\n"
-                + "Perdera la mitad de sus puntos y luego se le asignaran mas puntos por cada animal matado");
+                + "Perdera 500 de sus puntos y luego se le asignaran mas puntos por cada animal matado");
         t.setFill(Color.WHITE);
         t.setStyle("-fx-font: 12 century;");
         

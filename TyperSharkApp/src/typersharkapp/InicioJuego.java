@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -41,6 +39,7 @@ public class InicioJuego
     private Stage stageInicioJuego;
     private Stage stageIngresoDatos;
     private Queue<AnimalesMarinos> animales = new LinkedList<>();
+    private boolean conEnd;
     
     private Pane ingresoDatos;
     private TextField campoNombre;
@@ -52,7 +51,7 @@ public class InicioJuego
     
     private JuegoAnimales conjuntoHilosAnimales;
     
-    public InicioJuego(Stage stageP)
+    public InicioJuego(Stage stageP, String datos[],int con)
     {
         try{
             fondo = new Image("FondoJuego.jpg");
@@ -91,7 +90,11 @@ public class InicioJuego
         ivU.setFitWidth(900);
         ivU.setImage(fondo);
         
+        this.conEnd=false;
+        
         partidasGuardadas=new File("Partidas Guardadas.txt");
+        
+        
         
         
         TitulosLabel label = new TitulosLabel("Ingrese su nombre:", "-fx-font: 25 elephant",450,10,200,250, Color.DARKGRAY);
@@ -129,6 +132,14 @@ public class InicioJuego
         salir.getBtn().setOnAction(new Salir());
         guardar.getBtn().setOnAction(new GuardarPartida());
         
+        if(con==1){
+            
+            System.out.println("Ingresa contador");
+           
+            this.cargar(con,datos);
+        }
+        
+        
     }
 
      private class KeyHandler implements EventHandler<KeyEvent>
@@ -147,13 +158,14 @@ public class InicioJuego
         {
             try
             {
+                
                 System.out.println("TECLA PRESIONADA "+ keyEvent.getText().charAt(0));
                 if (keyEvent.getCode().isLetterKey())
                 {
-                    String A=this.animal.get(0).getPalabra();
-                    String B=this.animal.get(1).getPalabra();
-                    String C=this.animal.get(2).getPalabra();
-                    String D=this.animal.get(3).getPalabra();
+                    String A=this.animal.get(0).getPalabra().toLowerCase();
+                    String B=this.animal.get(1).getPalabra().toLowerCase();
+                    String C=this.animal.get(2).getPalabra().toLowerCase();
+                    String D=this.animal.get(3).getPalabra().toLowerCase();
                    //System.out.println(A+""+B+""+C+""+D);
                     if(!A.isEmpty())
                         if((A.charAt(0) ==keyEvent.getText().charAt(0)))
@@ -199,10 +211,11 @@ public class InicioJuego
                         this.animal.get(1).setBandera(1);
                         this.animal.get(2).setBandera(1);
                         this.animal.get(3).setBandera(1);
+                      
 
                     }
                 }
-                else if(keyEvent.getCode() == KeyCode.CONTROL){
+                else if(keyEvent.getCode() == KeyCode.ADD){
                     this.buzo.setVidas(this.buzo.getVidas()+1);
                 
                 }
@@ -229,7 +242,7 @@ public class InicioJuego
                 stageIngresoDatos.hide();
             
                 stageInicioJuego.show();
-                jugador = new Buceador(juego, campoNombre.getText());
+                jugador = new Buceador(juego, campoNombre.getText(),conEnd);
                 jugador.adjuntarBuceador(juego);
 
                 menu.setStyle("-fx-background-color: #778899;");
@@ -254,13 +267,18 @@ public class InicioJuego
                 menu.add(lbNivel, 2, 1);
                 menu.add(jugador.getLb_nivel(), 3, 1);
 
-                conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt");
+                conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt","wordsSustentacion.txt",conEnd);
 
                 eventoTeclado = new KeyHandler(conjuntoHilosAnimales.getAnimalesEnJuego(), jugador);
                 stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
 
                 conjuntoHilosAnimales.start();
                 jugador.start();
+                
+                if(jugador.getVidas()==0){
+                    guardarinfo();
+                }
+                
             }
             catch(Exception ex)
             {
@@ -282,37 +300,109 @@ public class InicioJuego
         @Override 
         public void handle(ActionEvent e){
             if(conjuntoHilosAnimales.getBuzo().getVidas()>0){
-            FileWriter fichero = null;
-            PrintWriter pw = null;
-            try
-            {
+                FileWriter fichero = null;
+                PrintWriter pw = null;
+                try
+                {
                 
-                    fichero = new FileWriter(partidasGuardadas, true);
+                    fichero = new FileWriter(partidasGuardadas);
                     pw = new PrintWriter(fichero); 
                     pw.println(jugador.getNombre()+","+jugador.getNivel()+","+jugador.getPuntaje()+","+jugador.getVidas()+"\n");
                 
-           
-                        
-                animales.poll().stop();
-                jugador.stop();
+                    conEnd=true; 
+                    
+                    stageInicioJuego.close();
+                    stagePrincipal.show();
+                    //jugador.stop();
+                    /*animales.poll().stop();
+                    animales.poll().stop();
+                    animales.poll().stop(); 
+                    animales.poll().stop();
+                    jugador.stop();*/
             
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            } finally {
-               try {
-               // Nuevamente aprovechamos el finally para 
-               // asegurarnos que se cierra el fichero.
-               if (null != fichero)
-                  fichero.close();
-               } catch (Exception e2) {
-                  e2.printStackTrace();
-               }
-            }
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                } finally {
+                    try {
+                    // Nuevamente aprovechamos el finally para 
+                    // asegurarnos que se cierra el fichero.
+                    if (null != fichero)
+                         fichero.close();
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                }
+                      
             }
         }
     }
     
+    private void guardarinfo(){
+        try
+            {
 
+                FileWriter fichero = new FileWriter("Nivel "+Integer.toString(jugador.getNivel())+".txt");
+                PrintWriter pw = new PrintWriter(fichero); 
+                pw.println(jugador.getNombre()+","+jugador.getPuntaje()+"\n");
+
+                conEnd=true; 
+
+                stageInicioJuego.close();
+                stagePrincipal.show();
+                fichero.close();
+
+        } catch (Exception e2) {
+                e2.printStackTrace();
+
+        }
+    
+    }
+    
+    private void cargar(int con, String data[]){
+        
+            
+            //this.jugador.setNombre(data[0]);
+                      
+            stagePrincipal.hide();
+            
+            stageInicioJuego.show();
+            jugador = new Buceador(juego, data[0],conEnd);
+            this.jugador.setNivel(Integer.parseInt(data[1]));
+            this.jugador.setPuntaje(Integer.parseInt(data[2]));
+            this.jugador.setVidas(Integer.parseInt(data[3])); 
+            jugador.adjuntarBuceador(juego);
+
+                menu.setStyle("-fx-background-color: #778899;");
+                lbNombre = new Label("Nombre Jugador:");
+                lbNombre.setStyle("-fx-font: 14 elephant");
+                lbNombre.setTextFill(Color.AQUA);
+                lbNivel = new Label("Nivel:");
+                lbNivel.setStyle("-fx-font: 14 elephant");
+                lbNivel.setTextFill(Color.AQUA);
+                lbPuntaje = new Label("Puntaje:");
+                lbPuntaje.setStyle("-fx-font: 14 elephant");
+                lbPuntaje.setTextFill(Color.AQUA);
+                lbVidas = new Label("Vidas:");
+                lbVidas.setStyle("-fx-font: 14 elephant");
+                lbVidas.setTextFill(Color.AQUA);
+                menu.add(lbNombre, 0, 0);
+                menu.add(jugador.getLb_nombre(), 1, 0);
+                menu.add(lbVidas, 0, 1);
+                menu.add(jugador.getLb_vidas(), 1, 1);
+                menu.add(lbPuntaje, 2, 0);
+                menu.add(jugador.getLb_puntaje(), 3, 0);
+                menu.add(lbNivel, 2, 1);
+                menu.add(jugador.getLb_nivel(), 3, 1);
+
+                conjuntoHilosAnimales = new JuegoAnimales(animales, jugador, juego, "Palabras.txt","wordsSustentacion.txt",conEnd);
+
+                eventoTeclado = new KeyHandler(conjuntoHilosAnimales.getAnimalesEnJuego(), jugador);
+                stageInicioJuego.addEventHandler(KeyEvent.KEY_PRESSED, eventoTeclado);
+
+                conjuntoHilosAnimales.start();
+                jugador.start();
+    
+    }
     
     public Stage getStageIngresoDatos() {
         return stageIngresoDatos;
